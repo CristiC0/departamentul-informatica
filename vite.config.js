@@ -1,14 +1,18 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import * as path from "path";
+
+const createPath = (url) => path.resolve(__dirname, url);
+
 // https://vitejs.dev/config/
 export default defineConfig({
     resolve: {
         alias: {
-            "@": path.resolve(__dirname, "./src"),
-            "@languages": path.resolve(__dirname, "./src/assets/translations"),
-            "@images": path.resolve(__dirname, "./src/assets/images"),
-            "@components": path.resolve(__dirname, "./src/components"),
+            "@": createPath("./src"),
+            "@languages": createPath("./src/assets/translations"),
+            "@hooks": createPath("./src/hooks"),
+            "@components": createPath("./src/components"),
+            "@context": createPath("./src/context"),
         },
     },
     plugins: [react()],
