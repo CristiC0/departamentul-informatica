@@ -5,6 +5,7 @@ function App() {
     return (
         <>
             <h1 className=" text-8xl text-center">{t("greeting")}</h1>
+            <h1 className=" text-8xl text-center">{t("greeting")}</h1>
         </>
     );
 }
