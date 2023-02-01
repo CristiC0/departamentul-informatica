@@ -14,14 +14,13 @@ function App() {
 
     return (
         <AuthContextProvider>
+            <Navbar/>
             <Routes>
                 <Route index element={<div>{t("greeting")}</div>} />
                 <Route path="*" element={<Navigate to="/" />} />
             </Routes>
         </AuthContextProvider>
-        <>
-            <Navbar/>
-        </>
+
     );
 }
 
