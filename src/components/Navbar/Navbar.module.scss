@@ -1,0 +1,199 @@
+@use '../../assets/styles/variables';
+
+
+.container {
+    width: 100%;
+    background-color: variables.$blue2;
+
+    .navigation {
+        margin: auto;
+        height: 45px;
+        max-width: 1200px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        padding: 16px 32px;
+        color: white;
+        text-transform: uppercase;
+
+        &__logo {
+            text-decoration: none;
+            color: white;
+            font-size: 32px;
+        }
+
+        &__menu {
+            ul {
+                display: flex;
+                flex-direction: row;
+                list-style-type: none;
+                gap: 48px;
+
+                li {
+                    overflow: hidden;
+                    a {
+                        text-decoration: none;
+                        color: white;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            &--expanded{
+                ul{
+                    height: 0;
+                }
+            }
+
+        }
+
+        &__button {
+            border: 0;
+            height: 40px;
+            width: 40px;
+            background-color: variables.$blue2;
+            cursor: pointer;
+            position: absolute;
+            right: 32px;
+            color: white;
+            font-size: 24px;
+
+            &--hamburger {
+                display: none;
+            }
+        }
+
+        &__icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 768px) {
+
+    .container {
+
+        .navigation {
+
+            &__button {
+                &--hamburger {
+                    display: block;
+                }
+            }
+
+            &__menu {
+                ul {
+                    display: none;
+
+
+                }
+
+                &--expanded {
+                    ul {
+                        display: block;
+                        position: absolute;
+                        top: 0px;
+                        margin-top: 77px;
+                        left: 0;
+                        width: 100%;
+                        height: auto;
+                        transition: all 1000ms;
+
+                        li {
+                            display: flex;
+                            justify-content: center;
+                            padding: 14px 0;
+                            background-color: #222;
+                            transition: height 1000ms;
+
+                            a {
+                                text-decoration: none;
+                                color: white;
+                                font-size: 16px;
+                            }
+                        }
+
+                        li:not(:last-child) {
+                            border-bottom: 1px solid #444;
+                        }
+                    }
+                }
+
+            }
+
+        }
+    }
+}
+
+
+// .container {
+//     width: 100%;
+//     background-color: variables.$blue2;
+// }
+
+// .navigation {
+//     margin: auto;
+//     height: 45px;
+//     max-width: 1200px;
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//     position: relative;
+//     padding: 16px 32px;
+//     color: white;
+//     text-transform: uppercase;
+// }
+
+// .logo {
+//     text-decoration: none;
+//     color: white;
+//     font-size: 32px;
+// }
+
+// .menu{
+//     ul {
+//         display: flex;
+//         gap: 48px;
+
+//         li {
+//             list-style-type: none;
+
+//             a {
+//                 text-decoration: none;
+//                 color: white;
+//                 font-size: 16px;
+//             }
+//         }
+//     }
+// }
+
+
+
+// .button  {
+//     border: 0;
+//     height: 40px;
+//     width: 40px;
+//     background-color: variables.$blue2;
+//     cursor: pointer;
+//     position: absolute;
+//     right: 32px;
+//     color: white;
+//     font-size: 24px;
+
+//     &__icon {
+//         display: flex;
+//         justify-content: center;
+//         align-items: center;
+//     }
+
+//     &--hamburger {
+//         display: none;
+//     }
+
+// }

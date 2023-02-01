@@ -1,5 +1,8 @@
-$color: red;
+@use './assets/styles/variables';
 
-h1 {
-    color: $color;
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: variables.$font1;
 }
+
