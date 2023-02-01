@@ -1,0 +1,48 @@
+@use '../../assets/styles/variables';
+
+
+.form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+
+    &__icon {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top:8px;
+        left: 8px;
+        color: rgb(117, 117, 117);
+        z-index: 1;
+
+        &--expanded{
+            display: none;
+        }
+    }
+    
+    &__input {
+
+        &--bar{
+            height: 26px;
+            max-width: 140px;
+            padding: 4px 28px;
+            border: 1px solid rgb(117, 117, 117);
+            border-radius: 8px;
+        }
+
+        &--expanded{
+            position: absolute;
+            height: 48px;
+            top:120px;
+            width: 70%;
+            padding: 4px 28px;
+            font-size: 22px;
+            border: 1px solid rgb(117, 117, 117);
+            border-radius: 28px;
+            box-shadow: variables.$box-shadow;
+        }
+      
+    }
+}

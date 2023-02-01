@@ -8,7 +8,6 @@ function App() {
     return (
         <>
             <Navbar/>
-            <h1 className=" text-8xl text-center">{t("greeting")}</h1>
         </>
     );
 }
