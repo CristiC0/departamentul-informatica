@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { useState, useEffect } from "react";
 import { AiOutlineSearch } from 'react-icons/ai';
 import styles from "./Navbar.module.scss";
@@ -9,9 +9,10 @@ function Navbar() {
     const [isNavExpanded, setIsNavExpanded] = useState(false);
     const [search, setSearch] = useState(false);
 
+
     useEffect(() => {
         const listener = addEventListener("resize", () => {
-            if ((isNavExpanded || search) && screen.width > 768) {
+            if (screen.width > 768) {
                 setIsNavExpanded(false);
                 setSearch(false);
             }
@@ -20,23 +21,7 @@ function Navbar() {
         return () => {
             removeEventListener("resize", listener);
         }
-
-    })
-
-    useEffect(() => {
-        let list = document.getElementById("list");
-        let login = document.createElement("li");
-        login.innerHTML = "<button>Logare</button>";
-        login.childNodes[0].className = styles['navigation__login--expanded'];
-
-        if (isNavExpanded && list?.childNodes.length < 7) {
-            list.appendChild(login);
-        }
-
-        if (!isNavExpanded && list.childNodes.length === 7) {
-            list.childNodes[list.childNodes.length - 1].remove();
-        }
-    });
+    },[])
 
 
     return (
@@ -59,7 +44,7 @@ function Navbar() {
                     <button
                         className={styles["navigation__button"] + " " + styles["navigation__button--search"]}
                         onClick={() => {
-                            setSearch(!search);
+                            setSearch((search)=>!search);
                             setIsNavExpanded(false);
                         }}
                     >
@@ -68,11 +53,11 @@ function Navbar() {
                     <button
                         className={styles["navigation__button"] + " " + styles["navigation__button--hamburger"]}
                         onClick={() => {
-                            setIsNavExpanded(!isNavExpanded);
+                            setIsNavExpanded((isNavExpanded)=>!isNavExpanded);
                             setSearch(false);
                         }}
                     >
-                        <div className={isNavExpanded ? styles["open"] : styles["cosed"]}>
+                        <div className={isNavExpanded ? styles["open"] : styles['']}>
                             <div className={styles["navigation__icon"]}></div>
                         </div>
                     </button>
@@ -81,23 +66,28 @@ function Navbar() {
 
                         <ul id="list">
                             <li>
-                                <Link to="/" className={styles["item"]}>Acasă</Link>
+                                <Link to="/">Acasă</Link>
                             </li>
                             <li>
-                                <Link to="/" className={styles["item"]}>Noutăți</Link>
+                                <Link to="/">Noutăți</Link>
                             </li>
                             <li>
-                                <Link to="/" className={styles["item"]}>Profesori</Link>
+                                <Link to="/">Profesori</Link>
                             </li>
                             <li>
-                                <Link to="/" className={styles["item"]}>Cursuri</Link>
+                                <Link to="/">Cursuri</Link>
                             </li>
                             <li>
-                                <Link to="/" className={styles["item"]}>Studenți</Link>
+                                <Link to="/">Studenți</Link>
                             </li>
                             <li>
-                                <Link to="/" className={styles["item"]}>Blog</Link>
+                                <Link to="/">Blog</Link>
                             </li>
+                            {isNavExpanded &&(
+                            <li>
+                                <Link to="/">Logare</Link>
+                            </li>
+                            )}
                         </ul>
                         <div className={styles["navigation__form"]}>
                             <Search className={styles["navigation__search"]} stateSearch={search} />

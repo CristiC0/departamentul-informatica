@@ -10,10 +10,10 @@
 
     &__icon {
         position: absolute;
-        width: 16px;
-        height: 16px;
-        top:8px;
-        left: 8px;
+        width: 1em;
+        height: 1em;
+        top:0.5em;
+        left: 0.5em;
         color: rgb(117, 117, 117);
         z-index: 1;
 
@@ -25,22 +25,22 @@
     &__input {
 
         &--bar{
-            height: 26px;
-            max-width: 140px;
-            padding: 4px 28px;
+            height: 100%;
+            max-width: 10rem;
+            padding: 0.25rem 1.75rem;
             border: 1px solid rgb(117, 117, 117);
-            border-radius: 8px;
+            border-radius: 0.5rem;
         }
 
         &--expanded{
             position: absolute;
-            height: 48px;
-            top:120px;
-            width: 70%;
-            padding: 4px 28px;
-            font-size: 22px;
+            height: 4rem;
+            top:7rem;
+            width: 80%;
+            padding: 0.25rem 1.75rem;
+            font-size: 1.5rem;
             border: 1px solid rgb(117, 117, 117);
-            border-radius: 28px;
+            border-radius: 2rem;
             box-shadow: variables.$box-shadow;
         }
       

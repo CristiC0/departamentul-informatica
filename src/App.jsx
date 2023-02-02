@@ -4,8 +4,10 @@ import { useRouteLang } from "@hooks/useRouteLang";
 import { AuthContextProvider } from "@context/AuthContext";
 import "./i18n";
 
+import GeneralLayout from "./layouts/GeneralLayout";
+import Homepage from "./pages/Homepage";
+import NewsPage from "./pages/NewsPage";
 
-import Navbar from "./components";
 
 function App() {
     const { t } = useTranslation();
@@ -14,10 +16,12 @@ function App() {
 
     return (
         <AuthContextProvider>
-            <Navbar/>
             <Routes>
-                <Route index element={<div>{t("greeting")}</div>} />
-                <Route path="*" element={<Navigate to="/" />} />
+                <Route path="/" element={<GeneralLayout/>}>
+                    <Route index element={<Homepage/>}></Route>
+                    <Route path="*" element={<NewsPage/>}></Route>
+                    <Route path="*" element={<Navigate to="/" />} />
+                </Route>
             </Routes>
         </AuthContextProvider>
 
