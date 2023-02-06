@@ -26,4 +26,14 @@ export const useRouteLang = (lang) => {
             ? i18n.changeLanguage(lang)
             : redirectToDefault(location.pathname, navigate);
     }, [lang]);
+
+    const changeLanguage = (lang) => {
+        if (!validateLanguage(lang)) return;
+        const pathWithNewLanguage = location.pathname.replace(
+            /^\/[^\/]*\/?/,
+            `/${lang}/`
+        );
+        navigate(pathWithNewLanguage);
+    };
+    return changeLanguage;
 };
