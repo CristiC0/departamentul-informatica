@@ -1,0 +1,11 @@
+.container{
+    height: 500px;
+    .swiper-container{
+        background-color: red;
+        .swiper-slide{
+            img{
+                width: 100%;
+            }
+        }
+    }
+}
