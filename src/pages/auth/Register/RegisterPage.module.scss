@@ -1,0 +1,67 @@
+//TODO: Responsive
+$accentColor: #3e588b;
+.container {
+    width: 100%;
+    height: 100%;
+    @include center;
+    flex-direction: column;
+    gap: 2em;
+    color: $accentColor;
+
+    &__header {
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    font-size: large;
+    gap: 0.6em;
+
+    @include responsive("small") {
+        width: 90%;
+    }
+
+    &__name {
+        display: flex;
+
+        gap: 0.8em;
+
+        @include responsive("small") {
+            flex-direction: column;
+        }
+    }
+
+    &__name > * {
+        flex: 1;
+    }
+
+    &__button {
+        width: 60%;
+        margin: auto;
+        color: white;
+        background-color: $accentColor;
+        font-size: large;
+        padding: 0.8em;
+        border: 0;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    &__button:disabled {
+        cursor: not-allowed;
+    }
+}
+
+.login-link {
+    font-size: 1.2em;
+
+    &__link,
+    &__link:visited,
+    &__link:active {
+        color: $accentColor;
+    }
+}
