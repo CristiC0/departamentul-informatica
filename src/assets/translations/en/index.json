@@ -1,3 +1,18 @@
 {
-    "greeting": "Hello World"
+    "greeting": "Hello World",
+    "auth-title": "Computer Science Department",
+    "register-header": "Register",
+    "input-firstname": "First Name",
+    "input-lastname": "Last Name",
+    "input-username": "Username",
+    "input-email": "Email",
+    "input-password": "Password",
+    "register-button": "Sign Up",
+    "register-login-question": "Already have an account?",
+    "register-login-link": "Log In",
+    "login-welcome": "Welcome Back!",
+    "login-message": "Sign in to your account",
+    "login-button": "Sign In",
+    "login-register-question": "Don't have an account?",
+    "login-register-link": "Register"
 }

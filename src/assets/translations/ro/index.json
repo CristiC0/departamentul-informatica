@@ -1,3 +1,18 @@
 {
-    "greeting": "Salut lume"
+    "greeting": "Salut lume",
+    "register-header": "Creează cont",
+    "auth-title": "Departamentul Informatica",
+    "input-firstname": "Prenume",
+    "input-lastname": "Nume",
+    "input-username": "Nume de utilizator",
+    "input-email": "Email",
+    "input-password": "Parola",
+    "register-button": "Inscrie-te",
+    "register-login-question": "Deja ai un cont?",
+    "register-login-link": "Înregistreaza-te",
+    "login-welcome": "Bine ați revenit!",
+    "login-message": "Conectați-vă la contul dvs.",
+    "login-button": "Conectați-vă",
+    "login-register-question": "Nu aveți un cont?",
+    "login-register-link": "Creeaza cont"
 }

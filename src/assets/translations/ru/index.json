@@ -1,3 +1,18 @@
 {
-    "greeting": "Привет мир"
+    "greeting": "Привет мир",
+    "register-header": "Регистрация",
+    "auth-title": "Департамент информатики",
+    "input-firstname": "Имя",
+    "input-lastname": "Фамилия",
+    "input-email": "Емейл",
+    "input-username": "Имя Пользователя",
+    "input-password": "Пароль",
+    "register-button": "Зарегистрироваться",
+    "register-login-question": "У вас уже есть аккаунт?",
+    "register-login-link": "Логин",
+    "login-welcome": "С возвращением!",
+    "login-message": "Войдите в свою учетную запись",
+    "login-button": "Войти",
+    "login-register-question": "У вас нет учетной записи?",
+    "login-register-link": "Зарегистрироваться"
 }
