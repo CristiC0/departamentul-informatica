@@ -10,7 +10,6 @@ export default function AuthLayout() {
             <div className={styles["container__header"]}>
                 <div className={styles["container__cover"]}></div>
                 <h1 className={styles["container__title"]}>
-                    {/* DEPARTAMENTUL <br /> INFORMATICA */}
                     {t("auth-title")}
                 </h1>
             </div>
