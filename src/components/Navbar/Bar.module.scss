@@ -1,0 +1,49 @@
+.bar {
+    width: 100vw;
+    background-color: black;
+
+    &__container {
+        max-width: 75rem;
+        height: 1.75rem;
+        margin: auto;
+        padding: 0 2rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__number {
+        color: white;
+        font-size: 0.8rem;
+    }
+
+    &__languages {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.5rem;
+
+        &--ro,
+        &--en,
+        &--ru {
+            width: 21px;
+            height: 15px;
+            cursor: pointer;
+        }
+
+        &--ro {
+            background-image: url("../../assets/icons/ro.svg");
+        }
+
+        &--en {
+            background-image: url("../../assets/icons/en.svg");
+        }
+
+        &--ru {
+            background-image: url("../../assets/icons/ru.svg");
+        }
+    }
+}
