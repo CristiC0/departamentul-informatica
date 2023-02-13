@@ -11,6 +11,25 @@ $background-color: #f2f2f2;
 
     &__element {
         background-color: $background-color;
+        color: grey;
+
+        & div {
+            width: 90%;
+            margin: 1.5em auto;
+            display: flex;
+            flex-direction: column;
+
+            & h2 {
+                color: blue;
+                text-transform: uppercase;
+                font-weight: 700;
+            }
+
+            & .container__date {
+                font-size: 0.8em;
+                margin-bottom: 1em;
+            }
+        }
 
         &--2h {
             grid-column: auto/span 2;
@@ -26,10 +45,6 @@ $background-color: #f2f2f2;
                     color: blue;
                     text-transform: uppercase;
                     font-weight: 700;
-                }
-
-                & p {
-                    color: grey;
                 }
 
                 & .container__date {
