@@ -13,6 +13,7 @@ export default defineConfig({
             "@hooks": createPath("./src/hooks"),
             "@components": createPath("./src/components"),
             "@context": createPath("./src/context"),
+            "@images": createPath("./src/assets/images"),
         },
     },
     plugins: [react()],

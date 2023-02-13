@@ -299,6 +299,7 @@
                         box-shadow: $box-shadow;
                         height: 24.5rem;
                         transition: height 400ms ease-out;
+                        z-index: 1000;
 
                         li {
                             display: flex;
@@ -340,6 +341,7 @@
                 background-color: $menu-color;
                 box-shadow: $box-shadow;
                 opacity: 0.8;
+                z-index: 1000;
             }
         }
     }
