@@ -1,0 +1,61 @@
+// *Temporary variables
+$coverColor: #3e588bbf;
+$coverWidth: 40%;
+$accentColor: blue;
+
+.container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+
+    &__header {
+        width: $coverWidth;
+        background-image: url("@images/AuthHeader.png");
+        background-repeat: no-repeat;
+        object-fit: cover;
+        position: relative;
+
+        @include responsive("medium") {
+            display: none;
+        }
+    }
+
+    &__cover {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: $coverColor;
+        opacity: 0.75;
+        z-index: 1;
+
+        @include responsive("medium") {
+            display: none;
+        }
+    }
+
+    &__title {
+        position: relative;
+        top: 20%;
+        left: 0.5em;
+        font-size: 3em;
+        text-transform: uppercase;
+        color: white;
+        font-weight: 800;
+        z-index: 2;
+        text-shadow: 1px 1px 1px black;
+
+        @include responsive(1150px) {
+            font-size: 2.5em;
+        }
+    }
+
+    &__form {
+        width: 100%-$coverWidth;
+        position: relative;
+
+        @include responsive("medium") {
+            width: 100%;
+            margin: 1em 0;
+        }
+    }
+}
