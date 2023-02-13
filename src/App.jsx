@@ -5,8 +5,8 @@ import AuthRoutes from "./routes/AuthRoutes";
 import { Suspense } from "react";
 import "./i18n";
 
-import GeneralLayout from "./layouts/GeneralLayout";
-import Homepage from "./pages/Homepage";
+import GeneralLayout from "./layouts/GeneralLayout/GeneralLayout";
+import Homepage from "./pages/Homepage/Homepage";
 import NewsPage from "./pages/NewsPage";
 
 function App() {

@@ -1,0 +1,15 @@
+.container{
+    &__information{
+        position: absolute;
+        top: 500px;
+        width: 100vw;
+        max-width: 100%;
+        height: 12rem;
+        background-color: $theme-color;
+        box-shadow: $box-shadow;
+
+        @include responsive("small"){
+            height: 18rem;
+        }
+    }
+}
