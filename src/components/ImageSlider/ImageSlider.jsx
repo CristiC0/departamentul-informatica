@@ -1,7 +1,7 @@
 import styles from "./ImageSlider.module.scss";
 import { useRef, useEffect } from 'react';
 import { register } from 'swiper/element/bundle';
-import { Navigation, Pagination,Autoplay } from "swiper";
+import { Navigation, Pagination, Autoplay } from "swiper";
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
@@ -34,7 +34,7 @@ function ImageSlider() {
 
   useEffect(() => {
     const swiperParams = {
-      modules: { Navigation, Pagination },
+      modules: { Navigation, Pagination,Autoplay},
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
