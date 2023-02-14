@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+
 @mixin btn($right) {
     border: 0;
     height: 24px;
@@ -60,7 +62,7 @@
 
     &__container {
         max-width: 75rem;
-        height: 1.75rem;
+        height: 2rem;
         margin: auto;
         padding: 0 2rem;
         display: flex;
@@ -111,14 +113,16 @@
 
     .navigation {
         margin: auto;
-        padding: 0.75rem 2rem;
-        height: 3.5rem;
+        padding: 1rem 2rem;
+        height: 5rem;
         max-width: 75rem;
         position: relative;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        text-transform: uppercase;
+        font-family: 'Oswald', sans-serif;
 
         &__logo {
             text-decoration: none;
@@ -139,6 +143,7 @@
                 justify-content: space-evenly;
                 flex-grow: 3;
                 list-style-type: none;
+                
 
                 li {
                     height: 100%;
@@ -293,7 +298,7 @@
                     ul {
                         position: absolute;
                         top: 0;
-                        margin-top: 3.5rem;
+                        margin-top: 5rem;
                         left: 0;
                         width: 100vw;
                         box-shadow: $box-shadow;
@@ -334,7 +339,7 @@
                 justify-content: center;
                 width: 100vw;
                 height: 100vh;
-                margin-top: 3.5rem;
+                margin-top: 5rem;
                 top: 0;
                 left: 0;
                 overflow: auto;
