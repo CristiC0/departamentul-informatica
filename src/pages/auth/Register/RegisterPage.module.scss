@@ -1,12 +1,10 @@
-//TODO: Responsive
-$accentColor: #3e588b;
 .container {
     width: 100%;
     height: 100%;
     @include center;
     flex-direction: column;
     gap: 2em;
-    color: $accentColor;
+    color: $primary-color;
 
     &__header {
         font-weight: 800;
@@ -43,7 +41,7 @@ $accentColor: #3e588b;
         width: 60%;
         margin: auto;
         color: white;
-        background-color: $accentColor;
+        background-color: $primary-color;
         font-size: large;
         padding: 0.8em;
         border: 0;
@@ -62,6 +60,6 @@ $accentColor: #3e588b;
     &__link,
     &__link:visited,
     &__link:active {
-        color: $accentColor;
+        color: $primary-color;
     }
 }

@@ -1,16 +1,16 @@
-@import url('https://fonts.googleapis.com/css2?family=Faustina&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Adlam+Unjoined&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap");
+@font-face {
+    font-family: "PT sans";
+    src: url("../assets/fonts/PTC55F.ttf");
+}
 
-$blue:#162447;
-$blue1: #3E588B;
-$blue3: #0A2647;
-$white: white;
+$primary-color: #3e588b;
+$secondary-color: white;
 
-$menu-background:white;
-$menu-color:#222;
-
-
-$font: 'Faustina', serif;
-$font1:'Noto Sans Adlam Unjoined', sans-serif;
+$font-color-dark: #222;
+$font-color-light: white;
 
 $box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+$font: "PT sans", sans-serif;
+$font_navbar: "Oswald", sans-serif;

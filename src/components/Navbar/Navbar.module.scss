@@ -6,7 +6,7 @@
     cursor: pointer;
     position: absolute;
     right: $right;
-    color: $menu-color;
+    color: $secondary-color;
     font-size: 24px;
     display: none;
 }
@@ -16,7 +16,7 @@
     position: absolute;
     height: $height;
     width: $width;
-    background-color: $menu-color;
+    background-color: $secondary-color;
     border-radius: 3px;
 }
 
@@ -25,7 +25,7 @@
     position: absolute;
     width: $width;
     height: $height;
-    background-color: $menu-color;
+    background-color: $secondary-color;
     border-radius: 3px;
     content: "";
     top: $top;
@@ -36,7 +36,7 @@
     position: absolute;
     width: $width;
     height: $height;
-    background-color: $menu-color;
+    background-color: $secondary-color;
     border-radius: 3px;
     content: "";
     top: $top;
@@ -57,7 +57,7 @@
 .container {
     width: 100vw;
     max-width: 100%;
-    background-color: $menu-background;
+    background-color: $secondary-color;
     box-shadow: $box-shadow;
 
     .navigation {
@@ -73,7 +73,7 @@
 
         &__logo {
             text-decoration: none;
-            color: $menu-color;
+            color: $font-color-dark;
             font-size: 2rem;
             width: 5%;
         }
@@ -101,7 +101,7 @@
                         display: inline-block;
                         position: relative;
                         text-decoration: none;
-                        color: $menu-color;
+                        color: $font-color-dark;
                         font-size: 1rem;
 
                         &:hover {
@@ -195,9 +195,9 @@
             align-items: center;
             height: 100%;
             padding: 0.25rem 0.75rem;
-            background-color: $menu-color;
+            background-color: $primary-color;
             opacity: 0.6;
-            color: $white;
+            color: $font-color-light;
             border: 1px solid rgb(117, 117, 117);
             border-radius: 0.5rem;
             font-size: 1rem;
@@ -249,7 +249,7 @@
                             display: flex;
                             justify-content: center;
                             padding: 1rem 0;
-                            background-color: $menu-color;
+                            background-color: $secondary-color;
                             height: 3.5rem;
                             transition: height 200ms ease-out;
                             box-shadow: $box-shadow;
@@ -282,7 +282,7 @@
                 top: 0;
                 left: 0;
                 overflow: auto;
-                background-color: $menu-color;
+                background-color: $secondary-color;
                 box-shadow: $box-shadow;
                 opacity: 0.8;
             }
