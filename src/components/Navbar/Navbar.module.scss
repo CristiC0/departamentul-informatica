@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+
 @mixin btn($right) {
     border: 0;
     height: 24px;
@@ -57,19 +59,21 @@
 .container {
     width: 100vw;
     max-width: 100%;
-    background-color: $menu-background;
+    background-color: $secondary-color;
     box-shadow: $box-shadow;
 
     .navigation {
         margin: auto;
-        padding: 0.75rem 2rem;
-        height: 3.5rem;
+        padding: 1rem 2rem;
+        height: 5rem;
         max-width: 75rem;
         position: relative;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        text-transform: uppercase;
+        font-family: $font-navbar;
 
         &__logo {
             text-decoration: none;
@@ -90,6 +94,7 @@
                 justify-content: space-evenly;
                 flex-grow: 3;
                 list-style-type: none;
+                
 
                 li {
                     height: 100%;
@@ -196,10 +201,12 @@
             height: 100%;
             padding: 0.25rem 0.75rem;
             background-color: $menu-color;
-            opacity: 0.6;
-            color: $white;
+            opacity: 0.8;
+            color: $font-color-light;
+            font-family: $font-navbar;
+            text-transform: uppercase;
             border: 1px solid rgb(117, 117, 117);
-            border-radius: 0.5rem;
+            border-radius: 0.3rem;
             font-size: 1rem;
             cursor: pointer;
 
@@ -238,12 +245,13 @@
                     ul {
                         position: absolute;
                         top: 0;
-                        margin-top: 3.5rem;
+                        margin-top: 5rem;
                         left: 0;
                         width: 100vw;
                         box-shadow: $box-shadow;
                         height: 24.5rem;
                         transition: height 400ms ease-out;
+                        z-index: 1000;
 
                         li {
                             display: flex;
@@ -256,7 +264,7 @@
 
                             a {
                                 text-decoration: none;
-                                color: white;
+                                color: $font-color-light;
                                 font-size: 1rem;
                             }
                         }
@@ -278,13 +286,14 @@
                 justify-content: center;
                 width: 100vw;
                 height: 100vh;
-                margin-top: 3.5rem;
+                margin-top: 5rem;
                 top: 0;
                 left: 0;
                 overflow: auto;
                 background-color: $menu-color;
                 box-shadow: $box-shadow;
                 opacity: 0.8;
+                z-index: 1000;
             }
         }
     }

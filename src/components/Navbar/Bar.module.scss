@@ -14,9 +14,28 @@
         align-items: center;
     }
 
-    &__number {
+    &__info{
+        display: flex;
+        flex-direction: row;
+        width: 20rem;
+        justify-content: space-between;
+        @include responsive("small"){
+            flex-direction: column;
+        }
+    }
+
+    &__number,
+    &__email {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
         color: white;
         font-size: 0.8rem;
+    }
+
+    &__link{
+        text-decoration: none;
+        color: white;
     }
 
     &__languages {
