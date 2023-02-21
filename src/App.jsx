@@ -3,6 +3,8 @@ import { useRouteLang } from "@hooks/useRouteLang";
 import { AuthContextProvider } from "@context/AuthContext";
 import AuthRoutes from "./routes/AuthRoutes";
 import { Suspense } from "react";
+import AuthRoutes from "./routes/AuthRoutes";
+import { Suspense } from "react";
 import "./i18n";
 
 import GeneralLayout from "./layouts/GeneralLayout";

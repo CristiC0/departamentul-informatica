@@ -1,0 +1,33 @@
+.container {
+    width: 100%;
+    position: relative;
+
+    .swiper-container {
+        height: 32rem;
+
+        .swiper-slide {
+            background-color: black;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                opacity: 0.4;
+            }
+        }
+
+        .swiper-button-prev,
+        .swiper-button-next {
+            --swiper-navigation-color: white;
+            @include responsive("small"){
+                display: none;
+            }
+        }
+
+        .swiper-pagination {
+            --swiper-pagination-color: white;
+        }
+    }
+}
+
+
+
