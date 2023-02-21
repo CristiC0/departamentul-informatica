@@ -65,7 +65,7 @@ function ImageSlider() {
         {
           images.map((images) =>
 
-            <swiper-slide class={styles["swiper-slide"]}>
+            <swiper-slide class={styles["swiper-slide"]} >
               <img src={images} alt="Image" />
               <div className={`swiper-button-prev ${styles["swiper-button-prev"]}`}></div>
               <div className={`swiper-button-next ${styles["swiper-button-next"]}`}></div>
