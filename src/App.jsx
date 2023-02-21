@@ -20,8 +20,11 @@ function App() {
                     <Route path="/*" element={<AuthRoutes />} />
                     <Route path="/" element={<GeneralLayout />}>
                         <Route index exact element={<Homepage />} />
-                        <Route path="*" element={<Navigate to="/" />} />
                     </Route>
+                    <Route
+                        path="/:lang/*"
+                        element={<Navigate to="/" replace />}
+                    />
                 </Routes>
             </AuthContextProvider>
         </Suspense>
