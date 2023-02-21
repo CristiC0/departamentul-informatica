@@ -25,7 +25,6 @@ function ImageSlider() {
   useEffect(() => {
     swiperElRef.current.addEventListener('progress', (e) => {
       const [swiper, progress] = e.detail;
-      console.log(progress);
     });
 
     swiperElRef.current.addEventListener('slidechange', (e) => {
@@ -65,7 +64,7 @@ function ImageSlider() {
         {
           images.map((images) =>
 
-            <swiper-slide class={styles["swiper-slide"]} >
+            <swiper-slide key={images} class={styles["swiper-slide"]} >
               <img src={images} alt="Image" />
               <div className={`swiper-button-prev ${styles["swiper-button-prev"]}`}></div>
               <div className={`swiper-button-next ${styles["swiper-button-next"]}`}></div>
