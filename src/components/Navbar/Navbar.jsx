@@ -107,12 +107,11 @@ function Navbar() {
                             />
                             <button
                                 className={styles["navigation__login"]}
-                                onClick={() => {
-                                    console.log(`/${i18n.language}/login`);
+                                onClick={() =>
                                     navigate(`/${i18n.language}/login`, {
                                         replace: true,
-                                    });
-                                }}
+                                    })
+                                }
                             >
                                 Logare
                             </button>
