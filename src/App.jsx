@@ -17,7 +17,7 @@ function App() {
         <Suspense>
             <AuthContextProvider>
                 <Routes>
-                    <Route path="/*" element={<AuthRoutes />} />
+                    <Route path="/aaa" element={<AuthRoutes />} />
                     <Route path="/" element={<GeneralLayout />}>
                         <Route index exact element={<Homepage />} />
                         <Route path="*" element={<Navigate to="/" />} />

@@ -3,7 +3,6 @@
     position: relative;
 
     .swiper-container {
-        //max-width: 75rem;
         height: 32rem;
 
         .swiper-slide {
@@ -14,13 +13,14 @@
                 object-fit: cover;
                 opacity: 0.4;
             }
-
-
         }
 
         .swiper-button-prev,
         .swiper-button-next {
             --swiper-navigation-color: white;
+            @include responsive("small"){
+                display: none;
+            }
         }
 
         .swiper-pagination {
