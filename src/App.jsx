@@ -7,7 +7,6 @@ import "./i18n";
 
 import GeneralLayout from "./layouts/GeneralLayout";
 import Homepage from "./pages/Homepage";
-import NewsPage from "./pages/NewsPage";
 
 function App() {
     const { lang } = useParams();
@@ -21,10 +20,6 @@ function App() {
                     <Route path="/" element={<GeneralLayout />}>
                         <Route index exact element={<Homepage />} />
                     </Route>
-                    <Route
-                        path="/:lang/*"
-                        element={<Navigate to="/" replace />}
-                    />
                 </Routes>
             </AuthContextProvider>
         </Suspense>
