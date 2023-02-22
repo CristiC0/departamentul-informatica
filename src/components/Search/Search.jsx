@@ -1,16 +1,15 @@
-import { AiOutlineSearch } from 'react-icons/ai';
+import { useTranslation } from "react-i18next";
 import styles from './Search.module.scss'
 
 
 function Search(props) {
-
+    const { t } = useTranslation();
     return (
         <>
             <form className={styles.form}>
-                <i className={props.search ? styles["form__icon--expanded"] : styles["form__icon"]}><AiOutlineSearch /></i>
                 <input
                     type="text"
-                    placeholder='Cautare..'
+                    placeholder={t("search")}
                     className={props.search ? styles['form__input--expanded'] : styles['form__input--bar']}
                 />
             </form>
