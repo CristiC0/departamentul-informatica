@@ -11,7 +11,6 @@ import Search from "../Search/Search";
 function Navbar() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
-    const { t } = useTranslation();
     const [isNavExpanded, setIsNavExpanded] = useState(false);
     const [search, setSearch] = useState(false);
 
@@ -105,15 +104,20 @@ function Navbar() {
                         </ul>
                         <div className={styles["navigation__icons"]}>
                             <button
-                                className={styles["navigation__button"] + " " +styles["navigation__button--search"]}
+                                className={styles["navigation__button"] + " " + styles["navigation__button--search"]}
                                 onClick={() => {
                                     setSearch((search) => !search);
                                     setIsNavExpanded(false);
                                 }}
                             >
-                                {search ? < CgClose/> :< AiOutlineSearch/> }
+                                {search ? < CgClose /> : < AiOutlineSearch />}
                             </button>
-                            <button className={styles["navigation__button"] +" " +styles["navigation__button--login"]}>
+                            <button className={styles["navigation__button"] + " " + styles["navigation__button--login"]}
+                                onClick={() =>
+                                    navigate(`/${i18n.language}/login`, {
+                                        replace: true,
+                                    })
+                                }>
                                 <HiOutlineUser />
                             </button>
                         </div>
