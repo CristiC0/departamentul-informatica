@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { HiOutlineUser } from "react-icons/hi";
@@ -9,6 +9,8 @@ import styles from "./Navbar.module.scss";
 import Search from "../Search/Search";
 
 function Navbar() {
+    const { t, i18n } = useTranslation();
+    const navigate = useNavigate();
     const { t } = useTranslation();
     const [isNavExpanded, setIsNavExpanded] = useState(false);
     const [search, setSearch] = useState(false);
@@ -95,7 +97,9 @@ function Navbar() {
                             </li>
                             {isNavExpanded && (
                                 <li>
-                                    <Link to="/">{t("login-button")}</Link>
+                                    <Link to={`/${i18n.language}/login`}>
+                                        Logare
+                                    </Link>
                                 </li>
                             )}
                         </ul>

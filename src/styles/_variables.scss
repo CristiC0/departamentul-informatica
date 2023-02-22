@@ -1,15 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap");
+@font-face {
+    font-family: "PT sans";
+    src: local("../assets/fonts/PTC55F.ttf");
+}
 
-$primary-color: #3E588B;
+$primary-color: #3e588b;
 $secondary-color: white;
 
 $font-color-light: white;
 $font-color-dark: #222;
 
-$menu-background:white;
-$menu-color:#222;
-$theme-color: #3E588B;
+$menu-background: white;
+$menu-color: #222;
 
-$font-navbar: 'Oswald', sans-serif;
 
 $box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+$font: "PT sans", sans-serif;
+$font_navbar: "Oswald", sans-serif;

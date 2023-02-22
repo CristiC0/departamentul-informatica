@@ -20,7 +20,6 @@ function App() {
                     <Route path="/*" element={<AuthRoutes />} />
                     <Route path="/" element={<GeneralLayout />}>
                         <Route index exact element={<Homepage />} />
-                        <Route path="*" element={<Navigate to="/" />} />
                     </Route>
                 </Routes>
             </AuthContextProvider>

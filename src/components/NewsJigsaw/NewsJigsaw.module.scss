@@ -1,0 +1,133 @@
+$background-color: #f2f2f2;
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 14em);
+    gap: 1em;
+
+    width: 60%;
+    margin: 4em auto;
+
+    &__element {
+        background-color: $background-color;
+        color: grey;
+
+        & div {
+            width: 90%;
+            margin: 1.5em auto;
+            display: flex;
+            flex-direction: column;
+
+            & h2 {
+                color: $primary-color;
+                text-transform: uppercase;
+                font-weight: 700;
+            }
+
+            & .container__date {
+                font-size: 0.8em;
+                margin-bottom: 1em;
+            }
+        }
+
+        &--2h {
+            grid-column: auto/span 2;
+            display: flex;
+
+            & div {
+                width: 50%;
+                margin: auto;
+                display: flex;
+                flex-direction: column;
+
+                & h2 {
+                    color: $primary-color;
+                    text-transform: uppercase;
+                    font-weight: 700;
+                }
+
+                & .container__date {
+                    font-size: 0.8em;
+                    margin-bottom: 1em;
+                }
+            }
+
+            & .container__position--left {
+                margin: 2em;
+            }
+        }
+
+        &--2v {
+            grid-row: auto / span 2;
+
+            & img {
+                width: 100%;
+            }
+        }
+
+        &--black {
+            background-color: black;
+            color: white;
+        }
+
+        &--aqua {
+            background-color: #00677e;
+            color: white;
+        }
+
+        &--imgSmall {
+            background-image: url("/src/assets/images/temp2.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center right;
+        }
+
+        &--imgLarge {
+            background-image: url("/src/assets/images/temp3.png");
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center right;
+        }
+
+        &--left {
+            margin: 0;
+        }
+    }
+
+    &__quote {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+
+        & h1 {
+            font-size: 8em;
+            margin-bottom: -0.5em;
+        }
+
+        & p {
+            width: 80%;
+            margin: auto;
+            font-size: 1.5em;
+            text-align: center;
+        }
+
+        & div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            & hr {
+                width: 30%;
+                color: white;
+                height: 2px;
+                background-color: white;
+            }
+
+            & .author {
+                font-size: 1em;
+                width: fit-content;
+            }
+        }
+    }
+}
