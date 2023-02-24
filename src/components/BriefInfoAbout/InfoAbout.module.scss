@@ -1,0 +1,79 @@
+.container {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    max-width: 75rem;
+    padding: 0 4rem;
+    gap: 4rem;
+    text-align: justify;
+
+    @include responsive("small"){
+        padding: 0 2rem;
+        
+    }
+
+    &--left {
+        flex-direction: row;
+    }
+
+    &--right {
+        flex-direction: row-reverse;
+    }
+
+    &--left,
+    &--right{
+        @include responsive("small"){
+            flex-direction: column;
+        }
+    }
+
+    &__image {
+        img {
+            height: 25rem;
+            width: 28rem;
+            object-fit:contain;
+
+            @include responsive("medium"){
+                height: 20rem;
+                width: 22rem;
+            }
+
+            @include responsive("small"){
+                height: 15rem;
+                width: 17rem;
+            }
+        }
+    }
+
+    &__info {
+
+        h1 {
+            color: $primary-color;
+            font-size: 2rem;
+        }
+
+        p {
+            color: $font-color-dark;
+            font-size: 1rem;
+            padding: 1rem 0;
+        }
+
+        button {
+            background-color: transparent;
+            border: 0px;
+            border-bottom: 0.1rem solid $font-color-grey;
+            text-transform: uppercase;
+            font-size: 1rem;
+            font-weight: bold;
+            color: $font-color-grey;
+            cursor: pointer;
+
+            &:hover {
+                color: $font-color-dark;
+                transition: 0.7s;
+                border-color: $font-color-dark;
+            }
+        }
+
+    }
+}

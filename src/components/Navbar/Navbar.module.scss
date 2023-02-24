@@ -6,7 +6,7 @@
     cursor: pointer;
     position: absolute;
     right: $right;
-    color: $secondary-color;
+    color: $font-color-dark;
     font-size: 24px;
     display: none;
 }
@@ -16,7 +16,7 @@
     position: absolute;
     height: $height;
     width: $width;
-    background-color: $secondary-color;
+    background-color: $font-color-dark;
     border-radius: 3px;
 }
 
@@ -25,7 +25,7 @@
     position: absolute;
     width: $width;
     height: $height;
-    background-color: $secondary-color;
+    background-color: $font-color-dark;
     border-radius: 3px;
     content: "";
     top: $top;
@@ -36,7 +36,7 @@
     position: absolute;
     width: $width;
     height: $height;
-    background-color: $secondary-color;
+    background-color: $font-color-dark;
     border-radius: 3px;
     content: "";
     top: $top;
@@ -152,6 +152,10 @@
                 cursor: pointer;
                 color: $menu-color;
                 font-size: 24px;
+
+                @include responsive("small"){
+                    display: none;
+                }
             }
 
             &--search--expanded {
@@ -206,27 +210,6 @@
 
             @include responsive("small"){
                 display: none;
-            }
-        }
-
-        &__login {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-            padding: 0.25rem 0.75rem;
-            background-color: $menu-color;
-            opacity: 0.8;
-            color: $font-color-light;
-            font-family: $font-navbar;
-            text-transform: uppercase;
-            border: 1px solid rgb(117, 117, 117);
-            border-radius: 0.3rem;
-            font-size: 1rem;
-            cursor: pointer;
-
-            &:hover {
-                opacity: 1;
             }
         }
     }
@@ -287,7 +270,7 @@
                             display: flex;
                             justify-content: center;
                             padding: 1rem 0;
-                            background-color: $secondary-color;
+                            background-color: $menu-color;
                             height: 3.5rem;
                             transition: height 200ms ease-out;
                             box-shadow: $box-shadow;
@@ -308,22 +291,6 @@
 
             &__form {
                 display: none;
-            }
-
-            .search {
-                position: absolute;
-                display: flex;
-                justify-content: center;
-                width: 100vw;
-                height: 100vh;
-                margin-top: 5rem;
-                top: 0;
-                left: 0;
-                overflow: auto;
-                background-color: $secondary-color;
-                box-shadow: $box-shadow;
-                opacity: 0.8;
-                z-index: 1000;
             }
         }
     }

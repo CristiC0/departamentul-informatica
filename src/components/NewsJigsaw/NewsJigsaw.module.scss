@@ -5,8 +5,8 @@ $background-color: #f2f2f2;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(5, 14em);
     gap: 1em;
-
-    width: 60%;
+    padding: 0 4rem;
+    max-width: 75rem;
     margin: 4em auto;
 
     &__element {
