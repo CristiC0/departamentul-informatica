@@ -14,5 +14,17 @@
     "login-message": "Sign in to your account",
     "login-button": "Sign In",
     "login-register-question": "Don't have an account?",
-    "login-register-link": "Register"
+    "login-register-link": "Register",
+    "navbar-home": "Home",
+    "navbar-news": "News",
+    "navbar-teachers": "Teachers",
+    "navbar-courses": "Courses",
+    "navbar-students": "Students",
+    "navbar-blog": "Blog",
+    "search": "Search..",
+    "info-foundation-year": "Foundation year",
+    "info-students": "Graduate students",
+    "info-prizes":"Prizes won",
+    "read-more":"Read it"
+    
 }

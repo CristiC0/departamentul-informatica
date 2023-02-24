@@ -1,6 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+import { HiOutlineUser } from "react-icons/hi";
+import { CgClose } from "react-icons/cg";
 import { useTranslation } from "react-i18next";
 import Bar from "./Bar";
 import styles from "./Navbar.module.scss";
@@ -16,7 +18,7 @@ function Navbar() {
         const listener = addEventListener("resize", () => {
             if (screen.width > 768) {
                 setIsNavExpanded(false);
-                setSearch(false);
+                //setSearch(false);
             }
         });
 
@@ -37,7 +39,7 @@ function Navbar() {
                         className={
                             styles["navigation__button"] +
                             " " +
-                            styles["navigation__button--search"]
+                            styles["navigation__button--search--expanded"]
                         }
                         onClick={() => {
                             setSearch((search) => !search);
@@ -75,22 +77,22 @@ function Navbar() {
                     >
                         <ul id="list">
                             <li>
-                                <Link to="/">Acasă</Link>
+                                <Link to="/">{t("navbar-home")}</Link>
                             </li>
                             <li>
-                                <Link to="/">Noutăți</Link>
+                                <Link to="/">{t("navbar-news")}</Link>
                             </li>
                             <li>
-                                <Link to="/">Profesori</Link>
+                                <Link to="/">{t("navbar-teachers")}</Link>
                             </li>
                             <li>
-                                <Link to="/">Cursuri</Link>
+                                <Link to="/">{t("navbar-courses")}</Link>
                             </li>
                             <li>
-                                <Link to="/">Studenți</Link>
+                                <Link to="/">{t("navbar-students")}</Link>
                             </li>
                             <li>
-                                <Link to="/">Blog</Link>
+                                <Link to="/">{t("navbar-blog")}</Link>
                             </li>
                             {isNavExpanded && (
                                 <li>
@@ -100,20 +102,23 @@ function Navbar() {
                                 </li>
                             )}
                         </ul>
-                        <div className={styles["navigation__form"]}>
-                            <Search
-                                className={styles["navigation__search"]}
-                                stateSearch={search}
-                            />
+                        <div className={styles["navigation__icons"]}>
                             <button
-                                className={styles["navigation__login"]}
+                                className={styles["navigation__button"] + " " + styles["navigation__button--search"]}
+                                onClick={() => {
+                                    setSearch((search) => !search);
+                                    setIsNavExpanded(false);
+                                }}
+                            >
+                                {search ? < CgClose /> : < AiOutlineSearch />}
+                            </button>
+                            <button className={styles["navigation__button"] + " " + styles["navigation__button--login"]}
                                 onClick={() =>
                                     navigate(`/${i18n.language}/login`, {
                                         replace: true,
                                     })
-                                }
-                            >
-                                Logare
+                                }>
+                                <HiOutlineUser />
                             </button>
                         </div>
                     </div>

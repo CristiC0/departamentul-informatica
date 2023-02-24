@@ -14,5 +14,16 @@
     "login-message": "Conectați-vă la contul dvs.",
     "login-button": "Conectați-vă",
     "login-register-question": "Nu aveți un cont?",
-    "login-register-link": "Creeaza cont"
+    "login-register-link": "Creeaza cont",
+    "navbar-home": "Acasă",
+    "navbar-news": "Noutăți",
+    "navbar-teachers": "Profesori",
+    "navbar-courses": "Cursuri",
+    "navbar-students": "Studenți",
+    "navbar-blog": "Blog",
+    "search": "Cautare..",
+    "info-foundation-year": "Anul fondarii",
+    "info-students": "Studenți absolvenți",
+    "info-prizes":"Premii câștigate",
+    "read-more":"Citește"
 }

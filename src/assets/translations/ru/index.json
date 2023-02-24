@@ -14,5 +14,16 @@
     "login-message": "Войдите в свою учетную запись",
     "login-button": "Войти",
     "login-register-question": "У вас нет учетной записи?",
-    "login-register-link": "Зарегистрироваться"
+    "login-register-link": "Зарегистрироваться",
+    "navbar-home": "Главная",
+    "navbar-news": "Новости",
+    "navbar-teachers": "Учителя",
+    "navbar-courses": "Курсы",
+    "navbar-students": "Студенты",
+    "navbar-blog": "Блог",
+    "search": "Поиск..",
+    "info-foundation-year": "Год основания",
+    "info-students": "Аспиранты",
+    "info-prizes":"Выигранные призы",
+    "read-more":"Читать далее"
 }
