@@ -21,9 +21,11 @@
     "navbar-courses": "Cursuri",
     "navbar-students": "Studenți",
     "navbar-blog": "Blog",
+    "navbar-login": "Logare",
+    "navbar-logout": "Iesire",
     "search": "Cautare..",
     "info-foundation-year": "Anul fondarii",
     "info-students": "Studenți absolvenți",
-    "info-prizes":"Premii câștigate",
-    "read-more":"Citește"
+    "info-prizes": "Premii câștigate",
+    "read-more": "Citește"
 }

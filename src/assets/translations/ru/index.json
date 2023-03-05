@@ -21,9 +21,11 @@
     "navbar-courses": "Курсы",
     "navbar-students": "Студенты",
     "navbar-blog": "Блог",
+    "navbar-login": "Логин",
+    "navbar-logout": "Выйти",
     "search": "Поиск..",
     "info-foundation-year": "Год основания",
     "info-students": "Аспиранты",
-    "info-prizes":"Выигранные призы",
-    "read-more":"Читать далее"
+    "info-prizes": "Выигранные призы",
+    "read-more": "Читать далее"
 }
