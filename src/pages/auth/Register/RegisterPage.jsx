@@ -1,17 +1,25 @@
 import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { registerSchema } from "@/schemas/authSchema";
 import { Link } from "react-router-dom";
-import styles from "./RegisterPage.module.scss";
 import Input from "@components/Input/Input";
-
-const onSubmit = (values, actions) => {
-    actions.resetForm();
-    // TODO: send to backend & redirect to login
-};
+import { useAuthContext } from "@/context/AuthContext";
+import styles from "./RegisterPage.module.scss";
 
 const RegisterPage = () => {
     const { t, i18n } = useTranslation();
+    const navigate = useNavigate();
+    const { register } = useAuthContext();
+
+    const onSubmit = (values, actions) => {
+        (async function () {
+            await register(values);
+            actions.resetForm();
+            navigate("/");
+        })();
+    };
+
     const {
         values,
         errors,

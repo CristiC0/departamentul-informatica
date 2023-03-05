@@ -2,18 +2,26 @@ import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
 import { loginSchema } from "@/schemas/authSchema";
 import { Link } from "react-router-dom";
-import styles from "./Login.module.scss";
+import { useNavigate } from "react-router-dom";
 import Input from "@components/Input/Input";
 import { AiOutlineUser } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
-
-const onSubmit = (values, actions) => {
-    actions.resetForm();
-    // TODO: send to backend & redirect to login
-};
+import styles from "./Login.module.scss";
+import { useAuthContext } from "../../../context/AuthContext";
 
 const LoginPage = () => {
     const { t, i18n } = useTranslation();
+    const navigate = useNavigate();
+    const { login } = useAuthContext();
+
+    const onSubmit = (values, actions) => {
+        (async function () {
+            await login(values);
+            actions.resetForm();
+            navigate("/");
+        })();
+    };
+
     const {
         values,
         errors,
@@ -24,7 +32,7 @@ const LoginPage = () => {
         handleSubmit,
     } = useFormik({
         initialValues: {
-            email: "",
+            username: "",
             password: "",
         },
         validationSchema: loginSchema,
@@ -39,14 +47,14 @@ const LoginPage = () => {
             </div>
             <form onSubmit={handleSubmit} className={styles["form"]}>
                 <Input
-                    type="email"
-                    name="email"
+                    type="text"
+                    name="username"
                     value={values.email}
-                    placeholder={t("input-email")}
+                    placeholder={t("input-username")}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    error={errors.email}
-                    touched={touched.email}
+                    error={errors.username}
+                    touched={touched.username}
                     icon={<AiOutlineUser />}
                 />
 
