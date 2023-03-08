@@ -2,15 +2,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { HiOutlineUser } from "react-icons/hi";
+import { MdLogout } from "react-icons/md";
 import { CgClose } from "react-icons/cg";
 import { useTranslation } from "react-i18next";
 import Bar from "./Bar";
 import styles from "./Navbar.module.scss";
 import Search from "../Search/Search";
+import { useAuthContext } from "@/context/AuthContext";
 
 function Navbar() {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
+    const { user, logout } = useAuthContext();
+
     const [isNavExpanded, setIsNavExpanded] = useState(false);
     const [search, setSearch] = useState(false);
 
@@ -94,32 +98,67 @@ function Navbar() {
                             <li>
                                 <Link to="/">{t("navbar-blog")}</Link>
                             </li>
-                            {isNavExpanded && (
-                                <li>
-                                    <Link to={`/${i18n.language}/login`}>
-                                        Logare
-                                    </Link>
-                                </li>
-                            )}
+                            {isNavExpanded &&
+                                (user.auth ? (
+                                    <li>
+                                        <Link onClick={() => logout()} to="/">
+                                            {t("navbar-logout")}
+                                        </Link>
+                                    </li>
+                                ) : (
+                                    <li>
+                                        <Link to={`/${i18n.language}/login`}>
+                                            {t("navbar-login")}
+                                        </Link>
+                                    </li>
+                                ))}
                         </ul>
                         <div className={styles["navigation__icons"]}>
                             <button
-                                className={styles["navigation__button"] + " " + styles["navigation__button--search"]}
+                                className={
+                                    styles["navigation__button"] +
+                                    " " +
+                                    styles["navigation__button--search"]
+                                }
                                 onClick={() => {
                                     setSearch((search) => !search);
                                     setIsNavExpanded(false);
                                 }}
                             >
-                                {search ? < CgClose /> : < AiOutlineSearch />}
+                                {search ? <CgClose /> : <AiOutlineSearch />}
                             </button>
-                            <button className={styles["navigation__button"] + " " + styles["navigation__button--login"]}
-                                onClick={() =>
-                                    navigate(`/${i18n.language}/login`, {
-                                        replace: true,
-                                    })
-                                }>
-                                <HiOutlineUser />
-                            </button>
+                            {user.auth ? (
+                                <button
+                                    className={
+                                        styles["navigation__button"] +
+                                        " " +
+                                        styles["navigation__button--login"]
+                                    }
+                                    onClick={() => {
+                                        logout();
+                                        navigate(`/`, {
+                                            replace: true,
+                                        });
+                                    }}
+                                >
+                                    <MdLogout />
+                                </button>
+                            ) : (
+                                <button
+                                    className={
+                                        styles["navigation__button"] +
+                                        " " +
+                                        styles["navigation__button--login"]
+                                    }
+                                    onClick={() =>
+                                        navigate(`/${i18n.language}/login`, {
+                                            replace: true,
+                                        })
+                                    }
+                                >
+                                    <HiOutlineUser />
+                                </button>
+                            )}
                         </div>
                     </div>
 

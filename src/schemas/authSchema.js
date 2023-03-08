@@ -40,10 +40,12 @@ export const registerSchema = yup.object().shape({
 });
 
 export const loginSchema = yup.object().shape({
-    email: yup
+    username: yup
         .string()
-        .email("Please enter a valid email")
-        .required("Email required"),
+        .min(3, "Minimum 3 characters")
+        .max(16, "Maximum 16 characters")
+        .matches(usernameRegex, "Only letters and numbers")
+        .required("Username required"),
     password: yup
         .string()
         .min(5, "Password must be minimum 5 characters")
