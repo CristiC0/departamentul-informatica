@@ -1,24 +1,19 @@
-import { Routes, Route, useParams, Navigate } from "react-router-dom";
-import { useRouteLang } from "@hooks/useRouteLang";
-import AuthRoutes from "./routes/AuthRoutes";
+import { AuthContextProvider } from "@context/AuthContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense } from "react";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/router";
 import "./i18n";
 
-import GeneralLayout from "./layouts/GeneralLayout/GeneralLayout";
-import Homepage from "./pages/Homepage/Homepage";
-
+const queryClient = new QueryClient();
 function App() {
-    const { lang } = useParams();
-    useRouteLang(lang);
-
     return (
         <Suspense>
-            <Routes>
-                <Route path="/*" element={<AuthRoutes />} />
-                <Route path="/" element={<GeneralLayout />}>
-                    <Route index exact element={<Homepage />} />
-                </Route>
-            </Routes>
+            <QueryClientProvider client={queryClient}>
+                <AuthContextProvider>
+                    <RouterProvider router={router} />
+                </AuthContextProvider>
+            </QueryClientProvider>
         </Suspense>
     );
 }
