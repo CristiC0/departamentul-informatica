@@ -11,6 +11,7 @@ import Homepage from "@pages/Homepage/Homepage";
 import LoginPage from "@pages/auth/Login/LoginPage";
 import RegisterPage from "@pages/auth/Register/RegisterPage";
 import Teachers from "@pages/teachers/Teachers";
+import NewsPage from "@pages/NewsPage/NewsPage";
 import Setup from "../Setup";
 
 const router = createBrowserRouter(
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
             </Route>
             <Route path=":lang" element={<GeneralLayout />}>
                 <Route index exact element={<Homepage />} />
+                <Route path="news" element={<NewsPage />} />
                 <Route path="teachers" element={<Teachers />} />
             </Route>
             <Route path="*" element={<Navigate to="/ro" />} />
