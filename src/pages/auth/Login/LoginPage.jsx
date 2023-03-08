@@ -41,7 +41,6 @@ const LoginPage = () => {
 
     return (
         <div className={styles.container}>
-            <button onClick={() => window.history.go(-1)}>Clikck</button>
             <div className={styles["container__header"]}>
                 <h1>{t("login-welcome")}</h1>
                 <p>{t("login-message")}</p>

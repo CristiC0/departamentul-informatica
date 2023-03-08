@@ -22,7 +22,6 @@ export const useRouteLang = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(lang);
         if (!validateLanguage(lang))
             redirectToDefault(location.pathname, navigate);
 
