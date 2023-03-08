@@ -36,16 +36,12 @@ $coverWidth: 40%;
         position: relative;
         top: 20%;
         left: 0.5em;
-        font-size: 3em;
+        font-size: clamp(2.5rem, 20%, 2.8rem);
         text-transform: uppercase;
         color: white;
         font-weight: 800;
         z-index: 2;
         text-shadow: 1px 1px 1px black;
-
-        @include responsive(1150px) {
-            font-size: 2.5em;
-        }
     }
 
     &__form {
