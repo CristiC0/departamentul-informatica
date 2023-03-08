@@ -17,6 +17,7 @@ export default defineConfig({
             "@schemas": createPath("./src/schemas"),
             "@images": createPath("./src/assets/images"),
             "@layouts": createPath("./src/layouts"),
+            "@routes": createPath("./src/routes"),
         },
     },
     plugins: [react()],
