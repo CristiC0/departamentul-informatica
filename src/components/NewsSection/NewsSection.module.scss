@@ -1,0 +1,50 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 75rem;
+    height: auto;
+    margin: 4rem auto;
+
+    &__top,
+    &__left,
+    &__right,
+    &__bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    &__top {
+        display: flex;
+        height: 26rem;
+    }
+
+    &__left {
+        max-width: 50rem;
+    }
+
+    &__right {
+        flex-direction: column;
+        max-width: 35rem;
+        &--1,
+        &--2,
+        &--3 {
+
+        }
+
+    }
+
+    &__bottom {
+        height: 20rem;
+        gap: 2rem;
+
+        &--1 {}
+
+        &--2 {}
+
+        &--3 {}
+
+        &--4 {}
+    }
+}

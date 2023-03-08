@@ -1,0 +1,9 @@
+.container{
+    border-bottom: 0.1rem solid $font-color-grey;
+
+    &__name{
+        font-size: 1.6rem;
+        font-weight:500;
+        color:$font-color-dark;
+    }
+}

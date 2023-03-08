@@ -1,0 +1,27 @@
+.container{
+    width: 100%;
+    .header{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 60rem;
+        height: 16rem;
+        margin: 0 auto;
+
+        &__title{
+            font-family: $font_title;
+            font-size: 4em;
+            color: $font-color-dark;
+        }
+        &__data,
+        &__weather{
+            color: $font-color-grey;
+        }
+    }
+
+    .news,
+    .popular{
+        max-width: 75rem;
+        margin: 2rem auto;
+    }
+}
