@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { HiOutlineUser } from "react-icons/hi";
@@ -33,7 +33,6 @@ function Navbar() {
     return (
         <>
             <Bar />
-
             <div className={styles.container}>
                 <nav className={styles.navigation}>
                     <Link to="/" className={styles["navigation__logo"]}>
@@ -134,9 +133,15 @@ function Navbar() {
                                     styles["navigation__button--login"]
                                 }
                             >
-                                <Link to={`auth/login`}>
-                                    <HiOutlineUser />
-                                </Link>
+                                {user.auth ? (
+                                    <Link onClick={() => logout()} to="/">
+                                        <MdLogout />
+                                    </Link>
+                                ) : (
+                                    <Link to={`auth/login`}>
+                                        <HiOutlineUser />
+                                    </Link>
+                                )}
                             </button>
                         </div>
                     </div>

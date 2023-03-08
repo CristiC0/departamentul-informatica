@@ -153,6 +153,10 @@
                 color: $menu-color;
                 font-size: 24px;
 
+                & > a {
+                    color: black;
+                }
+
                 @include responsive("small") {
                     display: none;
                 }
