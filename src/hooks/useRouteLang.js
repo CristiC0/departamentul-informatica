@@ -1,30 +1,32 @@
 import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
-const LANGUAGES = ["ro", "ru", "en"];
-const DEFAULT_LANGUAGE = LANGUAGES[0];
+const LANGUAGES = new Set(["ro", "ru", "en"]);
+const DEFAULT_LANGUAGE = "ro";
 
-const validateLanguage = (lang) =>
-    LANGUAGES.find((language) => language === lang);
+const validateLanguage = (lang) => LANGUAGES.has(lang);
 
 const redirectToDefault = (path, navigate) => {
     const pathWithDefaultLang = path.replace(
         /^\/[^\/]*\/?/,
         `/${DEFAULT_LANGUAGE}/`
     );
-    navigate(pathWithDefaultLang);
+    navigate(pathWithDefaultLang, { replace: true });
 };
 
-export const useRouteLang = (lang) => {
+export const useRouteLang = () => {
+    const { lang } = useParams();
     const { i18n } = useTranslation();
     const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
-        validateLanguage(lang)
-            ? i18n.changeLanguage(lang)
-            : redirectToDefault(location.pathname, navigate);
+        console.log(lang);
+        if (!validateLanguage(lang))
+            redirectToDefault(location.pathname, navigate);
+
+        if (i18n.language !== lang) i18n.changeLanguage(lang);
     }, [lang]);
 
     const changeLanguage = (lang) => {
