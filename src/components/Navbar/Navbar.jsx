@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { HiOutlineUser } from "react-icons/hi";
@@ -22,7 +22,6 @@ function Navbar() {
         const listener = addEventListener("resize", () => {
             if (screen.width > 768) {
                 setIsNavExpanded(false);
-                //setSearch(false);
             }
         });
 
@@ -34,6 +33,7 @@ function Navbar() {
     return (
         <>
             <Bar />
+
             <div className={styles.container}>
                 <nav className={styles.navigation}>
                     <Link to="/" className={styles["navigation__logo"]}>
@@ -107,7 +107,7 @@ function Navbar() {
                                     </li>
                                 ) : (
                                     <li>
-                                        <Link to={`/${i18n.language}/login`}>
+                                        <Link to={`auth/login`}>
                                             {t("navbar-login")}
                                         </Link>
                                     </li>
@@ -127,38 +127,17 @@ function Navbar() {
                             >
                                 {search ? <CgClose /> : <AiOutlineSearch />}
                             </button>
-                            {user.auth ? (
-                                <button
-                                    className={
-                                        styles["navigation__button"] +
-                                        " " +
-                                        styles["navigation__button--login"]
-                                    }
-                                    onClick={() => {
-                                        logout();
-                                        navigate(`/`, {
-                                            replace: true,
-                                        });
-                                    }}
-                                >
-                                    <MdLogout />
-                                </button>
-                            ) : (
-                                <button
-                                    className={
-                                        styles["navigation__button"] +
-                                        " " +
-                                        styles["navigation__button--login"]
-                                    }
-                                    onClick={() =>
-                                        navigate(`/${i18n.language}/login`, {
-                                            replace: true,
-                                        })
-                                    }
-                                >
+                            <button
+                                className={
+                                    styles["navigation__button"] +
+                                    " " +
+                                    styles["navigation__button--login"]
+                                }
+                            >
+                                <Link to={`auth/login`}>
                                     <HiOutlineUser />
-                                </button>
-                            )}
+                                </Link>
+                            </button>
                         </div>
                     </div>
 

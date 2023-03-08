@@ -41,6 +41,7 @@ const LoginPage = () => {
 
     return (
         <div className={styles.container}>
+            <button onClick={() => window.history.go(-1)}>Clikck</button>
             <div className={styles["container__header"]}>
                 <h1>{t("login-welcome")}</h1>
                 <p>{t("login-message")}</p>
@@ -80,7 +81,7 @@ const LoginPage = () => {
             <p className={styles["login-link"]}>
                 {t("login-register-question")}
                 <i className={styles["login-link__link"]}>
-                    <Link to={`/${i18n.language}/register`}>
+                    <Link to={`/${i18n.language}/auth/register`}>
                         {t("login-register-link")}
                     </Link>
                 </i>
