@@ -3,7 +3,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import styles from "./Input.module.scss";
 
 export default function Input(props) {
-    const { type, icon, error, touched, ...everythingElse } = props;
+    const { type, icon, error, touched, className, ...everythingElse } = props;
     const [showPassword, setShowPassword] = useState(false);
 
     const iconDecoration = icon !== undefined && (
@@ -31,7 +31,7 @@ export default function Input(props) {
         error && touched
             ? styles["input__field--error"]
             : styles["input__field--default"]
-    } ${icon !== undefined ? styles["input__field--icon"] : ""}`;
+    } ${icon !== undefined ? styles["input__field--icon"] : ""} ${className}`;
 
     return (
         <div className={styles["input"]}>
