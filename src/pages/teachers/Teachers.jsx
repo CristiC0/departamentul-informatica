@@ -1,4 +1,4 @@
-import { useState } from "react";
+import TabSelector from "@components/TabSelector/TabSelector";
 import Input from "@components/Input/Input.jsx";
 import { AiOutlineSearch } from "react-icons/ai";
 import { VscSettings } from "react-icons/vsc";
@@ -70,8 +70,6 @@ const teachers = [
 ];
 
 const Teachers = () => {
-    const [selected, setSelected] = useState(0);
-
     const {
         nrOfPages,
         displayedPages,
@@ -86,19 +84,10 @@ const Teachers = () => {
         <>
             <div className={styles.header}>
                 <div className={styles["header__select"]}>
-                    {selectMenuOptions.map((option, index) => (
-                        <span
-                            className={
-                                index === selected
-                                    ? styles["header__select--active"]
-                                    : ""
-                            }
-                            onClick={() => setSelected(index)}
-                            key={option.title}
-                        >
-                            {option.title}
-                        </span>
-                    ))}
+                    <TabSelector
+                        selectOptions={selectMenuOptions}
+                        selectedStyle={styles["header__select--current"]}
+                    />
                 </div>
                 <div className={styles["header__search"]}>
                     <Input
