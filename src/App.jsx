@@ -6,6 +6,7 @@ import "./i18n";
 
 import GeneralLayout from "./layouts/GeneralLayout/GeneralLayout";
 import Homepage from "./pages/Homepage/Homepage";
+import NewsPage from "./pages/NewsPage/NewsPage";
 
 function App() {
     const { lang } = useParams();
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/*" element={<AuthRoutes />} />
                 <Route path="/" element={<GeneralLayout />}>
                     <Route index exact element={<Homepage />} />
+                    <Route path="/news" element={<NewsPage />} />
                 </Route>
             </Routes>
         </Suspense>

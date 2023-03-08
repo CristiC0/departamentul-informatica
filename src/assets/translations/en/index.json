@@ -27,5 +27,25 @@
     "info-foundation-year": "Foundation year",
     "info-students": "Graduate students",
     "info-prizes": "Prizes won",
-    "read-more": "Read it"
+    "read-more": "Read it",
+    "sun":"Sun",
+    "mon":"Mon",
+    "tues":"Tues",
+    "wed":"Wed",
+    "thur":"Thur",
+    "fri":"Fri",
+    "sat":"Sat",
+    "jan":"Jan",
+    "feb":"Feb",
+    "mar":"Mar",
+    "apr":"Apr",
+    "may":"May",
+    "june":"June",
+    "july":"July",
+    "aug":"Aug",
+    "sept":"Sept",
+    "oct":"Oct",
+    "nov":"Nov",
+    "dec":"Dec"
+
 }
