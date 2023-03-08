@@ -15,20 +15,7 @@ $header-bg: #dce7f0;
     margin-top: -3em;
 
     &__select {
-        display: flex;
-        gap: 1em;
-        border-bottom: 1px solid black;
-
-        & > span {
-            font-size: 1.3em;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        &--active {
-            color: $highlight-color;
-            border-bottom: 3px solid $highlight-color;
-        }
+        width: fit-content;
     }
 
     &__search {

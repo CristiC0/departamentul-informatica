@@ -1,0 +1,18 @@
+.tabs {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 1em;
+    border-bottom: 1px solid black;
+
+    & > span {
+        font-size: 1.5em;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    &--selected {
+        color: $highlight-color;
+        border-bottom: 3px solid $highlight-color;
+    }
+}
