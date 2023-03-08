@@ -1,26 +1,24 @@
-import { Routes, Route, useParams, Navigate } from "react-router-dom";
-import { useRouteLang } from "@hooks/useRouteLang";
-import AuthRoutes from "./routes/AuthRoutes";
+import { AuthContextProvider } from "@context/AuthContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Suspense } from "react";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/router";
 import "./i18n";
 
+const queryClient = new QueryClient();
 import GeneralLayout from "./layouts/GeneralLayout/GeneralLayout";
 import Homepage from "./pages/Homepage/Homepage";
 import NewsPage from "./pages/NewsPage/NewsPage";
 
 function App() {
-    const { lang } = useParams();
-    useRouteLang(lang);
-
     return (
         <Suspense>
-            <Routes>
-                <Route path="/*" element={<AuthRoutes />} />
-                <Route path="/" element={<GeneralLayout />}>
-                    <Route index exact element={<Homepage />} />
+            <QueryClientProvider client={queryClient}>
+                <AuthContextProvider>
+                    <RouterProvider router={router} />
                     <Route path="/news" element={<NewsPage />} />
-                </Route>
-            </Routes>
+                </AuthContextProvider>
+            </QueryClientProvider>
         </Suspense>
     );
 }

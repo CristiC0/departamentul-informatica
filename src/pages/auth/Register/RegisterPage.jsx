@@ -112,7 +112,7 @@ const RegisterPage = () => {
             <p className={styles["login-link"]}>
                 {t("register-login-question")}
                 <i className={styles["login-link__link"]}>
-                    <Link to={`/${i18n.language}/login`}>
+                    <Link to={`/${i18n.language}/auth/login`}>
                         {t("register-login-link")}
                     </Link>
                 </i>
