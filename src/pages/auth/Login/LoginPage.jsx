@@ -80,7 +80,7 @@ const LoginPage = () => {
             <p className={styles["login-link"]}>
                 {t("login-register-question")}
                 <i className={styles["login-link__link"]}>
-                    <Link to={`/${i18n.language}/register`}>
+                    <Link to={`/${i18n.language}/auth/register`}>
                         {t("login-register-link")}
                     </Link>
                 </i>
