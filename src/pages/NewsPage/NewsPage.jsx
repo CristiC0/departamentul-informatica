@@ -2,8 +2,7 @@ import CompartmentName from "../../components/CompartmentName/CompartmentName";
 import NewsSection from "../../components/NewsSection/NewsSection";
 import CurrentDate from "../../components/CurrentDate/CurrentDate";
 import styles from "./NewsPage.module.scss";
-
-
+import Weather from "../../components/Weather/Weather";
 function NewsPage() {
 
     return (
@@ -11,7 +10,7 @@ function NewsPage() {
             <div className={styles['header']}>
                 <div className={styles["header__data"]}><CurrentDate /></div>
                 <div className={styles["header__title"]}>DI & NEWS</div>
-                <div className={styles["header__weather"]}>Chisinau 12℃</div>
+                <div className={styles["header__weather"]}>Chișinău <Weather/></div>
             </div>
             <div className={styles['header__menu']}></div>
             <div className={styles['news']}>
