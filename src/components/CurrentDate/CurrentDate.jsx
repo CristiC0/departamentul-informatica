@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 const CurrentDate = () => {
     const { t } = useTranslation();
 
-    let days = [t("sun"), t("mon"), t("tues"), t("wed"), t("thur"), t("fry"), t("sat")];
+    let days = [t("sun"), t("mon"), t("tues"), t("wed"), t("thur"), t("fri"), t("sat")];
     let months = [t("jan"), t("feb"), t("mar"), t("apr"), t("may"), t("june"), t("july"), t("aug"), t("sep"), t("oct"), t("nov"), t("dec")];
 
     const current = new Date();

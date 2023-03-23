@@ -1,4 +1,5 @@
 import styles from "./MediumCard.module.scss"
+import CardContent from "@components/Cards/CardContent/CardContent.jsx";
 
 const MediumCard = (props) => {
     return (
@@ -6,11 +7,11 @@ const MediumCard = (props) => {
             <div className={styles["container__image"]}>
                 <img src={props.image} alt="Image" />
             </div>
-            <div className={styles["content"]}>
-                <div className={styles["content__speciality"]}>{props.speciality}</div>
-                <div className={styles["content__title"]}>{props.title}</div>
-                <div className={styles["content__date"]}>{props.date}</div>
-            </div>
+            <CardContent
+                speciality={props.speciality}
+                title={props.title}
+                date={props.date}
+            />
         </div>
     );
 }

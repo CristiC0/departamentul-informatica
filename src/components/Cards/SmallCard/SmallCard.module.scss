@@ -11,25 +11,4 @@
             height: 100%;
         }
     }
-
-    .content {
-        display: flex;
-        flex-direction: column;
-        padding: 0 0.5rem;
-
-        &__speciality {
-            color:$highlight-color;
-            font-weight: bold;
-        }
-
-        &__title {
-            font-size: 1rem;
-            color: $font-color-dark;
-        }
-
-        &__date {
-            font-size: 0.9rem;
-            color: $font-color-grey;
-        }
-    }
 }

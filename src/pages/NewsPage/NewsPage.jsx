@@ -3,6 +3,7 @@ import NewsSection from "../../components/NewsSection/NewsSection";
 import CurrentDate from "../../components/CurrentDate/CurrentDate";
 import styles from "./NewsPage.module.scss";
 import Weather from "../../components/Weather/Weather";
+import NewsSlider from "@components/NewsSlider/NewsSlider.jsx";
 function NewsPage() {
 
     return (
@@ -19,6 +20,7 @@ function NewsPage() {
             </div>
             <div className={styles['popular']}>
                 <CompartmentName name="Popular pentru săptămână" />
+                <NewsSlider></NewsSlider>
             </div>
         </div>
     );
