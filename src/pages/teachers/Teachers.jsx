@@ -1,4 +1,6 @@
 import TabSelector from "@components/TabSelector/TabSelector";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import Input from "@components/Input/Input.jsx";
 import { AiOutlineSearch } from "react-icons/ai";
 import { VscSettings } from "react-icons/vsc";
@@ -110,7 +112,9 @@ const Teachers = () => {
                             defaultUserImage
                         )}
                         <h3>{teacher.name}</h3>
-                        <h4>Profile</h4>
+                        <h4>
+                            <Link to={`${teacher.name}`}>Profile</Link>
+                        </h4>
                     </div>
                 ))}
             </div>
