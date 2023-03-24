@@ -6,6 +6,7 @@ import router from "./routes/router";
 import "./i18n";
 
 const queryClient = new QueryClient();
+
 function App() {
     return (
         <Suspense>

@@ -10,7 +10,7 @@ function Homepage() {
             <div className={styles["container__slider"]}>
                 <ImageSlider />
             </div>
-            {/* <div className={styles['container__announces']}><NewsJigsaw/></div> */}
+            <div className={styles['container__announces']}><NewsJigsaw/></div>
             <div className={styles["container__information"]}>
                 <Info_container />
             </div>
