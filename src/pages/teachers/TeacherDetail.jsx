@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { BsFacebook, BsInstagram } from "react-icons/bs";
 import { SlSocialVkontakte } from "react-icons/sl";
-import { FacebookProvider, Page } from "react-facebook";
 import styles from "./TeacherDetail.module.scss";
 const teacherDetail = {
     name: "John Doe",
