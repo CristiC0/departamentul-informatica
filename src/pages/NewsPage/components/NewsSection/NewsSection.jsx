@@ -1,8 +1,8 @@
 import styles from "./NewsSection.module.scss"
 
-import BigCard from "../Cards/BigCard/BigCard";
-import MediumCard from "../Cards/MediumCard/MediumCard";
-import SmallCard from "../Cards/SmallCard/SmallCard";
+import BigCard from "../../../../components/Cards/BigCard/BigCard";
+import MediumCard from "../../../../components/Cards/MediumCard/MediumCard";
+import SmallCard from "../../../../components/Cards/SmallCard/SmallCard";
 
 const NewsSection = (props) => {
     return (
