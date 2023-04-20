@@ -23,15 +23,6 @@ function ImageSlider() {
 
   const images = [image_4, image_1, image_2];
 
-  // useEffect(() => {
-  //   swiperElRef.current.addEventListener('progress', (e) => {
-  //     const [swiper, progress] = e.detail;
-  //   });
-
-  //   swiperElRef.current.addEventListener('slidechange', (e) => {
-  //   });
-  // }, []);
-
   useEffect(() => {
     const swiperContainer = swiperElRef.current;
     const params = {
