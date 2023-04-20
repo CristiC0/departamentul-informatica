@@ -1,11 +1,12 @@
 import styles from "./ImageSlider.module.scss";
 import { useRef, useEffect } from 'react';
 import { register } from 'swiper/element/bundle';
-import { Navigation, Pagination, Autoplay } from "swiper";
+import { EffectFade, Navigation, Pagination, Autoplay, Scrollbar } from "swiper";
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import 'swiper/scss/autoplay';
+import 'swiper/scss/scrollbar';
 
 import image_1 from "@images/Slider_1.jpeg";
 import image_2 from "@images/Slider_2.jpeg";
@@ -22,36 +23,45 @@ function ImageSlider() {
 
   const images = [image_4, image_1, image_2];
 
-  useEffect(() => {
-    swiperElRef.current.addEventListener('progress', (e) => {
-      const [swiper, progress] = e.detail;
-    });
+  // useEffect(() => {
+  //   swiperElRef.current.addEventListener('progress', (e) => {
+  //     const [swiper, progress] = e.detail;
+  //   });
 
-    swiperElRef.current.addEventListener('slidechange', (e) => {
-    });
-  }, []);
+  //   swiperElRef.current.addEventListener('slidechange', (e) => {
+  //   });
+  // }, []);
 
   useEffect(() => {
-    const swiperParams = {
-      modules: { Navigation, Pagination,Autoplay},
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        type: 'bullets',
-      },
+    const swiperContainer = swiperElRef.current;
+    const params = {
+      modules: { EffectFade, Navigation, Pagination, Autoplay, Scrollbar },
+      navigation: true,
+      //pagination: {clickable: true},
       slidesPerView: 1,
-      autoplay: {
-        delay: 5000,
-      },
+      autoplay: { delay: 4000 },
+      scrollbar: { hide: false, draggable: true },
+      effect: "fade",
+      injectStyles: [
+        `
+          .swiper-button-next,
+          .swiper-button-prev {
+            color: white;
 
-    }
-    Object.assign(swiperElRef.current, swiperParams);
-    swiperElRef.current.initialize();
+            @media screen and (max-width: 768px) {
+              display: none;
+            }
+          }
+          .swiper-pagination-bullet{
+            background-color: white;
+          }
+      `,
+      ],
+    };
+
+    Object.assign(swiperContainer, params);
+    swiperContainer.initialize();
   }, []);
-
 
 
   return (
@@ -63,17 +73,11 @@ function ImageSlider() {
       >
         {
           images.map((images) =>
-
             <swiper-slide key={images} class={styles["swiper-slide"]} >
               <img src={images} alt="Image" />
-              <div className={`swiper-button-prev ${styles["swiper-button-prev"]}`}></div>
-              <div className={`swiper-button-next ${styles["swiper-button-next"]}`}></div>
-              <div className={`swiper-pagination ${styles["swiper-pagination"]}`}></div>
             </swiper-slide>
-
           )
         }
-
       </swiper-container>
     </div >
   );
