@@ -1,9 +1,9 @@
-import CompartmentName from "../../components/CompartmentName/CompartmentName";
-import NewsSection from "../../components/NewsSection/NewsSection";
-import CurrentDate from "../../components/CurrentDate/CurrentDate";
+import CompartmentName from "@components/CompartmentName/CompartmentName";
+import NewsSection from "./components/NewsSection/NewsSection";
+import CurrentDate from "@components/CurrentDate/CurrentDate";
 import styles from "./NewsPage.module.scss";
-import Weather from "../../components/Weather/Weather";
-import NewsSlider from "@components/NewsSlider/NewsSlider.jsx";
+import Weather from "@components/Weather/Weather";
+import NewsSlider from "./components/NewsSlider/NewsSlider.jsx";
 function NewsPage() {
 
     return (

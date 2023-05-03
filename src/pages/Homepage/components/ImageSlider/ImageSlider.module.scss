@@ -3,7 +3,7 @@
     position: relative;
 
     .swiper-container {
-        height: 32rem;
+        height: 50vh;
 
         .swiper-slide {
             background-color: black;
@@ -13,18 +13,6 @@
                 object-fit: cover;
                 opacity: 0.4;
             }
-        }
-
-        .swiper-button-prev,
-        .swiper-button-next {
-            --swiper-navigation-color: white;
-            @include responsive("small"){
-                display: none;
-            }
-        }
-
-        .swiper-pagination {
-            --swiper-pagination-color: white;
         }
     }
 }

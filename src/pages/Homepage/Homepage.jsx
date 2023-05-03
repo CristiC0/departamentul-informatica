@@ -1,7 +1,7 @@
-import ImageSlider from "@components/ImageSlider/ImageSlider";
-import NewsJigsaw from "@components/NewsJigsaw/NewsJigsaw";
-import Info_container from "@components/Info_container/Info_container";
-import BriefInfoAbout from "@components/BriefInfoAbout/BriefInfoAbout";
+import ImageSlider from "./components/ImageSlider/ImageSlider";
+import NewsJigsaw from "./components/NewsJigsaw/NewsJigsaw";
+import Info_container from "./components/Info_container/Info_container";
+import BriefInfoAbout from "./components/BriefInfoAbout/BriefInfoAbout";
 import styles from "./Homepage.module.scss";
 
 function Homepage() {
