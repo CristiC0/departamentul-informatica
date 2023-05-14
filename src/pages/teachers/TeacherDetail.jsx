@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { BsFacebook, BsInstagram } from "react-icons/bs";
 import { SlSocialVkontakte } from "react-icons/sl";
+import CompartmentName from "@components/CompartmentName/CompartmentName"
 import styles from "./TeacherDetail.module.scss";
 const teacherDetail = {
     name: "John Doe",
@@ -55,7 +56,7 @@ const colorBlue = (text) => {
 
 const TeacherDetail = () => {
     return (
-        <div>
+        <div className={styles.container} >
             <header className={styles.header}>
                 {teacherDetail.picture ? (
                     <div>
@@ -95,7 +96,7 @@ const TeacherDetail = () => {
                 </div>
             </div>
 
-            <Header title="Cursuri" />
+            <CompartmentName name="Cursuri"></CompartmentName>
 
             <div className={styles["courses"]}>
                 <div className={styles["courses__card"]}>
@@ -130,7 +131,7 @@ const TeacherDetail = () => {
                 </div>
             </div>
 
-            <Header title="Date Biografice" />
+            <CompartmentName name="Date biografice"></CompartmentName>
 
             <div className={styles["bio"]}>
                 {Object.keys(teacherDetail.bios)
@@ -147,7 +148,7 @@ const TeacherDetail = () => {
                     ))}
             </div>
 
-            <Header title="Carti" />
+            <CompartmentName name="Carți"></CompartmentName>
             <div className={styles.book}>
                 {teacherDetail.books[0].image ? (
                     <img src="" alt="" />
