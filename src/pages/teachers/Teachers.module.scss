@@ -2,12 +2,11 @@ $header-bg: #dce7f0;
 
 .container {
     width: 100%;
-    padding: 0 2rem;
 
-    &__content {
-        max-width: 75rem;
-        margin: 2rem auto;
-    }
+    // &__content {
+    //     max-width: 75rem;
+    //     margin: 2rem auto;
+    // }
 
     .lead {
         display: grid;

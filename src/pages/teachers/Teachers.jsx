@@ -4,6 +4,7 @@ import { HiArrowSmLeft } from "react-icons/hi";
 import styles from "./Teachers.module.scss";
 import usePagination from "@hooks/usePagination";
 import CompartmentName from "@components/CompartmentName/CompartmentName"
+import HeaderImage from "@components/HeaderImage/HeaderImage"
 
 
 const defaultUserImage = <div className={styles["list__card--noPhoto"]}></div>;
@@ -75,74 +76,72 @@ const Teachers = () => {
 
     return (
         <div className={styles.container}>
-            <div className={styles["container__content"]}>
+            <HeaderImage headerImage ="/src/assets/images/courses-banner.jpeg"></HeaderImage>
+            <CompartmentName name="Conducere"></CompartmentName>
+            <div className={styles.lead}>
+                {itemsOnPage.map((teacher) => {
+                    if (teacher?.lead === true) {
+                        return (
+                            <div key={teacher.id} className={styles["lead__card"]}>
+                                {teacher.photo ? (
+                                    <img
+                                        src={teacher.photo}
+                                        alt={`${teacher.name} photo`}
+                                    />
+                                ) : (
+                                    defaultUserImage
+                                )}
+                                <h3><Link to={`${teacher.name}`}>{teacher.name}</Link></h3>
+                                <h4>
+                                    {teacher.function}
+                                </h4>
+                            </div>
+                        )
+                    }
+                })}
+            </div>
 
-                <CompartmentName name="Conducere"></CompartmentName>
-                <div className={styles.lead}>
-                    {itemsOnPage.map((teacher) => {
-                        if (teacher?.lead === true) {
-                            return (
-                                <div key={teacher.id} className={styles["lead__card"]}>
-                                    {teacher.photo ? (
-                                        <img
-                                            src={teacher.photo}
-                                            alt={`${teacher.name} photo`}
-                                        />
-                                    ) : (
-                                        defaultUserImage
-                                    )}
-                                    <h3><Link to={`${teacher.name}`}>{teacher.name}</Link></h3>
-                                    <h4>
-                                        {teacher.function}
-                                    </h4>
-                                </div>
-                            )
-                        }
-                    })}
-                </div>
+            <CompartmentName name="Cadre didactice"></CompartmentName>
+            <div className={styles.list}>
+                {itemsOnPage.map((teacher) => (
+                    <div key={teacher.id} className={styles["list__card"]}>
+                        {teacher.photo ? (
+                            <img
+                                src={teacher.photo}
+                                alt={`${teacher.name} photo`}
+                            />
+                        ) : (
+                            defaultUserImage
+                        )}
+                        <h3><Link to={`${teacher.name}`}>{teacher.name}</Link></h3>
+                        <h4>
+                            {teacher.function}
+                        </h4>
+                    </div>
+                ))}
+            </div>
 
-                <CompartmentName name="Cadre didactice"></CompartmentName>
-                <div className={styles.list}>
-                    {itemsOnPage.map((teacher) => (
-                        <div key={teacher.id} className={styles["list__card"]}>
-                            {teacher.photo ? (
-                                <img
-                                    src={teacher.photo}
-                                    alt={`${teacher.name} photo`}
-                                />
-                            ) : (
-                                defaultUserImage
-                            )}
-                            <h3><Link to={`${teacher.name}`}>{teacher.name}</Link></h3>
-                            <h4>
-                                {teacher.function}
-                            </h4>
-                        </div>
-                    ))}
-                </div>
-
-                <div className={styles.navigation}>
-                    <HiArrowSmLeft
-                        className={styles["navigation__arrow"]}
-                        onClick={previousPage}
-                    />
-                    {displayedPages.map((page) => (
-                        <div
-                            className={`${styles["navigation__page"]} ${currentPage === page
-                                ? styles["navigation__page--current"]
-                                : ""
-                                }`}
-                            key={page}
-                            onClick={() => changePageNumber(page)}
-                        >
-                            {page}
-                        </div>
-                    ))}
-                    <HiArrowSmRight
-                        className={styles["navigation__arrow"]}
-                        onClick={nextPage}
-                    />
-                </div>
+            <div className={styles.navigation}>
+                <HiArrowSmLeft
+                    className={styles["navigation__arrow"]}
+                    onClick={previousPage}
+                />
+                {displayedPages.map((page) => (
+                    <div
+                        className={`${styles["navigation__page"]} ${currentPage === page
+                            ? styles["navigation__page--current"]
+                            : ""
+                            }`}
+                        key={page}
+                        onClick={() => changePageNumber(page)}
+                    >
+                        {page}
+                    </div>
+                ))}
+                <HiArrowSmRight
+                    className={styles["navigation__arrow"]}
+                    onClick={nextPage}
+                />
             </div>
         </div>
     );
