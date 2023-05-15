@@ -1,134 +1,89 @@
-$header-bg: #dce7f0;
+.teacher {
+    display: block;
+    padding: 4rem 0;
+    background-color: $tertiary-color;
 
-.container {
-    width: 100%;
-
-    // &__content {
-    //     max-width: 75rem;
-    //     margin: 2rem auto;
-    // }
-
-    .lead {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 3em;
-        width: 90%;
-        margin: 4em auto;
-
-        @include responsive("medium") {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        @include responsive("small") {
-            grid-template-columns: repeat(1, 1fr);
-        }
-
-        &__card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-
-            &>h3 {
-                text-transform: capitalize;
-                color: $primary-color;
-                cursor: pointer;
-            }
-
-            &>h4 {
-                color: grey;
-                font-weight: 100;
-            }
-
-            &--noPhoto {
-                width: 18em;
-                height: 18em;
-                background-image: url("@images/User.svg");
-                background-position: center;
-                background-repeat: no-repeat;
-                border: 2px solid $primary-color;
-                border-radius: 2px;
-            }
-        }
+    &__container {
+        max-width: 75rem;
+        padding: 0 1rem;
+        margin: 0 auto;
     }
-
-    .list {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 3em;
-        width: 90%;
-        margin: 4em auto;
-
-        @include responsive("medium") {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        @include responsive("small") {
-            grid-template-columns: repeat(1, 1fr);
-        }
-
-        &__card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            &>h3 {
-                text-transform: capitalize;
-                color: $primary-color;
-                cursor: pointer;
-            }
-
-            &>h4 {
-                color: grey;
-                font-weight: 100;
-            }
-
-            &--noPhoto {
-                width: 14em;
-                height: 14em;
-                background-image: url("@images/User.svg");
-                background-position: center;
-                background-repeat: no-repeat;
-                border: 2px solid $primary-color;
-                border-radius: 2px;
-            }
-        }
-    }
-
-    .navigation {
-        width: fit-content;
-        margin: 3em auto;
-
+    
+    &__row {
         display: flex;
-        justify-content: space-evenly;
+        gap: 1rem;
+        justify-content: space-between;
         align-items: center;
-        gap: 1em;
+        flex-wrap: wrap;
+    }
 
-        &__arrow {
-            width: 1.8em;
-            height: 1.8em;
-            font-size: 1.2em;
-            border-radius: 50%;
-            font-weight: 600;
-            color: $primary-color;
-            cursor: pointer;
-        }
+    &__cols{
+        &--1{
+            width: 23rem;
 
-        &__page {
-            color: black;
-            font-size: 1.5em;
-            cursor: pointer;
-
-            &::selection {
-                background-color: none;
-                color: black;
+            @include responsive("large") {
+                width: 20rem;
             }
 
-            &--current {
-                color: $highlight-color;
-                border-bottom: 1px solid $highlight-color;
+            @include responsive("medium") {
+                width: 100%;
+            }
+        }
+        &--2{
+            width: 17rem;
+
+            @include responsive("large") {
+                width: 14.5rem;
+            }
+
+            @include responsive("medium") {
+                width: 100%;
             }
         }
     }
+}
 
+.navigation {
+    width: fit-content;
+    margin: 0.5em auto;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 0.5em;
+
+    &__arrow, &__page{
+        width: 1.8em;
+        height: 1.8em;
+        font-size: 1.2em;
+        text-align: center;
+        border: 1px solid #ddd;
+        cursor: pointer;
+    }
+
+    &__arrow {
+        font-weight: 400;
+        color: $font-color-grey;
+        padding: 0.5rem;
+
+        &:hover{
+            background-color: $primary-color;
+            color: $secondary-color;
+        }
+    }
+
+    &__page {
+        color: black;
+        padding: 0.2rem;
+
+        &::selection {
+            background-color: none;
+            color: black;
+        }
+
+        &--current {
+            background-color: $primary-color;
+            color: $secondary-color;
+
+        }
+    }
 }
