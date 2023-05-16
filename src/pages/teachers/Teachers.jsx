@@ -71,14 +71,15 @@ const Teachers = () => {
         previousPage,
     } = usePagination(teachers, 8);
 
+    if (itemsOnPage == null) (<>Loading..</>)
+
     return (
         <div>
-            <HeaderImage headerImage="/src/assets/images/courses-banner.jpeg"></HeaderImage>
+            <HeaderImage headerImage="/src/assets/images/courses-banner.jpeg" />
             <PageHeader
                 title="Profesori"
-                introduction="Voluptate ut do aliquip incididunt nisi aute qui eu aliqua nulla. Fugiat qui sint fugiat irure nulla pariatur ex ad nulla. Proident pariatur veniam elit ut excepteur duis cillum labore enim labore incididunt dolore. Laboris elit duis et pariatur. Velit tempor et voluptate incididunt duis ipsum reprehenderit incididunt sit labore proident aliquip. Adipisicing labore cillum duis ea non id ex pariatur.">
-            </PageHeader>
-
+                introduction="Voluptate ut do aliquip incididunt nisi aute qui eu aliqua nulla. Fugiat qui sint fugiat irure nulla pariatur ex ad nulla. Proident pariatur veniam elit ut excepteur duis cillum labore enim labore incididunt dolore. Laboris elit duis et pariatur. Velit tempor et voluptate incididunt duis ipsum reprehenderit incididunt sit labore proident aliquip. Adipisicing labore cillum duis ea non id ex pariatur."
+            />
             <div className={styles.teacher}>
                 <div className={styles["teacher__container"]}>
                     <div className={styles["teacher__row"]}>

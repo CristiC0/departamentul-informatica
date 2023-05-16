@@ -56,7 +56,7 @@
         height: 1.8em;
         font-size: 1.2em;
         text-align: center;
-        border: 1px solid #ddd;
+        border: 1px solid $font-color-grey;
         cursor: pointer;
     }
 
@@ -72,12 +72,12 @@
     }
 
     &__page {
-        color: black;
+        color: $font-color-grey;
         padding: 0.2rem;
 
         &::selection {
             background-color: none;
-            color: black;
+            color: $font-color-grey;
         }
 
         &--current {
