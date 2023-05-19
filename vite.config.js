@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import * as path from "path";
-
 const createPath = (url) => path.resolve(__dirname, url);
 
 // https://vitejs.dev/config/
@@ -22,10 +21,8 @@ export default defineConfig({
     },
     plugins: [react()],
     server: {
-        proxy: {
-            "/api": "http://localhost:9090",
-        },
         port: "4200",
+        https: false,
     },
     css: {
         preprocessorOptions: {
