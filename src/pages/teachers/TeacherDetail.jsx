@@ -155,7 +155,9 @@ const TeacherDetail = (props) => {
                             <div className={styles.content}>
                                 <div className={styles.content__header}>
                                     <h1 className={styles.content__name}>{teacherDetail.name}</h1>
-                                    <AiOutlineEdit className={styles.content__edit}/>
+                                        <Link to="edit" className={styles.content__edit}>
+                                            <AiOutlineEdit className={styles.content__edit}/>
+                                        </Link>
                                 </div>
                                 <p className={styles.content__role}>{teacherDetail.role}</p>
                                 <p className={styles.content__description}>{teacherDetail.description}</p>
