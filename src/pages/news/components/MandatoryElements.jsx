@@ -1,18 +1,14 @@
-import { NodeViewWrapper, NodeViewContent } from "@tiptap/react";
+import { NodeViewWrapper } from "@tiptap/react";
 import styles from "./styles.module.scss";
 import { RiImageAddFill } from "react-icons/ri";
-import { useState } from "react";
 import axios from "axios";
-
+import { useEditorContext } from "@context/EditorContext";
+import { useState } from "react";
 const priorities = { High: 1, Normal: 2, Low: 3 };
 
 const MandatoryElements = () => {
-    const [data, setData] = useState({
-        title: "",
-        image: { title: "Upload Thumbnail", link: "" },
-        priority: priorities["Normal"],
-    });
-
+    const { setData, data } = useEditorContext();
+    const [image, setImage] = useState("Upload Image");
     const titleChangeHandler = (event) => {
         setData((oldData) => ({
             ...oldData,
@@ -28,15 +24,13 @@ const MandatoryElements = () => {
                 `${import.meta.env.VITE_API_BASE_URL}/upload/image/news`,
                 formData
             )
-            .then(({ data }) =>
+            .then(({ data }) => {
+                setImage(event.target.files[0].name);
                 setData((oldData) => ({
                     ...oldData,
-                    image: {
-                        title: event.target.files[0].name,
-                        link: data.imagePath,
-                    },
-                }))
-            )
+                    thumbnail: data.imagePath,
+                }));
+            })
             .catch((error) => console.error(error));
     };
 
@@ -66,10 +60,10 @@ const MandatoryElements = () => {
                             className="m-auto d-flex align-items-center justify-content-center"
                             contentEditable={false}
                         >
-                            {data.image.link === "" && (
+                            {image === "Upload Image" && (
                                 <RiImageAddFill size={30} />
                             )}
-                            <span> {data.image.title} </span>
+                            <span> {image} </span>
                         </label>
                         <div contentEditable={false}>
                             <input
@@ -86,8 +80,9 @@ const MandatoryElements = () => {
                         <div className={styles.group}>
                             <button
                                 className={
-                                    data.priority === priorities["High"] &&
-                                    styles["but--selected"]
+                                    data.priority === priorities["High"]
+                                        ? styles["but--selected"]
+                                        : ""
                                 }
                                 onClick={() =>
                                     priorityClickHandler(priorities["High"])
@@ -97,8 +92,9 @@ const MandatoryElements = () => {
                             </button>
                             <button
                                 className={
-                                    data.priority === priorities["Normal"] &&
-                                    styles["but--selected"]
+                                    data.priority === priorities["Normal"]
+                                        ? styles["but--selected"]
+                                        : ""
                                 }
                                 onClick={() =>
                                     priorityClickHandler(priorities["Normal"])
@@ -108,8 +104,9 @@ const MandatoryElements = () => {
                             </button>
                             <button
                                 className={
-                                    data.priority === priorities["Low"] &&
-                                    styles["but--selected"]
+                                    data.priority === priorities["Low"]
+                                        ? styles["but--selected"]
+                                        : ""
                                 }
                                 onClick={() =>
                                     priorityClickHandler(priorities["Low"])

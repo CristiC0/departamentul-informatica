@@ -1,6 +1,5 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import Placeholder from "@tiptap/extension-placeholder";
 import MenuBar from "./MenuBar";
 import Document from "@tiptap/extension-document";
 import styles from "./styles.module.scss";
@@ -13,71 +12,18 @@ import useNews from "@hooks/useNews";
 import MandatoryElements from "./Extension.jsx";
 import "./placeholder.scss";
 import "./editor.scss";
+import { useEditorContext } from "@context/EditorContext";
+import { useNavigate } from "react-router";
+import { useTranslation } from "react-i18next";
+
 const CustomDocument = Document.extend({
-    content: "mandatoryComponents paragraph block*",
+    content: "mandatoryComponents block*",
 });
 
-const data = {
-    title: "First News",
-    priority: 1,
-    content: {
-        type: "doc",
-        content: [
-            {
-                type: "heading",
-                attrs: { textAlign: "left", level: 1 },
-                content: [
-                    {
-                        type: "text",
-                        marks: [{ type: "strike" }],
-                        text: "News Title",
-                    },
-                ],
-            },
-            {
-                type: "paragraph",
-                attrs: { textAlign: "left" },
-                content: [
-                    {
-                        type: "text",
-                        marks: [{ type: "strike" }],
-                        text: "Hello ther",
-                    },
-                    { type: "text", text: "e'" },
-                ],
-            },
-            { type: "paragraph", attrs: { textAlign: "left" } },
-            {
-                type: "bulletList",
-                content: [
-                    {
-                        type: "listItem",
-                        content: [
-                            {
-                                type: "paragraph",
-                                attrs: { textAlign: "left" },
-                                content: [{ type: "text", text: "Me" }],
-                            },
-                        ],
-                    },
-                    {
-                        type: "listItem",
-                        content: [
-                            {
-                                type: "paragraph",
-                                attrs: { textAlign: "left" },
-                                content: [{ type: "text", text: "You" }],
-                            },
-                        ],
-                    },
-                ],
-            },
-            { type: "paragraph", attrs: { textAlign: "left" } },
-        ],
-    },
-};
-
 const Editor = () => {
+    const { i18n } = useTranslation();
+    const { data, validate } = useEditorContext();
+
     const editor = useEditor({
         extensions: [
             CustomDocument,
@@ -92,21 +38,26 @@ const Editor = () => {
             TextAlign.configure({
                 types: ["heading", "paragraph"],
             }),
-            // Placeholder.configure({
-            //     placeholder: ({ node }) => {
-            //         if (node.type.name === "title") {
-            //             return "Title";
-            //         }
-            //     },
-            // }),
             MandatoryElements,
         ],
-        content: ` <mandatory-components> </mandatory-components>`,
+        content: ` <mandatory-components></mandatory-components>`,
         autofocus: true,
     });
 
     const { createNews } = useNews();
+    const navigate = useNavigate();
+    const clickHandler = async () => {
+        const documentJSON = editor.getJSON();
+        documentJSON.content.shift();
+        const createdNews = await createNews({
+            title: data.title,
+            thumbnail: data.thumbnail,
+            priority: data.priority,
+            content: documentJSON,
+        });
 
+        navigate(`/${i18n.language}/news/${createdNews.id}`);
+    };
     return (
         <>
             <div className={styles.editor}>
@@ -117,14 +68,9 @@ const Editor = () => {
 
             <div>
                 <button
-                    onClick={
-                        () => console.log(editor.getJSON())
-                        // createNews({
-                        //     title: data.title,
-                        //     priority: data.priority,
-                        //     content: data.content,
-                        // })
-                    }
+                    className={styles.create}
+                    onClick={clickHandler}
+                    disabled={!validate()}
                 >
                     Create
                 </button>
