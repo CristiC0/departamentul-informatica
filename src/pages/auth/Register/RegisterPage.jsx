@@ -14,7 +14,12 @@ const RegisterPage = () => {
 
     const onSubmit = (values, actions) => {
         (async function () {
-            await register(values);
+            try {
+                await register(values);
+            } catch (error) {
+                console.log("ERROR", error);
+                actions.resetForm();
+            }
             actions.resetForm();
             navigate("/");
         })();

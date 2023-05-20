@@ -16,7 +16,13 @@ const LoginPage = () => {
 
     const onSubmit = (values, actions) => {
         (async function () {
-            await login(values);
+            try {
+                await login(values);
+            } catch (error) {
+                //TODO: Add something to show user does not exist
+                actions.resetForm();
+                return;
+            }
             actions.resetForm();
             navigate("/");
         })();
@@ -32,7 +38,7 @@ const LoginPage = () => {
         handleSubmit,
     } = useFormik({
         initialValues: {
-            username: "",
+            email: "",
             password: "",
         },
         validationSchema: loginSchema,
@@ -48,13 +54,13 @@ const LoginPage = () => {
             <form onSubmit={handleSubmit} className={styles["form"]}>
                 <Input
                     type="text"
-                    name="username"
+                    name="email"
                     value={values.email}
-                    placeholder={t("input-username")}
+                    placeholder={t("input-email")}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    error={errors.username}
-                    touched={touched.username}
+                    error={errors.email}
+                    touched={touched.email}
                     icon={<AiOutlineUser />}
                 />
 
