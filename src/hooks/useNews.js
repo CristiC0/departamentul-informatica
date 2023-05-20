@@ -6,26 +6,26 @@ import StarterKit from "@tiptap/starter-kit";
 import Typography from "@tiptap/extension-typography";
 import Underline from "@tiptap/extension-underline";
 const useNews = (id) => {
-    const createNews = ({ title, priority, content }) => {
+    const createNews = async ({ title, priority, content, thumbnail }) => {
         const body = {
             title,
             priority,
+            thumbnail,
             content: JSON.stringify(content),
         };
 
-        (async () => {
-            const response = await axios
-                .post(`${import.meta.env.VITE_API_BASE_URL}/news`, body, {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    withCredentials: true,
-                })
-                .catch((err) => console.error(err));
-        })();
+        const response = await axios
+            .post(`${import.meta.env.VITE_API_BASE_URL}/news`, body, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            })
+            .catch((err) => console.error(err));
+        return response.data.news;
     };
 
-    const [newsJSX, setNewsJSX] = useState(null);
+    const [data, setData] = useState(null);
     useEffect(() => {
         if (id)
             (async () => {
@@ -38,11 +38,10 @@ const useNews = (id) => {
                     Underline,
                 ]);
 
-                setNewsJSX(parse(output));
-                // console.log(data);
+                setData({ ...data, content: parse(output) });
             })();
     }, []);
-    return { createNews, newsJSX };
+    return { createNews, data };
 };
 
 export default useNews;
