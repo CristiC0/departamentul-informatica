@@ -14,6 +14,8 @@ import RegisterPage from "@pages/auth/Register/RegisterPage";
 import Teachers from "@pages/teachers/Teachers";
 import NewsPage from "@pages/NewsPage/NewsPage";
 import TeacherDetail from "@pages/teachers/TeacherDetail";
+import CreateNews from "@pages/news/CreateNews";
+import NewsDetail from "@pages/NewsPage/NewsDetail/NewsDetail";
 import TeacherEdit from "@pages/teachers/TeacherEdit/TeacherEdit";
 
 const router = createBrowserRouter(
@@ -25,7 +27,11 @@ const router = createBrowserRouter(
             </Route>
             <Route path=":lang" element={<GeneralLayout />}>
                 <Route index exact element={<Homepage />} />
-                <Route path="news" element={<NewsPage />} />
+                <Route path="news">
+                    <Route index exact element={<NewsPage />} />
+                    <Route path="add" element={<CreateNews />} />
+                    <Route path=":id" element={<NewsDetail />} />
+                </Route>
                 <Route path="teachers" element={<Teachers />} />
                 <Route path="teachers/:name" element={<TeacherDetail />} />
                 <Route path="teachers/:name/edit" element={<TeacherEdit />} />
