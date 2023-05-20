@@ -1,0 +1,118 @@
+.editor {
+    background-color: #fff;
+    border: 3px solid #0d0d0d;
+    border-radius: 0.75rem;
+    color: #0d0d0d;
+    display: flex;
+    flex-direction: column;
+    min-height: 26rem;
+    max-width: 90%;
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    &__header {
+        align-items: center;
+        background: #0d0d0d;
+        border-bottom: 3px solid #0d0d0d;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+        display: flex;
+        flex: 0 0 auto;
+        flex-wrap: wrap;
+        padding: 0.25rem;
+    }
+}
+
+.divider {
+    background-color: rgba(#fff, 0.25);
+    height: 1.25rem;
+    margin-left: 0.5rem;
+    margin-right: 0.75rem;
+    width: 1px;
+}
+
+.menu-item {
+    background-color: transparent;
+    border: none;
+    border-radius: 0.4rem;
+    color: #fff;
+    cursor: pointer;
+    height: 1.75rem;
+    margin-right: 0.25rem;
+    padding: 0.25rem;
+    width: 1.75rem;
+
+    svg {
+        fill: currentColor;
+        height: 100%;
+        width: 100%;
+    }
+
+    &:hover,
+    &.is-active {
+        background-color: #303030;
+    }
+}
+
+.blockquote {
+    border-left: 3px solid rgba(#0d0d0d, 0.1);
+    padding-left: 1rem;
+}
+
+.mandatory-elements {
+    &__title {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid black;
+        outline: none;
+        font-size: 2em;
+    }
+
+    &__thumbnail {
+        position: relative;
+        & label {
+            width: fit-content;
+            max-width: 40%;
+            background-color: black;
+            color: white;
+            padding: 0.4em 0.2em;
+            font-weight: bold;
+            overflow: hidden;
+
+            & span {
+                overflow: hidden;
+                white-space: nowrap;
+                margin: 0.2em;
+            }
+        }
+
+        & input {
+            visibility: hidden;
+        }
+    }
+
+    &__priority {
+        & .group {
+            width: fit-content;
+            margin: auto;
+        }
+        & button {
+            min-width: 5em;
+            padding: 0.4em 0.2em;
+            font-weight: bold;
+            background-color: black;
+            color: white;
+            font-weight: bold;
+            border: 1px solid white;
+            outline: none;
+        }
+
+        & .but--selected {
+            background-color: white;
+            color: black;
+            font-weight: bold;
+            border: 2px solid black;
+        }
+    }
+}
