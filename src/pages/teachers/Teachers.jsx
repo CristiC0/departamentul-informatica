@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import styles from "./Teachers.module.scss";
 import usePagination from "@hooks/usePagination";
@@ -61,6 +62,18 @@ const teachers = [
 ];
 
 const Teachers = () => {
+
+    const [data, setData] = useState(null);
+
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/teachers`)
+            .then((response) => response.json())
+            .then((data) => setData(data));
+        ;
+    }, []);
+
+    console.log(data);
+
     const {
         nrOfPages,
         displayedPages,
@@ -71,7 +84,10 @@ const Teachers = () => {
         previousPage,
     } = usePagination(teachers, 8);
 
-    if (itemsOnPage == null) (<>Loading..</>)
+
+    if (itemsOnPage == null)(<>Loading..</>)
+
+    //const name=`${data.lastname} " " ${data.firstName}`
 
     return (
         <div>
@@ -88,9 +104,9 @@ const Teachers = () => {
                                 return (
                                     <div key={teacher.id} className={styles["teacher__cols--1"]}>
                                         <TeacherCard
-                                            photo={teacher.photo ? teacher.photo : "/src/assets/images/default-user.png"}
-                                            name={teacher.name}
-                                            function={teacher.function}>
+                                            photo={teacher.photo ? data.photo : "/src/assets/images/default-user.png"}
+                                            name={`${teacher.lastname}" "${teacher.firstName}`}
+                                            function={teacher.title}>
                                         </TeacherCard>
                                     </div>
                                 )
@@ -106,8 +122,8 @@ const Teachers = () => {
                                 <div key={teacher.id} className={styles["teacher__cols--2"]}>
                                     <TeacherCard
                                         photo={teacher.photo ? teacher.photo : "/src/assets/images/default-user.png"}
-                                        name={teacher.name}
-                                        function={teacher.function}>
+                                        name={`${teacher.lastname}" "${teacher.firstName}`}
+                                        function={teacher.title}>
                                     </TeacherCard>
                                 </div>
                             )
