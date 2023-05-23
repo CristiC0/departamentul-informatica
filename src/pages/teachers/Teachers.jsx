@@ -2,20 +2,67 @@ import { useEffect, useState } from "react";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import styles from "./Teachers.module.scss";
 import usePagination from "@hooks/usePagination";
-import HeaderImage from "@components/HeaderImage/HeaderImage"
+import HeaderImage from "@components/HeaderImage/HeaderImage";
 import PageHeader from "@components/PageHeader/PageHeader";
 import TeacherCard from "./components/TeacherCard/TeacherCard";
 
-
 const teachers = [
-    { id: 1, name: "John Doe", function: "conferențiar universitar", photo: null, teacher: true },
-    { id: 2, name: "John Doe", function: "conferențiar universitar", photo: null, teacher: true },
-    { id: 3, name: "John Doe", function: "conferențiar universitar", photo: null, teacher: true },
-    { id: 4, name: "John Doe", function: "conferențiar universitar", photo: null, teacher: false },
-    { id: 5, name: "John Doe", function: "conferențiar universitar", photo: null, teacher: false },
-    { id: 6, name: "John Doe", function: "conferențiar universitar", photo: null, teacher: false },
-    { id: 7, name: "John Doe", function: "conferențiar universitar", photo: null, teacher: false },
-    { id: 8, name: "John Doe", function: "conferențiar universitar", photo: null, teacher: false },
+    {
+        id: 1,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: true,
+    },
+    {
+        id: 2,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: true,
+    },
+    {
+        id: 3,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: true,
+    },
+    {
+        id: 4,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: false,
+    },
+    {
+        id: 5,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: false,
+    },
+    {
+        id: 6,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: false,
+    },
+    {
+        id: 7,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: false,
+    },
+    {
+        id: 8,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: false,
+    },
     { id: 9, name: "John Doe", photo: null },
     { id: 1, name: "John Doe", photo: null },
     { id: 2, name: "John Doe", photo: null },
@@ -62,17 +109,30 @@ const teachers = [
 ];
 
 const Teachers = () => {
-
-    const [data, setData] = useState(null);
+    const [data, setData] = useState({ management: null, teachers: null });
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_BASE_URL}/teachers`)
-            .then((response) => response.json())
-            .then((data) => setData(data));
-        ;
+        const managementRequest = fetch(
+            `${
+                import.meta.env.VITE_API_BASE_URL
+            }/teachers/filter?management=true`
+        );
+        const teachersRequest = fetch(
+            `${
+                import.meta.env.VITE_API_BASE_URL
+            }/teachers/filter?management=false`
+        );
+        Promise.allSettled([managementRequest, teachersRequest])
+            .then((responses) =>
+                Promise.allSettled([
+                    responses[0].value.json(),
+                    responses[1].value.json(),
+                ])
+            )
+            .then((data) => {
+                setData({ management: data[0].value, teachers: data[1].value });
+            });
     }, []);
-
-    console.log(data);
 
     const {
         nrOfPages,
@@ -82,12 +142,9 @@ const Teachers = () => {
         currentPage,
         nextPage,
         previousPage,
-    } = usePagination(teachers, 8);
+    } = usePagination(data.teachers, 8);
 
-
-    if (itemsOnPage == null)(<>Loading..</>)
-
-    //const name=`${data.lastname} " " ${data.firstName}`
+    if (itemsOnPage === null) return <>Loading..</>;
 
     return (
         <div>
@@ -102,14 +159,21 @@ const Teachers = () => {
                         {itemsOnPage.map((teacher) => {
                             if (teacher?.teacher === true) {
                                 return (
-                                    <div key={teacher.id} className={styles["teacher__cols--1"]}>
+                                    <div
+                                        key={teacher.id}
+                                        className={styles["teacher__cols--1"]}
+                                    >
                                         <TeacherCard
-                                            photo={teacher.photo ? data.photo : "/src/assets/images/default-user.png"}
+                                            photo={
+                                                teacher.photo
+                                                    ? data.photo
+                                                    : "/src/assets/images/default-user.png"
+                                            }
                                             name={`${teacher.lastname}" "${teacher.firstName}`}
-                                            function={teacher.title}>
-                                        </TeacherCard>
+                                            function={teacher.title}
+                                        ></TeacherCard>
                                     </div>
-                                )
+                                );
                             }
                         })}
                     </div>
@@ -119,14 +183,21 @@ const Teachers = () => {
                     <div className={styles["teacher__row"]}>
                         {itemsOnPage.map((teacher) => {
                             return (
-                                <div key={teacher.id} className={styles["teacher__cols--2"]}>
+                                <div
+                                    key={teacher.id}
+                                    className={styles["teacher__cols--2"]}
+                                >
                                     <TeacherCard
-                                        photo={teacher.photo ? teacher.photo : "/src/assets/images/default-user.png"}
+                                        photo={
+                                            teacher.photo
+                                                ? teacher.photo
+                                                : "/src/assets/images/default-user.png"
+                                        }
                                         name={`${teacher.lastname}" "${teacher.firstName}`}
-                                        function={teacher.title}>
-                                    </TeacherCard>
+                                        function={teacher.title}
+                                    ></TeacherCard>
                                 </div>
-                            )
+                            );
                         })}
                     </div>
                 </div>
@@ -138,10 +209,11 @@ const Teachers = () => {
                     />
                     {displayedPages.map((page) => (
                         <div
-                            className={`${styles["navigation__page"]} ${currentPage === page
-                                ? styles["navigation__page--current"]
-                                : ""
-                                }`}
+                            className={`${styles["navigation__page"]} ${
+                                currentPage === page
+                                    ? styles["navigation__page--current"]
+                                    : ""
+                            }`}
                             key={page}
                             onClick={() => changePageNumber(page)}
                         >
@@ -153,9 +225,8 @@ const Teachers = () => {
                         onClick={nextPage}
                     />
                 </div>
-            </div >
+            </div>
         </div>
-
     );
 };
 
