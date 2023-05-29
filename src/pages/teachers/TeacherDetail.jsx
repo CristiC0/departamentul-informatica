@@ -1,19 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { BsFacebook, BsInstagram } from "react-icons/bs";
 import { SlSocialVkontakte } from "react-icons/sl";
 import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
-import CompartmentName from "@components/CompartmentName/CompartmentName"
-import HeaderImage from "@components/HeaderImage/HeaderImage"
+import CompartmentName from "@components/CompartmentName/CompartmentName";
+import HeaderImage from "@components/HeaderImage/HeaderImage";
 
-import { useRef, useEffect } from 'react';
-import { register } from 'swiper/element/bundle';
+import { useRef, useEffect } from "react";
+import { register } from "swiper/element/bundle";
 import { Navigation, Pagination, Autoplay } from "swiper";
-import 'swiper/scss';
-import 'swiper/scss/navigation';
-import 'swiper/scss/pagination';
-import 'swiper/scss/autoplay';
+import "swiper/scss";
+import "swiper/scss/navigation";
+import "swiper/scss/pagination";
+import "swiper/scss/autoplay";
 
 import styles from "./TeacherDetail.module.scss";
 const teacherDetail = {
@@ -36,14 +36,16 @@ const teacherDetail = {
             image: "/src/assets/images/temp1.png",
             name: "Criptografie și Securitatea Informației",
             cicle: "Licenta I",
-            description: "Commodo esse consequat ad laboris dolore labore sunt ipsum enim commodo. Elit officia magna do irure esse commodo tempor proident do cillum aliquip ex ut. Proident non ea eu eiusmod ullamco sunt labore adipisicing minim ea ex non id. Anim minim proident tempor nisi esse eu proident incididunt ipsum non. Laborum ut quis cupidatat ullamco.",
+            description:
+                "Commodo esse consequat ad laboris dolore labore sunt ipsum enim commodo. Elit officia magna do irure esse commodo tempor proident do cillum aliquip ex ut. Proident non ea eu eiusmod ullamco sunt labore adipisicing minim ea ex non id. Anim minim proident tempor nisi esse eu proident incididunt ipsum non. Laborum ut quis cupidatat ullamco.",
             link: null,
         },
         {
             id: 2,
             image: "/src/assets/images/temp1.png",
             name: "Criptografie și Securitatea Informației",
-            description: "Commodo esse consequat ad laboris dolore labore sunt ipsum enim commodo. Elit officia magna do irure esse commodo tempor proident do cillum aliquip ex ut. Proident non ea eu eiusmod ullamco sunt labore adipisicing minim ea ex non id. Anim minim proident tempor nisi esse eu proident incididunt ipsum non. Laborum ut quis cupidatat ullamco.",
+            description:
+                "Commodo esse consequat ad laboris dolore labore sunt ipsum enim commodo. Elit officia magna do irure esse commodo tempor proident do cillum aliquip ex ut. Proident non ea eu eiusmod ullamco sunt labore adipisicing minim ea ex non id. Anim minim proident tempor nisi esse eu proident incididunt ipsum non. Laborum ut quis cupidatat ullamco.",
             cicle: "Licenta I",
             link: null,
         },
@@ -96,8 +98,15 @@ const colorBlue = (text) => {
 register();
 
 const TeacherDetail = (props) => {
-
     const swiperElRef = useRef(null);
+    const teacherId = useParams("id");
+    useEffect(() => {
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`)
+            .then((response) => response.json())
+            .then((data) => {
+                setData(data.response);
+            });
+    }, []);
 
     useEffect(() => {
         const swiperParams = {
@@ -107,11 +116,11 @@ const TeacherDetail = (props) => {
             breakpoints: {
                 992: {
                     slidesPerView: coursesPerView,
-                    spaceBetween: 20
+                    spaceBetween: 20,
                 },
                 767: {
                     slidesPerView: 1,
-                    spaceBetween: 20
+                    spaceBetween: 20,
                 },
             },
             autoplay: {
@@ -119,8 +128,7 @@ const TeacherDetail = (props) => {
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
             },
-
-        }
+        };
         Object.assign(swiperElRef.current, swiperParams);
         swiperElRef.current.initialize();
     }, []);
@@ -131,11 +139,9 @@ const TeacherDetail = (props) => {
         coursesPerView = 1;
     } else if (numberOfCourses === 2) {
         coursesPerView = 2;
+    } else {
+        coursesPerView = 3;
     }
-    else {
-        coursesPerView = 3
-    }
-
 
     return (
         <>
@@ -144,38 +150,65 @@ const TeacherDetail = (props) => {
                 <div className={styles.container}>
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item "><Link to="/">Home</Link></li>
-                            <li className="breadcrumb-item " ><Link to="/teachers">Profesori</Link></li>
-                            <li className="breadcrumb-item active" aria-current="page">{teacherDetail.name}</li>
+                            <li className="breadcrumb-item ">
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li className="breadcrumb-item ">
+                                <Link to="/teachers">Profesori</Link>
+                            </li>
+                            <li
+                                className="breadcrumb-item active"
+                                aria-current="page"
+                            >
+                                {teacherDetail.name}
+                            </li>
                         </ol>
                     </nav>
                     <div className={styles.profile}>
-
                         <div className={styles.profile__content}>
                             <div className={styles.content}>
                                 <div className={styles.content__header}>
-                                    <h1 className={styles.content__name}>{teacherDetail.name}</h1>
-                                        <Link to="edit" className={styles.content__edit}>
-                                            <AiOutlineEdit className={styles.content__edit}/>
-                                        </Link>
+                                    <h1 className={styles.content__name}>
+                                        {teacherDetail.name}
+                                    </h1>
+                                    <Link
+                                        to="edit"
+                                        className={styles.content__edit}
+                                    >
+                                        <AiOutlineEdit
+                                            className={styles.content__edit}
+                                        />
+                                    </Link>
                                 </div>
-                                <p className={styles.content__role}>{teacherDetail.role}</p>
-                                <p className={styles.content__description}>{teacherDetail.description}</p>
+                                <p className={styles.content__role}>
+                                    {teacherDetail.role}
+                                </p>
+                                <p className={styles.content__description}>
+                                    {teacherDetail.description}
+                                </p>
                             </div>
                             <div className={styles.contacts}>
                                 <div className={styles.contacts__mail}>
                                     <AiOutlineMail />
-                                    <a href={`mailto: ${teacherDetail.socials.email}`}>
-                                        {teacherDetail.socials.email}</a>
+                                    <a
+                                        href={`mailto: ${teacherDetail.socials.email}`}
+                                    >
+                                        {teacherDetail.socials.email}
+                                    </a>
                                 </div>
                                 <div className={styles.contacts__phone}>
-                                    <BsTelephone />{teacherDetail.socials.phone}
+                                    <BsTelephone />
+                                    {teacherDetail.socials.phone}
                                 </div>
                             </div>
                         </div>
                         <div className={styles.profile__photo}>
                             <img
-                                src={teacherDetail.picture ? teacherDetail.picture : "/src/assets/images/default-user.png"}
+                                src={
+                                    teacherDetail.picture
+                                        ? teacherDetail.picture
+                                        : "/src/assets/images/default-user.png"
+                                }
                                 alt={`${teacherDetail.name} photo`}
                             />
                         </div>
@@ -190,17 +223,44 @@ const TeacherDetail = (props) => {
                         {teacherDetail.courses.map((course) => (
                             <swiper-slide key={course.id} class={styles.swiper}>
                                 <div className={`card ${styles.card}`}>
-                                    <img src={course.image} className="card-img-top" alt="..." />
-                                    <div className={`card-body ${styles.card__body}`}>
-                                        <h5 className={`card-title ${styles.card__title}`}>{course.name}</h5>
-                                        <p className={`card-text ${styles.card__text}`}>{course.cicle}</p>
+                                    <img
+                                        src={course.image}
+                                        className="card-img-top"
+                                        alt="..."
+                                    />
+                                    <div
+                                        className={`card-body ${styles.card__body}`}
+                                    >
+                                        <h5
+                                            className={`card-title ${styles.card__title}`}
+                                        >
+                                            {course.name}
+                                        </h5>
+                                        <p
+                                            className={`card-text ${styles.card__text}`}
+                                        >
+                                            {course.cicle}
+                                        </p>
                                     </div>
                                     <div className={styles.overlay}>
-                                        <h5 className={styles.overlay__name}>{course.name}</h5>
+                                        <h5 className={styles.overlay__name}>
+                                            {course.name}
+                                        </h5>
                                         <div className={styles.overlay__text}>
-                                            <p className={styles.overlay__description}>{course.description}</p>
+                                            <p
+                                                className={
+                                                    styles.overlay__description
+                                                }
+                                            >
+                                                {course.description}
+                                            </p>
                                         </div>
-                                        <a href="#" className={`btn btn-primary ${styles.overlay__button}`}>Acceseaza cursul</a>
+                                        <a
+                                            href="#"
+                                            className={`btn btn-primary ${styles.overlay__button}`}
+                                        >
+                                            Acceseaza cursul
+                                        </a>
                                     </div>
                                 </div>
                             </swiper-slide>
@@ -209,7 +269,6 @@ const TeacherDetail = (props) => {
                     <CompartmentName name="Biografie"></CompartmentName>
                 </div>
             </div>
-
 
             {/* <div className={styles.container} >
                 <header className={styles.header}>
