@@ -36,7 +36,8 @@ function Navbar() {
             <div className={styles.container}>
                 <nav className={styles.navigation}>
                     <Link to="/" className={styles["navigation__logo"]}>
-                        DI
+                        <span className={styles.logo__top}>DI</span>
+                        <span className={styles.logo__bottom}>Departamentul Informatică</span>
                     </Link>
                     <button
                         className={
@@ -94,11 +95,9 @@ function Navbar() {
                                 <Link to="/">{t("navbar-courses")}</Link>
                             </li>
                             <li>
-                                <Link to="/">{t("navbar-students")}</Link>
+                                <Link to="/">{t("navbar-schedule")}</Link>
                             </li>
-                            <li>
-                                <Link to="/">{t("navbar-blog")}</Link>
-                            </li>
+
                             {isNavExpanded &&
                                 (user.auth ? (
                                     <li>
