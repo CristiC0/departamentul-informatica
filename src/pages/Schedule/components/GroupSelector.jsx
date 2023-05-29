@@ -1,6 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+
 const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
+    const [weekParity, setWeekParity] = useState(null);
+    useEffect(() => {
+        const currentDate = new Date();
+        const startDate = new Date(currentDate.getFullYear(), 0, 1);
+        const days = Math.floor(
+            (currentDate - startDate) / (24 * 60 * 60 * 1000)
+        );
+        const weekNumber = Math.ceil(days / 7);
+        setWeekParity(weekNumber % 2 === 0 ? 2 : 1);
+        setSettings((oldState) => ({
+            ...oldState,
+            week: weekNumber % 2 === 0 ? 2 : 1,
+        }));
+    }, []);
+
     useEffect(() => {
         if (localStorage.getItem("scheduleSettings"))
             setSettings(JSON.parse(localStorage.getItem("scheduleSettings")));
@@ -19,6 +35,7 @@ const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
             })
             .catch((err) => console.error(err));
     }, []);
+
     useEffect(() => {
         if (groups.allGroups) {
             setGroups((oldState) => ({
@@ -42,10 +59,10 @@ const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
     };
     return (
         <>
-            <div className="container d-flex justify-content-around">
-                <div className="dropdown">
+            <div className="container d-flex justify-content-around my-3 flex-wrap align-content-center">
+                <div className="dropdown my-2">
                     <button
-                        className="btn btn-primary dropdown-toggle"
+                        className="btn btn-dark dropdown-toggle"
                         type="button"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
@@ -67,9 +84,9 @@ const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
                         </li>
                     </ul>
                 </div>
-                <div className="dropdown">
+                <div className="dropdown my-2">
                     <button
-                        className="btn btn-primary dropdown-toggle"
+                        className="btn btn-dark dropdown-toggle"
                         type="button"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
@@ -99,9 +116,9 @@ const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
                         )}
                     </ul>
                 </div>
-                <div className="dropdown">
+                <div className="dropdown my-2">
                     <button
-                        className="btn btn-primary dropdown-toggle"
+                        className="btn btn-dark dropdown-toggle"
                         type="button"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
@@ -121,19 +138,19 @@ const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
                             ))}
                     </ul>
                 </div>
-                <div className="dropdown">
+                <div className="dropdown my-2">
                     <button
-                        className="btn btn-primary dropdown-toggle"
+                        className="btn btn-dark dropdown-toggle"
                         type="button"
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                     >
-                        Saptamana {settings.week === 0 ? "Para" : "Impara"}
+                        Saptamana {settings.week === 2 ? "Para" : "Impara"}
                     </button>
                     <ul className="dropdown-menu">
                         <li
                             className="dropdown-item"
-                            onClick={() => onSettingClick({ week: 0 })}
+                            onClick={() => onSettingClick({ week: 2 })}
                         >
                             Para
                         </li>
@@ -145,6 +162,12 @@ const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
                         </li>
                     </ul>
                 </div>
+                <span className="d-table my-2">
+                    <i className=" d-table-cell align-middle">
+                        Acum este saptamana
+                        <b>{weekParity === 1 ? " impara" : " para"}</b>
+                    </i>
+                </span>
             </div>
         </>
     );

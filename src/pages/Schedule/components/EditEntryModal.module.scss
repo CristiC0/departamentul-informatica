@@ -1,0 +1,15 @@
+.modal {
+    & :first-child {
+        max-width: 700px;
+    }
+}
+
+.body {
+    & ul {
+        max-height: 15em;
+    }
+
+    & li {
+        cursor: pointer;
+    }
+}
