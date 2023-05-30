@@ -17,6 +17,7 @@ import TeacherDetail from "@pages/teachers/TeacherDetail";
 import CreateNews from "@pages/news/CreateNews";
 import NewsDetail from "@pages/NewsPage/NewsDetail/NewsDetail";
 import TeacherEdit from "@pages/teachers/TeacherEdit/TeacherEdit";
+import Schedule from "@pages/Schedule/Schedule";
 
 const router = createBrowserRouter(
     createRoutesFromElements(
@@ -35,6 +36,7 @@ const router = createBrowserRouter(
                 <Route path="teachers" element={<Teachers />} />
                 <Route path="teachers/:name" element={<TeacherDetail />} />
                 <Route path="teachers/:name/edit" element={<TeacherEdit />} />
+                <Route path="schedule" element={<Schedule />} />
             </Route>
             <Route path="*" element={<Navigate to="/ro" />} />
         </Route>
