@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import HeaderImage from "@components/HeaderImage/HeaderImage";
+import { useFormik } from "formik";
+import { teacherSchema } from "@/schemas/teacherSchema";
 
 const TeacherEdit = (props) => {
 
@@ -24,12 +26,6 @@ const TeacherEdit = (props) => {
     const teacherId = window.location.href.split('/')[5];
 
     useEffect(() => {
-        // fetch(`${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`)
-        //     .then((response) => response.json())
-        //     .then((data) => {
-        //         setData(data)
-        //     });
-
         axios
             .get(`${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`)
             .then((response) => {
@@ -87,19 +83,39 @@ const TeacherEdit = (props) => {
     }
 
 
-    function handleSubmit(event) {
+    function submitHandler(event) {
         event.preventDefault();
-        axios.patch(`${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`, { ...data }, { withCredentials: true }).then(({ statusText }) => {
-            if (statusText === "OK")
-                axios
-                    .get(`${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`)
-                    .then((response) => {
-                        setData(response.data);
-                    })
-        })
+        axios.patch(`${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`, { ...data }, { withCredentials: true })
+            .then(({ statusText }) => {
+                if (statusText === "OK")
+                    axios
+                        .get(`${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`)
+                        .then((response) => {
+                            setData(response.data);
+                        })
+            })
             .catch(error => console.log(error));
 
     }
+
+    const {
+        values,
+        errors,
+        touched,
+        isSubmitting,
+        handleBlur,
+        handleChange,
+        handleSubmit,
+    } = useFormik({
+        initialValues: {
+            lastName: data.lastName,
+            firstName: data.firstName,
+            email: data.email,
+            phone: data.phone,
+        },
+        validationSchema: teacherSchema,
+        submitHandler,
+    });
 
     if (data === null) return (<>Loading...</>)
 
@@ -126,9 +142,13 @@ const TeacherEdit = (props) => {
                                     <input
                                         type="text"
                                         name="lastName"
+                                        value={values.lastName}
+                                        error={errors.lastName}
+                                        touched={touched.lastName}
+                                        onBlur={handleBlur}
                                         id="lastName"
                                         placeholder={data.lastName}
-                                        onChange={handleInput}
+                                        onChange={(e) => { handleInput(e), handleChange(e) }}
                                     />
                                 </div>
                                 <div className={styles.firstname}>
@@ -136,9 +156,13 @@ const TeacherEdit = (props) => {
                                     <input
                                         type="text"
                                         name="firstName"
+                                        value={values.firstName}
+                                        error={errors.firstName}
+                                        touched={touched.firstName}
+                                        onBlur={handleBlur}
                                         id="firstName"
                                         placeholder={data.firstName}
-                                        onChange={handleInput}
+                                        onChange={(e) => { handleInput(e), handleChange(e) }}
                                     />
                                 </div>
                             </div>
@@ -196,6 +220,7 @@ const TeacherEdit = (props) => {
                                     name="description"
                                     rows="6"
                                     placeholder={data.description}
+                                    onBlur={handleBlur}
                                     onChange={handleInput}>
                                 </textarea>
                             </div>
@@ -210,8 +235,12 @@ const TeacherEdit = (props) => {
                                     <input
                                         type="email"
                                         name="email"
+                                        value={values.email}
+                                        error={errors.email}
+                                        touched={touched.email}
                                         placeholder={data.email}
-                                        onChange={handleInput}
+                                        onBlur={handleBlur}
+                                        onChange={(e) => { handleInput(e), handleChange(e) }}
                                     />
                                 </div>
 
@@ -223,14 +252,20 @@ const TeacherEdit = (props) => {
                                     <input
                                         type="tel"
                                         name="phone"
+                                        value={values.phone}
+                                        error={errors.phone}
+                                        touched={touched.phone}
                                         placeholder={data.phone}
-                                        onChange={handleInput}
+                                        onBlur={handleBlur}
+                                        onChange={(e) => { handleInput(e), handleChange(e) }}
                                     />
                                 </div>
                             </div>
 
 
-                            <button className={styles.button} onClick={handleSubmit}>Salvează</button>
+                            <button className={styles.button} onClick={handleSubmit} disabled={isSubmitting}>
+                                {isSubmitting ? "Submitting..." : "Salvează"}
+                            </button>
                         </div>
 
 
