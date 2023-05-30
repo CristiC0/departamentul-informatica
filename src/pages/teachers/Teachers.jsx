@@ -1,22 +1,125 @@
-import styles from "./Teachers.module.scss";
 import { useEffect, useState } from "react";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
+import styles from "./Teachers.module.scss";
 import usePagination from "@hooks/usePagination";
 import HeaderImage from "@components/HeaderImage/HeaderImage";
 import PageHeader from "@components/PageHeader/PageHeader";
 import TeacherCard from "./components/TeacherCard/TeacherCard";
 
+const teachers = [
+    {
+        id: 1,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: true,
+    },
+    {
+        id: 2,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: true,
+    },
+    {
+        id: 3,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: true,
+    },
+    {
+        id: 4,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: false,
+    },
+    {
+        id: 5,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: false,
+    },
+    {
+        id: 6,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: false,
+    },
+    {
+        id: 7,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: false,
+    },
+    {
+        id: 8,
+        name: "John Doe",
+        function: "conferențiar universitar",
+        photo: null,
+        teacher: false,
+    },
+    { id: 9, name: "John Doe", photo: null },
+    { id: 1, name: "John Doe", photo: null },
+    { id: 2, name: "John Doe", photo: null },
+    { id: 3, name: "John Doe", photo: null },
+    { id: 4, name: "John Doe", photo: null },
+    { id: 5, name: "John Doe", photo: null },
+    { id: 6, name: "John Doe", photo: null },
+    { id: 7, name: "John Doe", photo: null },
+    { id: 8, name: "John Doe", photo: null },
+    { id: 9, name: "John Doe", photo: null },
+    { id: 1, name: "John Doe", photo: null },
+    { id: 2, name: "John Doe", photo: null },
+    { id: 3, name: "John Doe", photo: null },
+    { id: 4, name: "John Doe", photo: null },
+    { id: 5, name: "John Doe", photo: null },
+    { id: 6, name: "John Doe", photo: null },
+    { id: 7, name: "John Doe", photo: null },
+    { id: 8, name: "John Doe", photo: null },
+    { id: 9, name: "John Doe", photo: null },
+    { id: 1, name: "John Doe", photo: null },
+    { id: 2, name: "John Doe", photo: null },
+    { id: 3, name: "John Doe", photo: null },
+    { id: 4, name: "John Doe", photo: null },
+    { id: 5, name: "John Doe", photo: null },
+    { id: 6, name: "John Doe", photo: null },
+    { id: 7, name: "John Doe", photo: null },
+    { id: 8, name: "John Doe", photo: null },
+    { id: 9, name: "John Doe", photo: null },
+    { id: 1, name: "John Doe", photo: null },
+    { id: 2, name: "John Doe", photo: null },
+    { id: 3, name: "John Doe", photo: null },
+    { id: 4, name: "John Doe", photo: null },
+    { id: 5, name: "John Doe", photo: null },
+    { id: 6, name: "John Doe", photo: null },
+    { id: 7, name: "John Doe", photo: null },
+    { id: 8, name: "John Doe", photo: null },
+    { id: 9, name: "John Doe", photo: null },
+    { id: 1, name: "John Doe", photo: null },
+    { id: 2, name: "John Doe", photo: null },
+    { id: 3, name: "John Doe", photo: null },
+    { id: 4, name: "John Doe", photo: null },
+    { id: 5, name: "John Doe", photo: null },
+    { id: 6, name: "John Doe", photo: null },
+];
 
 const Teachers = () => {
     const [data, setData] = useState({ management: null, teachers: null });
 
     useEffect(() => {
         const managementRequest = fetch(
-            `${import.meta.env.VITE_API_BASE_URL
+            `${
+                import.meta.env.VITE_API_BASE_URL
             }/teachers/filter?management=true`
         );
         const teachersRequest = fetch(
-            `${import.meta.env.VITE_API_BASE_URL
+            `${
+                import.meta.env.VITE_API_BASE_URL
             }/teachers/filter?management=false`
         );
         Promise.allSettled([managementRequest, teachersRequest])
@@ -39,8 +142,9 @@ const Teachers = () => {
         currentPage,
         nextPage,
         previousPage,
-    } = usePagination(data.teachers, 4);
+    } = usePagination(data.teachers, 8);
 
+    if (itemsOnPage === null) return <>Loading..</>;
 
     return (
         <div>
@@ -52,49 +156,49 @@ const Teachers = () => {
             <div className={styles.teacher}>
                 <div className={styles["teacher__container"]}>
                     <div className={styles["teacher__row"]}>
-                        {data.management ? data.management.map((teacher) => {
-                            return (
-                                <div
-                                    key={teacher.id}
-                                    className={styles["teacher__cols--1"]}
-                                >
-                                    <TeacherCard
-                                        id={teacher.id}
-                                        photo={
-                                            teacher.photo
-                                                ? teacher.photo
-                                                : "/src/assets/images/default-user.png"
-                                        }
-                                        name={`${teacher.lastName} ${teacher.firstName}`}
-                                        function={teacher.title}
-                                    ></TeacherCard>
-                                </div>
-                            );
-                        }) : <Spinner/>}
+                        {itemsOnPage.map((teacher) => {
+                            if (teacher?.teacher === true) {
+                                return (
+                                    <div
+                                        key={teacher.id}
+                                        className={styles["teacher__cols--1"]}
+                                    >
+                                        <TeacherCard
+                                            photo={
+                                                teacher.photo
+                                                    ? data.photo
+                                                    : "/src/assets/images/default-user.png"
+                                            }
+                                            name={`${teacher.lastname}" "${teacher.firstName}`}
+                                            function={teacher.title}
+                                        ></TeacherCard>
+                                    </div>
+                                );
+                            }
+                        })}
                     </div>
                 </div>
 
                 <div className={styles["teacher__container"]}>
                     <div className={styles["teacher__row"]}>
-                        {itemsOnPage ? itemsOnPage.map((teacher) => {
+                        {itemsOnPage.map((teacher) => {
                             return (
                                 <div
                                     key={teacher.id}
                                     className={styles["teacher__cols--2"]}
                                 >
                                     <TeacherCard
-                                        id={teacher.id}
                                         photo={
                                             teacher.photo
                                                 ? teacher.photo
                                                 : "/src/assets/images/default-user.png"
                                         }
-                                        name={`${teacher.lastName} ${teacher.firstName}`}
+                                        name={`${teacher.lastname}" "${teacher.firstName}`}
                                         function={teacher.title}
                                     ></TeacherCard>
                                 </div>
                             );
-                        }) :  <Spinner/>}
+                        })}
                     </div>
                 </div>
 
@@ -105,10 +209,11 @@ const Teachers = () => {
                     />
                     {displayedPages.map((page) => (
                         <div
-                            className={`${styles["navigation__page"]} ${currentPage === page
-                                ? styles["navigation__page--current"]
-                                : ""
-                                }`}
+                            className={`${styles["navigation__page"]} ${
+                                currentPage === page
+                                    ? styles["navigation__page--current"]
+                                    : ""
+                            }`}
                             key={page}
                             onClick={() => changePageNumber(page)}
                         >
@@ -126,13 +231,3 @@ const Teachers = () => {
 };
 
 export default Teachers;
-
-const Spinner = () => {
-    return (
-        <div className="d-flex justify-content-center">
-            <div className="spinner-border m-5" role="status">
-                <span className="sr-only">Loading...</span>
-            </div>
-        </div>
-    )
-}
