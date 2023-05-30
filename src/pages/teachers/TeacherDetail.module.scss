@@ -37,6 +37,7 @@
                 width: 25rem;
                 height: 25rem;
                 flex-shrink: 0;
+                border-radius: 50%;
                 overflow: hidden;
 
                 @include responsive("medium") {
@@ -60,9 +61,7 @@
                     gap: 0.5rem;
                 }
 
-                &__name {
-
-                }
+                &__name {}
 
                 &__edit {
                     flex-shrink: 0;
@@ -73,8 +72,6 @@
 
                 &__role {
                     color: $font-color-grey;
-                    display: flex;
-                    gap: 0.5rem;
                 }
 
                 &__cicle {}

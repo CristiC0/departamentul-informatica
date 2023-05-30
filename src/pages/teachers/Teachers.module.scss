@@ -12,7 +12,7 @@
     &__row {
         display: flex;
         gap: 1rem;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
     }
@@ -20,8 +20,6 @@
     &__cols{
         &--1{
             width: 23rem;
-            height: 36rem;
-            margin-bottom: 30px;
 
             @include responsive("large") {
                 width: 20rem;
@@ -29,12 +27,9 @@
 
             @include responsive("medium") {
                 width: 100%;
-                height: auto;
             }
         }
         &--2{
-            height: 28rem;
-            margin-bottom: 30px;
             width: 17rem;
 
             @include responsive("large") {
@@ -43,7 +38,6 @@
 
             @include responsive("medium") {
                 width: 100%;
-                height: auto;
             }
         }
     }
