@@ -70,8 +70,8 @@ function ImageSlider() {
               <div className={styles.content}>
                 <div class={styles.content__container}>
                   <h1 className={styles.content__title}>Bine ați venit la Departamentul de Informatică</h1>
-                  <p className={styles.content__paragraph}>
-                  Departamentul de Informatică din cadrul Universității de Stat este unul dintre cele mai populare și respectate departamente din domeniul informaticii din țară. Acesta se bucură de o reputație solidă datorită calității educației și resurselor disponibile.
+                  <p>
+                  Un loc unde excelența în educație se întâlnește cu popularitatea în industria IT. Suntem mândri să vă prezentăm un departament dinamic și vibrant, care oferă studenților oportunități senzaționale de a-și dezvolta cunoștințele și abilitățile în domeniul informaticii. Cu un program de studii cuprinzător și o echipă excepțională de profesori, suntem dedicați pregătirii specialiștilor în informatică care să fie pregătiți să abordeze provocările actuale și viitoare ale unei lumi digitale în continuă schimbare. 
                   </p>
                   <div className={styles.content__buttons}>
                     <button type="button" className={`btn btn-prmary ${styles["content__buttons--fill"]}`}>
