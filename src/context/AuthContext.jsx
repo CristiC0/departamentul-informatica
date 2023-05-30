@@ -5,7 +5,7 @@ const url = import.meta.env.VITE_API_BASE_URL + "/auth";
 
 const AuthContext = createContext();
 
-const defaultUser = { name: "", id: "", email: "", role: "", auth: false };
+const defaultUser = { name: "", id: "", email: "", auth: false };
 
 export const AuthContextProvider = ({ children }) => {
     const [user, setUser] = useState({ ...defaultUser });
@@ -46,8 +46,8 @@ export const AuthContextProvider = ({ children }) => {
                 withCredentials: true,
             })
             .catch((error) => console.error(error.message));
-        const { name, id, email, role } = parseJwt(data.token);
-        saveUser({ name, id, email, role, auth: true });
+        const { name, id, email } = parseJwt(data.token);
+        saveUser({ name, id, email, auth: true });
     }
 
     function saveUser(user) {
