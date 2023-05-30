@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Arbutus+Slab&family=Oswald:wght@500&display=swap');
 
-
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,300&display=swap');
-
-
 @font-face {
     font-family: "PT sans";
     src: local("../assets/fonts/PTC55F.ttf");
@@ -19,13 +15,14 @@ $font-color-light: white;
 $font-color-dark: #222;
 $font-color-grey: grey;
 
+$menu-background: white;
 $menu-color: #222;
 
 $box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 $box-shadow1:rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px;
 $bottom-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
-$font: 'Open Sans', sans-serif;
+$font: "PT sans", sans-serif;
 $font_navbar: "Oswald", sans-serif;
 $font_title: 'Arbutus Slab', serif;
 
