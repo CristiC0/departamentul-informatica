@@ -5,13 +5,17 @@ const TeacherCard = (props) => {
 
     return (
         <div className={styles.card}>
-            <Link to={`${props.name}`}>
+            <Link to={`${props.id}`}>
                 <div className={styles.card__photo}>
                     <img src={props.photo} />
                 </div>
                 <div className={styles.card__info}>
                     <h3>{props.name}</h3>
-                    <span>{props.function}</span>
+                    {props.function.map((title)=>{
+                        return(
+                            <span>{title}</span>
+                        )
+                    })}
                 </div>
             </Link>
         </div>
