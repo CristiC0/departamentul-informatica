@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 
 const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
@@ -60,108 +61,99 @@ const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
     return (
         <>
             <div className="container d-flex justify-content-around my-3 flex-wrap align-content-center">
-                <div className="dropdown my-2">
-                    <button
-                        className="btn btn-dark dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
+                <Dropdown>
+                    <Dropdown.Toggle
+                        className="my-2"
+                        variant="dark"
+                        id="dropdown-basic"
                     >
                         Ciclu de studii {settings.cycle === 1 ? "I" : "II"}
-                    </button>
-                    <ul className="dropdown-menu">
-                        <li
-                            className="dropdown-item"
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item
                             onClick={() => onSettingClick({ cycle: 1 })}
                         >
                             Licenta
-                        </li>
-                        <li
-                            className="dropdown-item"
+                        </Dropdown.Item>
+                        <Dropdown.Item
                             onClick={() => onSettingClick({ cycle: 2 })}
                         >
                             Master
-                        </li>
-                    </ul>
-                </div>
-                <div className="dropdown my-2">
-                    <button
-                        className="btn btn-dark dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
+                        </Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+                <Dropdown>
+                    <Dropdown.Toggle
+                        className="my-2"
+                        variant="dark"
+                        id="dropdown-basic"
                     >
                         Anul de studii {settings.year}
-                    </button>
-                    <ul className="dropdown-menu">
-                        <li
-                            className="dropdown-item"
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item
                             onClick={() => onSettingClick({ year: 1 })}
                         >
                             1
-                        </li>
-                        <li
-                            className="dropdown-item"
+                        </Dropdown.Item>
+                        <Dropdown.Item
                             onClick={() => onSettingClick({ year: 2 })}
                         >
                             2
-                        </li>
+                        </Dropdown.Item>
                         {settings.cycle === 1 && (
-                            <li
-                                className="dropdown-item"
+                            <Dropdown.Item
                                 onClick={() => onSettingClick({ year: 3 })}
                             >
                                 3
-                            </li>
+                            </Dropdown.Item>
                         )}
-                    </ul>
-                </div>
-                <div className="dropdown my-2">
-                    <button
-                        className="btn btn-dark dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
+                    </Dropdown.Menu>
+                </Dropdown>
+
+                <Dropdown>
+                    <Dropdown.Toggle
+                        className="my-2"
+                        variant="dark"
+                        id="dropdown-basic"
                     >
                         Grupa {settings.group?.name}
-                    </button>
-                    <ul className="dropdown-menu">
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
                         {groups.currentGroups &&
                             groups.currentGroups.map((group) => (
-                                <li
+                                <Dropdown.Item
                                     key={group.name}
-                                    className="dropdown-item"
                                     onClick={() => onSettingClick({ group })}
                                 >
                                     {group.name}
-                                </li>
+                                </Dropdown.Item>
                             ))}
-                    </ul>
-                </div>
-                <div className="dropdown my-2">
-                    <button
-                        className="btn btn-dark dropdown-toggle"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
+                    </Dropdown.Menu>
+                </Dropdown>
+
+                <Dropdown>
+                    <Dropdown.Toggle
+                        className="my-2"
+                        variant="dark"
+                        id="dropdown-basic"
                     >
                         Saptamana {settings.week === 2 ? "Para" : "Impara"}
-                    </button>
-                    <ul className="dropdown-menu">
-                        <li
-                            className="dropdown-item"
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item
                             onClick={() => onSettingClick({ week: 2 })}
                         >
                             Para
-                        </li>
-                        <li
-                            className="dropdown-item"
+                        </Dropdown.Item>
+                        <Dropdown.Item
                             onClick={() => onSettingClick({ week: 1 })}
                         >
                             Impara
-                        </li>
-                    </ul>
-                </div>
+                        </Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+
                 <span className="d-table my-2">
                     <i className=" d-table-cell align-middle">
                         Acum este saptamana

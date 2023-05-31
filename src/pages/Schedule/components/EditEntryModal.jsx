@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import styles from "./EditEntryModal.module.scss";
+import Dropdown from "react-bootstrap/Dropdown";
 const week = ["Oricare", "Impara", "Para"];
 const EditEntryModal = ({
     settings,
@@ -84,6 +85,22 @@ const EditEntryModal = ({
         setShow(false);
         setSelectedEntry(null);
     };
+    const deleteEntry = async () => {
+        handleClose();
+        await axios
+            .delete(`${import.meta.env.VITE_API_BASE_URL}/schedule/${data.id}`)
+            .catch((err) => console.error(err));
+        await axios
+            .get(
+                `${import.meta.env.VITE_API_BASE_URL}/schedule/group/${
+                    settings.group.id
+                }`
+            )
+            .then(({ data }) => {
+                setSchedule(data);
+            })
+            .catch((err) => console.error(err));
+    };
 
     if (!options) return null;
     return (
@@ -120,35 +137,37 @@ const EditEntryModal = ({
                             Cursul:
                         </label>
                         <div className="col-6 dropdown p-0">
-                            <button
-                                className="btn btn-dark dropdown-toggle w-100"
-                                type="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                            >
-                                {data?.courseId
-                                    ? (options?.courses?.find(
-                                          (course) =>
-                                              course.id === data.courseId
-                                      )).name
-                                    : options?.courses?.[0].name}
-                            </button>
-                            <ul className="dropdown-menu w-100 overflow-x-hidden overflow-y-scroll">
-                                {options?.courses.map((course) => (
-                                    <li
-                                        key={course.id}
-                                        className="dropdown-item"
-                                        onClick={() => {
-                                            setData((oldData) => ({
-                                                ...oldData,
-                                                courseId: course.id,
-                                            }));
-                                        }}
-                                    >
-                                        {course.name}
-                                    </li>
-                                ))}
-                            </ul>
+                            <Dropdown>
+                                <Dropdown.Toggle
+                                    className="w-100"
+                                    variant="dark"
+                                    id="dropdown-basic"
+                                >
+                                    {data?.courseId
+                                        ? (options?.courses?.find(
+                                              (course) =>
+                                                  course.id === data.courseId
+                                          )).name
+                                        : options?.courses?.[0].name}
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu
+                                    className={`${styles.menu} w-100 overflow-x-hidden overflow-y-scroll`}
+                                >
+                                    {options?.courses?.map((course) => (
+                                        <Dropdown.Item
+                                            key={course.id}
+                                            onClick={() => {
+                                                setData((oldData) => ({
+                                                    ...oldData,
+                                                    courseId: course.id,
+                                                }));
+                                            }}
+                                        >
+                                            {course.name}
+                                        </Dropdown.Item>
+                                    ))}
+                                </Dropdown.Menu>
+                            </Dropdown>
                         </div>
                     </div>
                     <div className="row my-2">
@@ -156,12 +175,11 @@ const EditEntryModal = ({
                             Profesorul:
                         </label>
                         {options.teachers && (
-                            <div className="col-6 dropdown p-0">
-                                <button
-                                    className="btn btn-dark dropdown-toggle w-100"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
+                            <Dropdown className="col-6 dropdown p-0">
+                                <Dropdown.Toggle
+                                    className="w-100"
+                                    variant="dark"
+                                    id="dropdown-basic"
                                 >
                                     {data?.teacherId
                                         ? `${
@@ -178,13 +196,13 @@ const EditEntryModal = ({
                                               )).lastName
                                           } `
                                         : `${options?.teachers[0].firstName} ${options?.teachers[0].lastName} `}
-                                    {}
-                                </button>
-                                <ul className="dropdown-menu w-100 overflow-x-hidden overflow-y-scroll">
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu
+                                    className={`${styles.menu} w-100 overflow-x-hidden overflow-y-scroll`}
+                                >
                                     {options?.teachers.map((teacher) => (
-                                        <li
+                                        <Dropdown.Item
                                             key={teacher.id}
-                                            className="dropdown-item"
                                             onClick={() => {
                                                 setData((oldData) => ({
                                                     ...oldData,
@@ -193,10 +211,10 @@ const EditEntryModal = ({
                                             }}
                                         >
                                             {`${teacher.firstName} ${teacher.lastName} `}
-                                        </li>
+                                        </Dropdown.Item>
                                     ))}
-                                </ul>
-                            </div>
+                                </Dropdown.Menu>
+                            </Dropdown>
                         )}
                     </div>
                     <div className="row my-2">
@@ -205,30 +223,32 @@ const EditEntryModal = ({
                         </label>
                         {options.teachers && (
                             <div className="col-6 dropdown p-0">
-                                <button
-                                    className="btn btn-dark dropdown-toggle w-100 overflow-hidden"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    {data?.week ? week[data.week] : week[0]}
-                                </button>
-                                <ul className="dropdown-menu w-100 overflow-x-hidden overflow-y-scroll ">
-                                    {week.map((value, index) => (
-                                        <li
-                                            key={value}
-                                            className="dropdown-item"
-                                            onClick={() => {
-                                                setData((oldData) => ({
-                                                    ...oldData,
-                                                    week: index,
-                                                }));
-                                            }}
-                                        >
-                                            {value}
-                                        </li>
-                                    ))}
-                                </ul>
+                                <Dropdown>
+                                    <Dropdown.Toggle
+                                        className="w-100"
+                                        variant="dark"
+                                        id="dropdown-basic"
+                                    >
+                                        {data?.week ? week[data.week] : week[0]}
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu
+                                        className={`${styles.menu} w-100 overflow-x-hidden overflow-y-scroll`}
+                                    >
+                                        {week.map((value, index) => (
+                                            <Dropdown.Item
+                                                key={value}
+                                                onClick={() => {
+                                                    setData((oldData) => ({
+                                                        ...oldData,
+                                                        week: index,
+                                                    }));
+                                                }}
+                                            >
+                                                {value}
+                                            </Dropdown.Item>
+                                        ))}
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </div>
                         )}
                     </div>
@@ -238,60 +258,59 @@ const EditEntryModal = ({
                         </label>
                         {options.teachers && (
                             <div className="col-6 dropdown p-0">
-                                <button
-                                    className="btn btn-dark dropdown-toggle w-100 overflow-hidden"
-                                    type="button"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    {data?.type ? data.type : "Nici un tip"}
-                                </button>
-                                <ul className="dropdown-menu w-100 overflow-x-hidden overflow-y-scroll ">
-                                    <li
-                                        className="dropdown-item"
-                                        onClick={() => {
-                                            setData((oldData) => ({
-                                                ...oldData,
-                                                type: "curs",
-                                            }));
-                                        }}
+                                <Dropdown>
+                                    <Dropdown.Toggle
+                                        className="w-100"
+                                        variant="dark"
+                                        id="dropdown-basic"
                                     >
-                                        Curs
-                                    </li>
-                                    <li
-                                        className="dropdown-item"
-                                        onClick={() => {
-                                            setData((oldData) => ({
-                                                ...oldData,
-                                                type: "seminar",
-                                            }));
-                                        }}
+                                        {data?.type ? data.type : "Nici un tip"}
+                                    </Dropdown.Toggle>
+                                    <Dropdown.Menu
+                                        className={`${styles.menu} w-100 overflow-x-hidden overflow-y-scroll`}
                                     >
-                                        Seminar
-                                    </li>
-                                    <li
-                                        className="dropdown-item"
-                                        onClick={() => {
-                                            setData((oldData) => ({
-                                                ...oldData,
-                                                type: "lab",
-                                            }));
-                                        }}
-                                    >
-                                        Laborator
-                                    </li>
-                                    <li
-                                        className="dropdown-item"
-                                        onClick={() => {
-                                            setData((oldData) => ({
-                                                ...oldData,
-                                                type: null,
-                                            }));
-                                        }}
-                                    >
-                                        Nici un tip
-                                    </li>
-                                </ul>
+                                        <Dropdown.Item
+                                            onClick={() => {
+                                                setData((oldData) => ({
+                                                    ...oldData,
+                                                    type: "curs",
+                                                }));
+                                            }}
+                                        >
+                                            Curs
+                                        </Dropdown.Item>
+                                        <Dropdown.Item
+                                            onClick={() => {
+                                                setData((oldData) => ({
+                                                    ...oldData,
+                                                    type: "seminar",
+                                                }));
+                                            }}
+                                        >
+                                            Seminar
+                                        </Dropdown.Item>
+                                        <Dropdown.Item
+                                            onClick={() => {
+                                                setData((oldData) => ({
+                                                    ...oldData,
+                                                    type: "lab",
+                                                }));
+                                            }}
+                                        >
+                                            Laborator
+                                        </Dropdown.Item>
+                                        <Dropdown.Item
+                                            onClick={() => {
+                                                setData((oldData) => ({
+                                                    ...oldData,
+                                                    type: null,
+                                                }));
+                                            }}
+                                        >
+                                            Nici un tip
+                                        </Dropdown.Item>
+                                    </Dropdown.Menu>
+                                </Dropdown>
                             </div>
                         )}
                     </div>
@@ -303,6 +322,13 @@ const EditEntryModal = ({
                         onClick={handleClose}
                     >
                         Cancel
+                    </button>
+                    <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={deleteEntry}
+                    >
+                        Delete
                     </button>
                     <button
                         type="submit"
