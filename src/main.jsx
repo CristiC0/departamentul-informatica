@@ -4,7 +4,7 @@ import App from "./App";
 // Bootstrap CSS
 import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
-import "bootstrap/dist/js/bootstrap.bundle.min";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { AuthContextProvider } from "@context/AuthContext";
 import "./index.scss";
 
