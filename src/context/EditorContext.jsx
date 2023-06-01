@@ -15,7 +15,7 @@ export const EditorContextProvider = ({ children }) => {
         return (
             data.title !== "" &&
             data.thumbnail !== "" &&
-            data.priority in [1, 2, 3]
+            [1, 2, 3].includes(data.priority)
         );
     };
     return (
