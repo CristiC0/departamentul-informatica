@@ -58,16 +58,15 @@ const EditEntryModal = ({
                 body
             );
         } else {
+            console.log(data);
             await axios.patch(
-                `${import.meta.env.VITE_API_BASE_URL}/schedule/${
-                    selectedEntry.id
-                }`,
+                `${import.meta.env.VITE_API_BASE_URL}/schedule/${data.id}`,
                 body
             );
         }
 
-        setShow(false);
         setData(null);
+        handleClose();
 
         await axios
             .get(
