@@ -4,37 +4,41 @@ import { register } from 'swiper/element/bundle';
 import { Navigation, Pagination, Autoplay } from "swiper";
 import axios from 'axios';
 
+
+const swiperParams = {
+    modules: { Navigation, Pagination, Autoplay },
+    slidesPerView: 3,
+    spaceBetween: 20,
+    breakpoints: {
+        992: {
+            slidesPerView: 3,
+            spaceBetween: 20
+        },
+        767: {
+            slidesPerView: 1,
+            spaceBetween: 20
+        },
+    },
+    autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+    }
+};
+
 export default function NewsSlider() {
 
     const swiperElRef = useRef(null);
     const [data, setData] = useState(null);
 
+
     useEffect(() => {
-        const swiperParams = {
-            modules: { Navigation, Pagination, Autoplay },
-            slidesPerView: 1,
-            spaceBetween: 20,
-            breakpoints: {
-                992: {
-                    slidesPerView: 1,
-                    spaceBetween: 20
-                },
-                767: {
-                    slidesPerView: 1,
-                    spaceBetween: 20
-                },
-            },
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-                pauseOnMouseEnter: true,
-            },
-
+        if (swiperElRef?.current) {
+            console.log(swiperElRef.current, swiperParams);
+            Object.assign(swiperElRef.current, swiperParams);
+            swiperElRef.current.initialize();
         }
-        Object.assign(swiperElRef.current, swiperParams);
-        swiperElRef.current.initialize();
-
-    }, []);
+    }, [swiperElRef]);
     
     useEffect(() => {
         axios
@@ -44,6 +48,7 @@ export default function NewsSlider() {
             })
     }, []);
 
+    console.log(data);
     if (data === null) return (<>Loading...</>)
     const priorityNews = data.filter((data) => (data.priority == 1));
 
