@@ -25,6 +25,12 @@ const useNews = (id) => {
         return response.data.news;
     };
 
+    const getFirstText = () => {
+        if (!json?.content?.[0]?.content?.[0]?.text) return "";
+        return json.content[0].content[0].text;
+    };
+
+    const [json, setJson] = useState(null);
     const [data, setData] = useState(null);
     useEffect(() => {
         if (id)
@@ -37,11 +43,11 @@ const useNews = (id) => {
                     Typography,
                     Underline,
                 ]);
-
+                setJson(JSON.parse(data.content));
                 setData({ ...data, content: parse(output) });
             })();
     }, []);
-    return { createNews, data };
+    return { createNews, data, getFirstText };
 };
 
 export default useNews;
