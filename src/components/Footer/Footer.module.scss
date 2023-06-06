@@ -32,7 +32,9 @@
         }
 
         @include responsive("small") {}
+
         @include responsive("x-small") {}
+
         @include responsive("small") {}
     }
 
@@ -59,8 +61,30 @@
 
     &__logo {
         text-transform: uppercase;
-        font-size: 1.125rem;
-        font-weight: bold;
+        display: flex;
+        flex-direction: row;
+        text-decoration: none;
+        gap: 0.5rem;
+        color: $font-color-light;
+        font-family: $font-navbar;
+        width: 20%;
+
+        &--top {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.6rem;
+        }
+
+        &--bottom {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.6rem;
+            font-weight: 100;
+            width: 6rem;
+            line-height: 120%;
+        }
     }
 
     &__title {
@@ -73,7 +97,7 @@
         padding-top: 1rem;
         color: $font-color-grey;
         text-align: justify;
-        
+
 
         ul {
             list-style: none;

@@ -8,7 +8,7 @@ import HeaderImage from "@components/HeaderImage/HeaderImage";
 import { useFormik } from "formik";
 import { teacherSchema } from "@/schemas/teacherSchema";
 
-const TeacherEdit = (props) => {
+const TeacherEdit = () => {
 
     const [data, setData] = useState({
         firstName: '',
@@ -78,7 +78,6 @@ const TeacherEdit = (props) => {
                 }));
             })
             .catch((error) => console.error(error));
-        console.log(formData)
     };
 
     const onValueChange = (event) => {
@@ -92,8 +91,6 @@ const TeacherEdit = (props) => {
             const title=event.target.checked ? [event.target.value , ...oldData.title] : oldData.title.shift();
              return { ...oldData,title } })
     }
-
-
 
     function onSubmit(event) {
         event.preventDefault();

@@ -29,8 +29,8 @@
 
     &__image {
         img {
-            height: 25rem;
-            width: 28rem;
+            height: 18rem;
+            width: 26rem;
             object-fit:contain;
 
             @include responsive("medium"){

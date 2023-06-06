@@ -1,0 +1,53 @@
+.partners{
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    text-align: center;
+
+    small{
+        text-transform: uppercase;
+        color: $font-color-grey;
+    }
+
+    h2{
+        font-weight: 700;
+        margin-bottom: 2rem;
+    }
+
+    &__row{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 1rem;
+
+        @include responsive("medium"){
+            flex-direction: column;
+        }
+    }
+
+    &__cols{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        @include responsive("medium") {
+            align-items: center;
+        }
+
+        img{
+            width: auto;
+            height: 3rem;
+            object-fit: contain;
+
+            @include responsive("small") {
+                width: 70%;
+                height: auto;
+            }
+
+            @include responsive("x-small") {
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+}
