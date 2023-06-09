@@ -6,19 +6,29 @@ import { Link } from "react-router-dom";
 import Input from "@components/Input/Input";
 import { useAuthContext } from "@/context/AuthContext";
 import styles from "./RegisterPage.module.scss";
+import { useState } from "react";
+import { Toast } from "react-bootstrap";
 
 const RegisterPage = () => {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const { register } = useAuthContext();
+    const [showToast, setShowToast] = useState(false);
+    const [error, setError] = useState(null);
 
     const onSubmit = (values, actions) => {
         (async function () {
             try {
                 await register(values);
             } catch (error) {
-                console.log("ERROR", error);
+                setShowToast(true);
+                setError(error?.response?.data?.message);
+                setTimeout(() => {
+                    setShowToast(false);
+                    setError(null);
+                }, 3000);
                 actions.resetForm();
+                return;
             }
             actions.resetForm();
             navigate("/");
@@ -122,6 +132,12 @@ const RegisterPage = () => {
                     </Link>
                 </i>
             </p>
+            <Toast show={showToast} className={styles.toast}>
+                <Toast.Header>
+                    <strong className="me-auto"> Register Error </strong>
+                </Toast.Header>
+                <Toast.Body className="text-danger">{error}</Toast.Body>
+            </Toast>
         </div>
     );
 };

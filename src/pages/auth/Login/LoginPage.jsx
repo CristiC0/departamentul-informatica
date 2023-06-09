@@ -5,21 +5,30 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import Input from "@components/Input/Input";
 import { AiOutlineUser } from "react-icons/ai";
+import { useState } from "react";
 import { RiLockPasswordLine } from "react-icons/ri";
 import styles from "./Login.module.scss";
-import { useAuthContext } from "../../../context/AuthContext";
+import { useAuthContext } from "@context/AuthContext";
+import { Toast } from "react-bootstrap";
 
 const LoginPage = () => {
     const { t, i18n } = useTranslation();
     const navigate = useNavigate();
     const { login } = useAuthContext();
 
+    const [showToast, setShowToast] = useState(false);
+    const [error, setError] = useState(null);
     const onSubmit = (values, actions) => {
         (async function () {
             try {
                 await login(values);
             } catch (error) {
-                //TODO: Add something to show user does not exist
+                setShowToast(true);
+                setError(error?.response?.data?.message);
+                setTimeout(() => {
+                    setShowToast(false);
+                    setError(null);
+                }, 3000);
                 actions.resetForm();
                 return;
             }
@@ -91,6 +100,12 @@ const LoginPage = () => {
                     </Link>
                 </i>
             </p>
+            <Toast show={showToast} className={styles.toast}>
+                <Toast.Header>
+                    <strong className="me-auto"> Login Error </strong>
+                </Toast.Header>
+                <Toast.Body className="text-danger">{error}</Toast.Body>
+            </Toast>
         </div>
     );
 };

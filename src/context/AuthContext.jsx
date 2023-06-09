@@ -36,16 +36,15 @@ export const AuthContextProvider = ({ children }) => {
     };
 
     async function authRequest(userData, endpoint) {
-        const { data } = await axios
-            .post(`${url}/${endpoint}`, userData, {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "http://localhost:3000",
-                },
-                credentials: "include",
-                withCredentials: true,
-            })
-            .catch((error) => console.error(error.message));
+        const { data } = await axios.post(`${url}/${endpoint}`, userData, {
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "http://localhost:3000",
+            },
+            credentials: "include",
+            withCredentials: true,
+        });
+        // .catch((error) => console.error(error.message));
         const { name, id, email, role } = parseJwt(data.token);
         saveUser({ name, id, email, role, auth: true });
     }
