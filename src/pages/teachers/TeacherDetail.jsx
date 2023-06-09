@@ -2,25 +2,25 @@ import { Link } from "react-router-dom";
 import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
-import CompartmentName from "@components/CompartmentName/CompartmentName"
-import HeaderImage from "@components/HeaderImage/HeaderImage"
+import CompartmentName from "@components/CompartmentName/CompartmentName";
+import HeaderImage from "@components/HeaderImage/HeaderImage";
 
-import { useRef, useEffect, useState } from 'react';
-import { register } from 'swiper/element/bundle';
+import { useRef, useEffect, useState } from "react";
+import { register } from "swiper/element/bundle";
 import { Navigation, Pagination, Autoplay } from "swiper";
-import 'swiper/scss';
-import 'swiper/scss/navigation';
-import 'swiper/scss/pagination';
-import 'swiper/scss/autoplay';
+import "swiper/scss";
+import "swiper/scss/navigation";
+import "swiper/scss/pagination";
+import "swiper/scss/autoplay";
 
 import styles from "./TeacherDetail.module.scss";
+import { useTranslation } from "react-i18next";
 
 register();
 
 const TeacherDetail = (props) => {
-
     const swiperElRef = useRef(null);
-
+    const { i18n } = useTranslation();
     // useEffect(() => {
     //     const swiperParams = {
     //         modules: { Navigation, Pagination, Autoplay },
@@ -47,19 +47,16 @@ const TeacherDetail = (props) => {
     //     swiperElRef.current.initialize();
     // }, []);
 
-
     const [data, setData] = useState(null);
-    const teacherId = window.location.href.split('/')[5];
+    const teacherId = window.location.href.split("/")[5];
 
     useEffect(() => {
-
-
         fetch(`${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`)
             .then((response) => response.json())
             .then((data) => {
-                setData(data)
+                setData(data);
             });
-    }, [])
+    }, []);
 
     // const numberOfCourses = data.courses.length;
     // let coursesPerView = 0;
@@ -72,7 +69,7 @@ const TeacherDetail = (props) => {
     //     coursesPerView = 3
     // }
 
-    if (data === null) return (<>Loading...</>)
+    if (data === null) return <>Loading...</>;
 
     return (
         <>
@@ -81,43 +78,65 @@ const TeacherDetail = (props) => {
                 <div className={styles.container}>
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item "><Link to="/">Home</Link></li>
-                            <li className="breadcrumb-item " ><Link to="/teachers">Profesori</Link></li>
-                            <li className="breadcrumb-item active" aria-current="page">{`${data.lastName} ${data.firstName}`}</li>
+                            <li className="breadcrumb-item ">
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li className="breadcrumb-item ">
+                                <Link to={`/${i18n.language}/teachers`}>
+                                    Profesori
+                                </Link>
+                            </li>
+                            <li
+                                className="breadcrumb-item active"
+                                aria-current="page"
+                            >{`${data.lastName} ${data.firstName}`}</li>
                         </ol>
                     </nav>
                     <div className={styles.profile}>
-
                         <div className={styles.profile__content}>
                             <div className={styles.content}>
                                 <div className={styles.content__header}>
-                                    <h1 className={styles.content__name}>{`${data.lastName} ${data.firstName}`}</h1>
-                                    <Link to="edit" className={styles.content__edit}>
-                                        <AiOutlineEdit className={styles.content__edit} />
+                                    <h1
+                                        className={styles.content__name}
+                                    >{`${data.lastName} ${data.firstName}`}</h1>
+                                    <Link
+                                        to="edit"
+                                        className={styles.content__edit}
+                                    >
+                                        <AiOutlineEdit
+                                            className={styles.content__edit}
+                                        />
                                     </Link>
                                 </div>
-                                <p className={styles.content__role}>{data.title.map((role) => {
-                                    return (
-                                        <span>{role}.</span>
-                                    )
-                                })}
+                                <p className={styles.content__role}>
+                                    {data.title.map((role) => {
+                                        return <span>{role}.</span>;
+                                    })}
                                 </p>
-                                <p className={styles.content__description}>{data.description}</p>
+                                <p className={styles.content__description}>
+                                    {data.description}
+                                </p>
                             </div>
                             <div className={styles.contacts}>
                                 <div className={styles.contacts__mail}>
                                     <AiOutlineMail />
                                     <a href={`mailto: ${data.email}`}>
-                                        {data.email}</a>
+                                        {data.email}
+                                    </a>
                                 </div>
                                 <div className={styles.contacts__phone}>
-                                    <BsTelephone />{data.phone}
+                                    <BsTelephone />
+                                    {data.phone}
                                 </div>
                             </div>
                         </div>
                         <div className={styles.profile__photo}>
                             <img
-                                src={data.photo ? data.photo : "/src/assets/images/default-user.png"}
+                                src={
+                                    data.photo
+                                        ? data.photo
+                                        : "/src/assets/images/default-user.png"
+                                }
                                 alt={`${data.lastName} photo`}
                             />
                         </div>
@@ -132,17 +151,44 @@ const TeacherDetail = (props) => {
                         {data.courses.map((course) => (
                             <swiper-slide key={course.id} class={styles.swiper}>
                                 <div className={`card ${styles.card}`}>
-                                    <img src={course.image} className="card-img-top" alt="..." />
-                                    <div className={`card-body ${styles.card__body}`}>
-                                        <h5 className={`card-title ${styles.card__title}`}>{course.name}</h5>
-                                        <p className={`card-text ${styles.card__text}`}>{course.cicle}</p>
+                                    <img
+                                        src={course.image}
+                                        className="card-img-top"
+                                        alt="..."
+                                    />
+                                    <div
+                                        className={`card-body ${styles.card__body}`}
+                                    >
+                                        <h5
+                                            className={`card-title ${styles.card__title}`}
+                                        >
+                                            {course.name}
+                                        </h5>
+                                        <p
+                                            className={`card-text ${styles.card__text}`}
+                                        >
+                                            {course.cicle}
+                                        </p>
                                     </div>
                                     <div className={styles.overlay}>
-                                        <h5 className={styles.overlay__name}>{course.name}</h5>
+                                        <h5 className={styles.overlay__name}>
+                                            {course.name}
+                                        </h5>
                                         <div className={styles.overlay__text}>
-                                            <p className={styles.overlay__description}>{course.description}</p>
+                                            <p
+                                                className={
+                                                    styles.overlay__description
+                                                }
+                                            >
+                                                {course.description}
+                                            </p>
                                         </div>
-                                        <a href="#" className={`btn btn-primary ${styles.overlay__button}`}>Acceseaza cursul</a>
+                                        <a
+                                            href="#"
+                                            className={`btn btn-primary ${styles.overlay__button}`}
+                                        >
+                                            Acceseaza cursul
+                                        </a>
                                     </div>
                                 </div>
                             </swiper-slide>
@@ -151,7 +197,6 @@ const TeacherDetail = (props) => {
                     <CompartmentName name="Biografie"></CompartmentName>
                 </div>
             </div>
-
 
             {/* <div className={styles.container} >
                 <header className={styles.header}>
