@@ -1,0 +1,15 @@
+.clickable {
+    cursor: pointer;
+}
+
+.img {
+    &--10 {
+        width: 8em;
+        height: 5em;
+        object-fit: cover;
+    }
+}
+
+.dropdown-menu {
+    max-height: 15em;
+}
