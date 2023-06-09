@@ -99,7 +99,9 @@ function Navbar() {
                                 <Link to="/">{t("navbar-courses")}</Link>
                             </li>
                             <li>
-                                <Link to="/">{t("navbar-schedule")}</Link>
+                                <Link to={`/${i18n.language}/schedule`}>
+                                    {t("navbar-schedule")}
+                                </Link>
                             </li>
 
                             {user.auth && user.role === "ADMIN" && (
