@@ -3,7 +3,15 @@
     height: 13rem;
 
     @include responsive("medium") {
-       height: 13*3rem;
+       height: 12*3rem;
+    }
+
+    @include responsive("x-small") {
+        height: 9.25*3rem;
+    }
+
+    @include responsive("xxx-small") {
+        height: 11*3rem;
     }
 
     .row{
@@ -27,10 +35,28 @@
             display: flex;
             align-items: center;
             flex-grow: 1;
-            padding: 4rem 3rem;
+            width: 33%;
+            padding: 3rem 3rem;
             z-index: 1;
             color: $font-color-light;
             position: relative;
+
+            @include responsive("large") {
+                padding: 2rem 3rem;
+            }
+
+            @include responsive("medium") {
+                width: 100%;
+                padding: 4rem 3rem;
+            }
+
+            @include responsive("x-small") {
+                padding: 2rem 3rem;
+            }
+
+            p{
+                margin: 0;
+            }
 
             &::before{
                 content:'';

@@ -8,7 +8,7 @@ export default function Intro() {
         <>
             <div className={styles.container}>
                 <div className={styles.container__top}>
-                    <small>Text</small>
+                    <small>Formarea viitorului digital prin excelență și inovație</small>
                     <h2>Misiunea Departamentului de Informatică</h2>
                     <p>Misiunea principală a Departamentului de Informatică este de a pregăti specialiști de înaltă calificare în domeniul de Informatică, cadre didactice competente în acesta, precum și de a promova învățămîntul şi cercetarea în concordanţă cu exigenţele unei societăţi bazate pe cunoaştere şi pe educaţie continuă. Totodată departamentul are rolul de membru activ al mediului social, care are misiunea de a promova în societate cultura  informatică, de a contribui la perfecţionarea sistemului educațional, de a adopta reglementări conforme cu standardele moderne naționale și internaționale.</p>
                     <div className={styles.author}>
@@ -21,7 +21,7 @@ export default function Intro() {
                 <div className={styles.container}>
                     <div className={styles.container__bottom}>
                         <div className={styles.video}>
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/8NyEQb_8JhM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/8NyEQb_8JhM" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
                         </div>
                         <div className={styles.content}>
                             <header className={styles.content__header}>

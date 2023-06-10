@@ -82,14 +82,14 @@
             font-family: $font-navbar;
             width: 20%;
 
-            .logo__top{
+            .logo__top {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 font-size: 1.6rem;
             }
 
-            .logo__bottom{
+            .logo__bottom {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -162,6 +162,7 @@
         }
 
         &__button {
+
             &--search,
             &--login {
                 border: 0;
@@ -172,7 +173,7 @@
                 color: $menu-color;
                 font-size: 24px;
 
-                & > a {
+                &>a {
                     color: black;
                 }
 
@@ -236,7 +237,8 @@
                 display: none;
             }
 
-            button, a{
+            button,
+            a {
                 display: flex;
                 justify-content: center;
 
@@ -269,7 +271,7 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@include responsive("small") {
     .container {
         .navigation {
             &__button {

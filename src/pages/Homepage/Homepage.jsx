@@ -5,6 +5,9 @@ import BriefInfoAbout from "./components/BriefInfoAbout/BriefInfoAbout";
 import styles from "./Homepage.module.scss";
 import Info_boxes from "./components/Info_boxes/Info_boxes";
 import Intro from "./components/Intro/Intro";
+import NewsSlider from "@components/NewsSlider/NewsSlider";
+import About from "./components/About/About";
+import Partners from "./components/Partners/Partners";
 
 function Homepage() {
     return (
@@ -18,8 +21,10 @@ function Homepage() {
             <div className={styles["container__information"]}>
                 <Info_container />
             </div>
-            <div className={styles["container__about"]}>
-                <BriefInfoAbout />
+            <About />
+            <NewsSlider/>
+            <div className={styles.container__partners}>
+                <Partners />
             </div>
         </div>
     );

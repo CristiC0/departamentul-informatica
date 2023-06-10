@@ -8,7 +8,9 @@ import HeaderImage from "@components/HeaderImage/HeaderImage";
 import { useFormik } from "formik";
 import { teacherSchema } from "@/schemas/teacherSchema";
 
-const TeacherEdit = (props) => {
+
+const TeacherEdit = () => {
+
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
@@ -94,12 +96,10 @@ const TeacherEdit = (props) => {
 
     const onCheckboxChange = (event) => {
         setData((oldData) => {
-            const title = event.target.checked
-                ? [event.target.value, ...oldData.title]
-                : oldData.title.shift();
-            return { ...oldData, title };
-        });
-    };
+            const title=event.target.checked ? [event.target.value , ...oldData.title] : oldData.title.shift();
+             return { ...oldData,title } })
+    }
+
 
     function onSubmit(event) {
         event.preventDefault();

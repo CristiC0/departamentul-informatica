@@ -15,12 +15,16 @@ const Footer = () => {
             <div className={styles["footer__container"]}>
                 <div className={styles["footer__rows"]}>
                     <div className={styles["footer__cols"] + " " + styles["footer__cols--about"]}>
-                        <div className={styles["footer__logo"]}>DI</div>
+                        <div className={styles["footer__logo"]}>
+                            <span className={styles["footer__logo--top"]}>DI</span>
+                            <span className={styles["footer__logo--bottom"]}>Departamentul Informatică</span>
+                        </div>
                         <div className={styles["footer__content"]}>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In, delectus necessitatibus nesciunt earum accusamus unde ex voluptatibus sit autem eveniet expedita, voluptate similique, facere rem ullam excepturi vero exercitationem beatae?</p>
-                                                        <div className={styles["footer__links"]}>
-                                <BsFacebook/>
-                                <BsTelegram/>
+                            <p>
+Departamentul de Informatică din cadrul Universității de Stat este unul dintre cele mai populare și respectate departamente din domeniul informaticii din țară. Acesta se bucură de o reputație solidă datorită calității educației și resurselor disponibile.</p>
+                            <div className={styles["footer__links"]}>
+                                <BsFacebook />
+                                <BsTelegram />
                             </div>
                         </div>
                     </div>
@@ -41,10 +45,7 @@ const Footer = () => {
                                     <Link to="/">{t("navbar-courses")}</Link>
                                 </li>
                                 <li>
-                                    <Link to="/">{t("navbar-students")}</Link>
-                                </li>
-                                <li>
-                                    <Link to="/">{t("navbar-blog")}</Link>
+                                    <Link to="/">{t("navbar-schedule")}</Link>
                                 </li>
                             </ul>
                         </div>
@@ -54,11 +55,11 @@ const Footer = () => {
                         <div className={styles["footer__title"]}>Contacte</div>
                         <div className={styles["footer__content"]}>
                             <div className={styles["contacts"] + " " + styles["contacts--phone"]}>
-                                <BsTelephone className={styles["footer__icon"]}/>
+                                <BsTelephone className={styles["footer__icon"]} />
                                 <span>+373 22 242720</span>
                             </div>
                             <div className={styles["contacts"] + " " + styles["contacts--email"]}>
-                                <AiOutlineMail className={styles["footer__icon"]}/>
+                                <AiOutlineMail className={styles["footer__icon"]} />
                                 <a href="mailto:depinformaticausm@gmail.com">depinformaticausm@gmail.com</a>
                             </div>
                             <div className={styles["contacts"] + " " + styles["contacts--url"]}>
@@ -71,7 +72,7 @@ const Footer = () => {
                         <div className={styles["footer__title"]}>Adresa</div>
                         <div className={styles["footer__content"]}>
                             <div className={styles["footer__address"]}>
-                                <BiNavigation className={styles["footer__icon"]+" "+styles["footer__icon--navigation"]}/>
+                                <BiNavigation className={styles["footer__icon"] + " " + styles["footer__icon--navigation"]} />
                                 <span>
                                     Universitaitea de Stat din Moldova,
                                     Str. Alexei Mateevici, Nr. 60, bloc 4, MD-2009, Chişinău

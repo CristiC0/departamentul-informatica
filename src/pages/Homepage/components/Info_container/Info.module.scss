@@ -3,7 +3,7 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    color: white;
+    color: $font-color-light;
     text-transform: uppercase;
 
     @include responsive("small"){
