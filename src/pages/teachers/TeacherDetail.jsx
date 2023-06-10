@@ -7,8 +7,9 @@ import HeaderImage from "@components/HeaderImage/HeaderImage";
 
 import { useRef, useEffect, useState } from "react";
 import { register } from "swiper/element/bundle";
-import { Navigation, Pagination, Autoplay } from "swiper";
+import { useParams } from "react-router-dom";
 import "swiper/scss";
+
 import "swiper/scss/navigation";
 import "swiper/scss/pagination";
 import "swiper/scss/autoplay";
@@ -48,12 +49,14 @@ const TeacherDetail = (props) => {
     // }, []);
 
     const [data, setData] = useState(null);
-    const teacherId = window.location.href.split("/")[5];
+
+    const { id } = useParams();
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`)
+        fetch(`${import.meta.env.VITE_API_BASE_URL}/teachers/${id}`)
             .then((response) => response.json())
             .then((data) => {
+                console.log(data);
                 setData(data);
             });
     }, []);

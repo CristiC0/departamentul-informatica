@@ -41,9 +41,9 @@ const router = createBrowserRouter(
                     <Route path=":id" element={<NewsDetail />} />
                 </Route>
                 <Route path="teachers" element={<Teachers />} />
-                <Route path="teachers/:name" element={<TeacherDetail />} />
+                <Route path="teachers/:id" element={<TeacherDetail />} />
                 <Route
-                    path="teachers/:name/edit"
+                    path="teachers/:id/edit"
                     element={
                         <GuardedRoute allowedRoles={["ADMIN", "TEACHER"]}>
                             <TeacherEdit />

@@ -1,16 +1,15 @@
 import styles from "./TeacherEdit.module.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import HeaderImage from "@components/HeaderImage/HeaderImage";
 import { useFormik } from "formik";
 import { teacherSchema } from "@/schemas/teacherSchema";
-
+import { useTranslation } from "react-i18next";
 
 const TeacherEdit = () => {
-
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
@@ -22,13 +21,15 @@ const TeacherEdit = () => {
         phone: "",
     });
 
+    const { i18n } = useTranslation();
     const [image, setImage] = useState("Upload image");
 
-    const teacherId = window.location.href.split("/")[5];
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios
-            .get(`${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`)
+            .get(`${import.meta.env.VITE_API_BASE_URL}/teachers/${id}`)
             .then((response) => {
                 const {
                     firstName,
@@ -96,16 +97,18 @@ const TeacherEdit = () => {
 
     const onCheckboxChange = (event) => {
         setData((oldData) => {
-            const title=event.target.checked ? [event.target.value , ...oldData.title] : oldData.title.shift();
-             return { ...oldData,title } })
-    }
-
+            const title = event.target.checked
+                ? [event.target.value, ...oldData.title]
+                : oldData.title.shift();
+            return { ...oldData, title };
+        });
+    };
 
     function onSubmit(event) {
         event.preventDefault();
         axios
             .patch(
-                `${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`,
+                `${import.meta.env.VITE_API_BASE_URL}/teachers/${id}`,
                 { ...data },
                 { withCredentials: true }
             )
@@ -115,13 +118,14 @@ const TeacherEdit = () => {
                         .get(
                             `${
                                 import.meta.env.VITE_API_BASE_URL
-                            }/teachers/${teacherId}`
+                            }/teachers/${id}`
                         )
                         .then((response) => {
                             setData(response.data);
                         });
             })
             .catch((error) => console.log(error));
+        navigate(`/${i18n.language}/teachers/${id}`);
     }
 
     const {
@@ -156,12 +160,18 @@ const TeacherEdit = () => {
                                 <Link to="/">Home</Link>
                             </li>
                             <li className="breadcrumb-item ">
-                                <Link to="/teachers">Profesori</Link>
+                                <Link to={`/${i18n.language}/teachers`}>
+                                    Profesori
+                                </Link>
                             </li>
                             <li
                                 className="breadcrumb-item active"
                                 aria-current="page"
-                            >{`${data.lastName} ${data.firstName}`}</li>
+                            >
+                                <Link to={`/${i18n.language}/teachers/${id}`}>
+                                    {`${data.lastName} ${data.firstName}`}
+                                </Link>
+                            </li>
                         </ol>
                     </nav>
 
