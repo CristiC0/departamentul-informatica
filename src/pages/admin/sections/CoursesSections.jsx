@@ -18,8 +18,6 @@ const CoursesSection = () => {
     const [selectedCourse, setSelectedCourse] = useState();
 
     const [showDelete, setShowDelete] = useState(false);
-    const [users, setUsers] = useState();
-    const [author, setAuthor] = useState();
     const [showEditEntry, setShowEditEntry] = useState(false);
 
     useEffect(() => {
@@ -33,23 +31,9 @@ const CoursesSection = () => {
                 withCredentials: true,
             })
             .then(({ data }) => {
-                console.log(data);
                 setCourses("title", true, data);
             })
             .catch((err) => console.error(err));
-    };
-
-    const updatePriority = async (priority, courses) => {
-        await axios
-            .patch(
-                `${import.meta.env.VITE_API_BASE_URL}/courses/${courses.id}`,
-                { priority },
-                {
-                    withCredentials: true,
-                }
-            )
-            .catch((err) => console.error(err));
-        update();
     };
 
     const deleteFunction = async () => {
@@ -73,7 +57,6 @@ const CoursesSection = () => {
 
     const editHandler = (courses) => {
         setSelectedCourse(courses);
-        // setAuthor(users.find((user) => user.id === courses.authorId));
         setShowEditEntry(true);
     };
 
@@ -90,7 +73,7 @@ const CoursesSection = () => {
                     `${import.meta.env.VITE_API_BASE_URL}/courses/${
                         selectedCourse.id
                     }`,
-                    { ...values, authorId: author.id },
+                    { ...values },
                     {
                         withCredentials: true,
                     }

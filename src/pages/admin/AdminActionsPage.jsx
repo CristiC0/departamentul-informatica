@@ -4,8 +4,13 @@ import UserSection from "./sections/UserSection";
 import NewsSection from "./sections/NewsSection";
 import CoursesSection from "./sections/CoursesSections";
 import GroupsSection from "./sections/GroupsSections";
+import { Navigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 const AdminActionsPage = () => {
+    const { i18n } = useTranslation();
+    const [goToAddNews, setGoToAddNews] = useState(false);
     return (
         <Tabs
             defaultActiveKey="user"

@@ -31,7 +31,7 @@ const UserSection = () => {
                 withCredentials: true,
             })
             .then(({ data }) => {
-                sortUsers("lastName", true, data);
+                sortUsers("firstName", true, data);
             })
             .catch((err) => console.error(err));
     };

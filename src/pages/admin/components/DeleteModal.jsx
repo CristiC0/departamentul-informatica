@@ -31,7 +31,10 @@ const DeleteTimeModal = ({
                     type="submit"
                     className="btn btn-dark"
                     data-bs-dismiss="modal"
-                    onClick={deleteFunction}
+                    onClick={() => {
+                        handleClose();
+                        deleteFunction();
+                    }}
                 >
                     Yes
                 </button>

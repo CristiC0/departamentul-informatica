@@ -31,7 +31,6 @@ const GroupsSection = () => {
                 withCredentials: true,
             })
             .then(({ data }) => {
-                // console.log(data);
                 setGroups("name", true, data);
             })
             .catch((err) => console.error(err));
@@ -74,7 +73,7 @@ const GroupsSection = () => {
                     `${import.meta.env.VITE_API_BASE_URL}/groups/${
                         selectedGroup.id
                     }`,
-                    { ...values, authorId: author.id },
+                    { ...values },
                     {
                         withCredentials: true,
                     }

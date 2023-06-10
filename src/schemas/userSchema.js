@@ -2,7 +2,7 @@ import * as yup from "yup";
 
 const nameRegex = /^[\w- ]*$/;
 
-const usernameRegex = /^[\w\d]*$/;
+const usernameRegex = /^[\w\d ]*$/;
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
 
 export const updateUserSchema = yup.object().shape({
