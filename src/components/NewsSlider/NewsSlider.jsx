@@ -1,44 +1,60 @@
 import styles from './NewsSlider.module.scss'
 import { useRef, useState, useEffect } from 'react';
 import { register } from 'swiper/element/bundle';
-import { Navigation, Pagination, Autoplay } from "swiper";
+import { Navigation, Pagination, Autoplay, EffectFade } from "swiper";
 import axios from 'axios';
+import useNews from "@hooks/useNews";
 
-
-const swiperParams = {
-    modules: { Navigation, Pagination, Autoplay },
-    slidesPerView: 3,
-    spaceBetween: 20,
-    breakpoints: {
-        992: {
-            slidesPerView: 3,
-            spaceBetween: 20
-        },
-        767: {
-            slidesPerView: 1,
-            spaceBetween: 20
-        },
-    },
-    autoplay: {
-        delay: 3000,
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-    }
-};
-
+register();
 export default function NewsSlider() {
 
     const swiperElRef = useRef(null);
     const [data, setData] = useState(null);
 
+    const swiperParams = {
+        modules: { Navigation, Pagination, Autoplay, EffectFade},
+        slidesPerView: 3,
+        spaceBetween: 20,
+        navigation:true,
+        // breakpoints: {
+        //     992: {
+        //         slidesPerView: 3,
+        //         spaceBetween: 20
+        //     },
+        //     767: {
+        //         slidesPerView: 3,
+        //         spaceBetween: 20
+        //     },
+        // },
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+        },
+        effect: "fade",
+        injectStyles: [
+          `
+            .swiper-button-next,
+            .swiper-button-prev {
+              color: white;
+    
+              @media screen and (max-width: 768px) {
+                display: none;
+              }
+            }
+            .swiper-pagination-bullet{
+              background-color: white;
+            }
+        `,
+        ],
+    };
 
     useEffect(() => {
         if (swiperElRef?.current) {
-            console.log(swiperElRef.current, swiperParams);
             Object.assign(swiperElRef.current, swiperParams);
             swiperElRef.current.initialize();
         }
-    }, [swiperElRef]);
+    }, [swiperElRef,swiperParams]);
     
     useEffect(() => {
         axios
@@ -48,7 +64,6 @@ export default function NewsSlider() {
             })
     }, []);
 
-    console.log(data);
     if (data === null) return (<>Loading...</>)
     const priorityNews = data.filter((data) => (data.priority == 1));
 
@@ -57,7 +72,7 @@ export default function NewsSlider() {
 
             <swiper-container
                 ref={swiperElRef}
-                init="false"
+                init="true"
                 className={styles.swiper_container}
             >
                 {priorityNews.map((news) => (
