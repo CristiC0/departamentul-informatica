@@ -8,22 +8,23 @@ import HeaderImage from "@components/HeaderImage/HeaderImage";
 import { useFormik } from "formik";
 import { teacherSchema } from "@/schemas/teacherSchema";
 
+
 const TeacherEdit = () => {
 
     const [data, setData] = useState({
-        firstName: '',
-        lastName: '',
-        photo: '',
-        title: '',
-        description: '',
-        biografy: '',
-        email: '',
-        phone: '',
+        firstName: "",
+        lastName: "",
+        photo: "",
+        title: "",
+        description: "",
+        biografy: "",
+        email: "",
+        phone: "",
     });
 
     const [image, setImage] = useState("Upload image");
 
-    const teacherId = window.location.href.split('/')[5];
+    const teacherId = window.location.href.split("/")[5];
 
     useEffect(() => {
         axios
@@ -37,7 +38,8 @@ const TeacherEdit = () => {
                     description,
                     biografy,
                     email,
-                    phone } = response.data;
+                    phone,
+                } = response.data;
 
                 setData({
                     firstName,
@@ -47,20 +49,22 @@ const TeacherEdit = () => {
                     description,
                     biografy,
                     email,
-                    phone
+                    phone,
                 });
 
                 values.firstName = firstName;
                 values.lastName = lastName;
                 values.email = email;
                 values.phone = phone;
-            })
-
-    }, [])
+            });
+    }, []);
 
     const handleInput = (event) => {
-        setData((oldData) => ({ ...oldData, [event.target.name]: event.target.value }))
-    }
+        setData((oldData) => ({
+            ...oldData,
+            [event.target.name]: event.target.value,
+        }));
+    };
 
     const imageChangeHandler = (event) => {
         const formData = new FormData();
@@ -82,9 +86,13 @@ const TeacherEdit = () => {
 
     const onValueChange = (event) => {
         setData((oldData) => {
-            const title= oldData.title?.[0]==='Doctor' ? [oldData.title?.[0], event.target.value]:[event.target.value];
-            return { ...oldData, title}})
-    }
+            const title =
+                oldData.title?.[0] === "Doctor"
+                    ? [oldData.title?.[0], event.target.value]
+                    : [event.target.value];
+            return { ...oldData, title };
+        });
+    };
 
     const onCheckboxChange = (event) => {
         setData((oldData) => {
@@ -92,19 +100,28 @@ const TeacherEdit = () => {
              return { ...oldData,title } })
     }
 
+
     function onSubmit(event) {
         event.preventDefault();
-        axios.patch(`${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`, { ...data }, { withCredentials: true })
+        axios
+            .patch(
+                `${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`,
+                { ...data },
+                { withCredentials: true }
+            )
             .then(({ statusText }) => {
                 if (statusText === "OK")
                     axios
-                        .get(`${import.meta.env.VITE_API_BASE_URL}/teachers/${teacherId}`)
+                        .get(
+                            `${
+                                import.meta.env.VITE_API_BASE_URL
+                            }/teachers/${teacherId}`
+                        )
                         .then((response) => {
                             setData(response.data);
-                        })
+                        });
             })
-            .catch(error => console.log(error));
-
+            .catch((error) => console.log(error));
     }
 
     const {
@@ -126,27 +143,30 @@ const TeacherEdit = () => {
         onSubmit,
     });
 
-    console.log(data);
-
-    if (data === null) return (<>Loading...</>)
+    if (data === null) return <>Loading...</>;
 
     return (
         <>
             <HeaderImage headerImage="/src/assets/images/courses-banner.jpeg" />
             <div className={styles.teacher}>
                 <div className={styles.container}>
-
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
-                            <li className="breadcrumb-item "><Link to="/">Home</Link></li>
-                            <li className="breadcrumb-item " ><Link to="/teachers">Profesori</Link></li>
-                            <li className="breadcrumb-item active" aria-current="page">{`${data.lastName} ${data.firstName}`}</li>
+                            <li className="breadcrumb-item ">
+                                <Link to="/">Home</Link>
+                            </li>
+                            <li className="breadcrumb-item ">
+                                <Link to="/teachers">Profesori</Link>
+                            </li>
+                            <li
+                                className="breadcrumb-item active"
+                                aria-current="page"
+                            >{`${data.lastName} ${data.firstName}`}</li>
                         </ol>
                     </nav>
 
                     <div className={styles.profile}>
                         <div className={styles.profile__content}>
-
                             <div className={styles.name}>
                                 <div className={styles.lastname}>
                                     <label htmlFor="lastName">Nume:</label>
@@ -159,7 +179,9 @@ const TeacherEdit = () => {
                                         onBlur={handleBlur}
                                         id="lastName"
                                         placeholder={data.lastName}
-                                        onChange={(e) => { handleInput(e), handleChange(e) }}
+                                        onChange={(e) => {
+                                            handleInput(e), handleChange(e);
+                                        }}
                                     />
                                 </div>
                                 <div className={styles.firstname}>
@@ -173,13 +195,17 @@ const TeacherEdit = () => {
                                         onBlur={handleBlur}
                                         id="firstName"
                                         placeholder={data.firstName}
-                                        onChange={(e) => { handleInput(e), handleChange(e) }}
+                                        onChange={(e) => {
+                                            handleInput(e), handleChange(e);
+                                        }}
                                     />
                                 </div>
                             </div>
 
                             <div className={styles.function}>
-                                <label className={styles.function__label}>Funcție:</label>
+                                <label className={styles.function__label}>
+                                    Funcție:
+                                </label>
                                 <div className={styles["function--primary"]}>
                                     <input
                                         type="checkbox"
@@ -189,7 +215,8 @@ const TeacherEdit = () => {
                                         checked={data.title.includes("Doctor")}
                                         onChange={onCheckboxChange}
                                     />
-                                    <label htmlFor="doctor">Doctor</label><br></br>
+                                    <label htmlFor="doctor">Doctor</label>
+                                    <br></br>
                                 </div>
 
                                 <div className={styles["function--secondary"]}>
@@ -198,30 +225,45 @@ const TeacherEdit = () => {
                                         id="prof"
                                         name="title"
                                         value="Profesor universitar"
-                                        checked={data.title.includes("Profesor universitar")}
+                                        checked={data.title.includes(
+                                            "Profesor universitar"
+                                        )}
                                         onChange={onValueChange}
                                     />
-                                    <label htmlFor="prof">Profesor universitar</label><br></br>
+                                    <label htmlFor="prof">
+                                        Profesor universitar
+                                    </label>
+                                    <br></br>
 
                                     <input
                                         type="radio"
                                         id="lect"
                                         name="title"
                                         value="Lector universitar"
-                                        checked={data.title.includes("Lector universitar")}
+                                        checked={data.title.includes(
+                                            "Lector universitar"
+                                        )}
                                         onChange={onValueChange}
                                     />
-                                    <label htmlFor="lect">Lector universitar</label><br></br>
+                                    <label htmlFor="lect">
+                                        Lector universitar
+                                    </label>
+                                    <br></br>
 
                                     <input
                                         type="radio"
                                         id="conf"
                                         name="title"
                                         value="Conferențiar universitar"
-                                        checked={data.title.includes("Conferențiar universitar")}
+                                        checked={data.title.includes(
+                                            "Conferențiar universitar"
+                                        )}
                                         onChange={onValueChange}
                                     />
-                                    <label htmlFor="conf">Conferențiar universitar</label><br></br>
+                                    <label htmlFor="conf">
+                                        Conferențiar universitar
+                                    </label>
+                                    <br></br>
                                 </div>
                             </div>
 
@@ -232,14 +274,13 @@ const TeacherEdit = () => {
                                     rows="6"
                                     placeholder={data.description}
                                     onBlur={handleBlur}
-                                    onChange={handleInput}>
-                                </textarea>
+                                    onChange={handleInput}
+                                ></textarea>
                             </div>
 
                             <div className={styles.contacts}>
-
                                 <div className={styles["contacts__container"]}>
-                                    <div className={styles["contacts--col1"]} >
+                                    <div className={styles["contacts--col1"]}>
                                         <AiOutlineMail />
                                         <label htmlFor="email">Email:</label>
                                     </div>
@@ -251,12 +292,14 @@ const TeacherEdit = () => {
                                         touched={touched.email}
                                         placeholder={data.email}
                                         onBlur={handleBlur}
-                                        onChange={(e) => { handleInput(e), handleChange(e) }}
+                                        onChange={(e) => {
+                                            handleInput(e), handleChange(e);
+                                        }}
                                     />
                                 </div>
 
                                 <div className={styles["contacts__container"]}>
-                                    <div className={styles["contacts--col1"]} >
+                                    <div className={styles["contacts--col1"]}>
                                         <BsTelephone />
                                         <label htmlFor="phone">Telefon:</label>
                                     </div>
@@ -268,22 +311,30 @@ const TeacherEdit = () => {
                                         touched={touched.phone}
                                         placeholder={data.phone}
                                         onBlur={handleBlur}
-                                        onChange={(e) => { handleInput(e), handleChange(e) }}
+                                        onChange={(e) => {
+                                            handleInput(e), handleChange(e);
+                                        }}
                                     />
                                 </div>
                             </div>
 
-
-                            <button type="submit" className={styles.button} onClick={onSubmit} disabled={isSubmitting}>
+                            <button
+                                type="submit"
+                                className={styles.button}
+                                onClick={onSubmit}
+                                disabled={isSubmitting}
+                            >
                                 {isSubmitting ? "Submitting..." : "Salvează"}
                             </button>
                         </div>
 
-
                         <div className={styles.profile__photo}>
-
                             <img
-                                src={data.photo ? data.photo : "/src/assets/images/default-user.png"}
+                                src={
+                                    data.photo
+                                        ? data.photo
+                                        : "/src/assets/images/default-user.png"
+                                }
                                 alt="Photo"
                             />
                             <span>Încărcați fotografia</span>
@@ -294,14 +345,12 @@ const TeacherEdit = () => {
                                     onChange={imageChangeHandler}
                                 />
                             </div>
-
                         </div>
-
                     </div>
                 </div>
-            </div >
+            </div>
         </>
     );
-}
+};
 
 export default TeacherEdit;

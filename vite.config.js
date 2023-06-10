@@ -3,7 +3,6 @@ import react from "@vitejs/plugin-react";
 import * as path from "path";
 const createPath = (url) => path.resolve(__dirname, url);
 
-// https://vitejs.dev/config/
 export default defineConfig({
     resolve: {
         alias: {

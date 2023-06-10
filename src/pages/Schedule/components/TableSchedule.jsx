@@ -104,6 +104,17 @@ const TableSchedule = ({ schedule, edit, settings, setSchedule }) => {
                     className={`table-group-divider ${edit ? styles.edit : ""}`}
                 >
                     {times?.map((time) => {
+                        let existsEntry = false;
+                        if (schedule)
+                            loop: for (let day of schedule) {
+                                for (let entry of day) {
+                                    if (entry.time === time) {
+                                        existsEntry = true;
+                                        break loop;
+                                    }
+                                }
+                            }
+                        if (!existsEntry) return null;
                         return (
                             <tr key={time}>
                                 <th

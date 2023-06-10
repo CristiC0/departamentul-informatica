@@ -37,7 +37,9 @@ function Navbar() {
                 <nav className={styles.navigation}>
                     <Link to="/" className={styles["navigation__logo"]}>
                         <span className={styles.logo__top}>DI</span>
-                        <span className={styles.logo__bottom}>Departamentul Informatică</span>
+                        <span className={styles.logo__bottom}>
+                            Departamentul Informatică
+                        </span>
                     </Link>
                     <button
                         className={
@@ -84,7 +86,9 @@ function Navbar() {
                                 <Link to="/">{t("navbar-home")}</Link>
                             </li>
                             <li>
-                                <Link to={`/${i18n.language}/news`}>{t("navbar-news")}</Link>
+                                <Link to={`/${i18n.language}/news`}>
+                                    {t("navbar-news")}
+                                </Link>
                             </li>
                             <li>
                                 <Link to={`/${i18n.language}/teachers`}>
@@ -95,8 +99,18 @@ function Navbar() {
                                 <Link to="/">{t("navbar-courses")}</Link>
                             </li>
                             <li>
-                                <Link to="/">{t("navbar-schedule")}</Link>
+                                <Link to={`/${i18n.language}/schedule`}>
+                                    {t("navbar-schedule")}
+                                </Link>
                             </li>
+
+                            {user.auth && user.role === "ADMIN" && (
+                                <li>
+                                    <Link to={`/${i18n.language}/admin`}>
+                                        ADMIN
+                                    </Link>
+                                </li>
+                            )}
 
                             {isNavExpanded &&
                                 (user.auth ? (

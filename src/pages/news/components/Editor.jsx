@@ -40,7 +40,7 @@ const Editor = () => {
             }),
             MandatoryElements,
         ],
-        content: ` <mandatory-components></mandatory-components>`,
+        content: ` <mandatory-components></mandatory-components> Write here...`,
         autofocus: true,
     });
 
