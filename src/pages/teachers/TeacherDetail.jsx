@@ -21,7 +21,7 @@ register();
 
 const TeacherDetail = (props) => {
     const swiperElRef = useRef(null);
-    const { i18n, } = useTranslation();
+    const { i18n,t } = useTranslation();
     const [data, setData] = useState(null);
     const { id } = useParams();
 
