@@ -8,6 +8,8 @@ import HeaderImage from "@components/HeaderImage/HeaderImage";
 import { useFormik } from "formik";
 import { teacherSchema } from "@/schemas/teacherSchema";
 import { useTranslation } from "react-i18next";
+import Accordion from 'react-bootstrap/Accordion';
+import Form from 'react-bootstrap/Form';
 
 const TeacherEdit = () => {
     const [data, setData] = useState({
@@ -18,10 +20,13 @@ const TeacherEdit = () => {
         description: "",
         biografy: "",
         email: "",
+        courses: [],
         phone: "",
     });
 
     const { i18n, t } = useTranslation();
+    const [courses, setCourses] = useState(null);
+
     const [image, setImage] = useState("Upload image");
 
     const { id } = useParams();
@@ -40,6 +45,7 @@ const TeacherEdit = () => {
                     biografy,
                     email,
                     phone,
+                    courses,
                 } = response.data;
 
                 setData({
@@ -51,6 +57,7 @@ const TeacherEdit = () => {
                     biografy,
                     email,
                     phone,
+                    courses,
                 });
 
                 values.firstName = firstName;
@@ -58,6 +65,12 @@ const TeacherEdit = () => {
                 values.email = email;
                 values.phone = phone;
             });
+
+        axios
+            .get(`${import.meta.env.VITE_API_BASE_URL}/courses`)
+            .then((response) =>
+                setCourses(response.data)
+            );
     }, []);
 
     const handleInput = (event) => {
@@ -104,6 +117,27 @@ const TeacherEdit = () => {
         });
     };
 
+    const onValueChecked = (event) => {
+        setData((oldData) => {
+            const courses = event.target.checked
+                ? [event.target.value, ...oldData.courses]
+                : [event.target.value];
+            console.log(" data ", oldData);
+            return { ...oldData, courses };
+        });
+    };
+
+    // const onValueChecked = (event) => {
+    //     setData((oldData) => {
+    //         console.log("event", event);
+    //         // console.log("old",oldData);
+    //         return ({
+    //         ...oldData,
+    //         courses: [event.target.value]
+    //     })}
+    //     );
+    // };
+
     function onSubmit(event) {
         event.preventDefault();
         axios
@@ -116,8 +150,7 @@ const TeacherEdit = () => {
                 if (statusText === "OK")
                     axios
                         .get(
-                            `${
-                                import.meta.env.VITE_API_BASE_URL
+                            `${import.meta.env.VITE_API_BASE_URL
                             }/teachers/${id}`
                         )
                         .then((response) => {
@@ -146,6 +179,8 @@ const TeacherEdit = () => {
         validationSchema: teacherSchema,
         onSubmit,
     });
+
+    console.log("courses", data.courses);
 
     if (data === null) return <>Loading...</>;
 
@@ -287,12 +322,23 @@ const TeacherEdit = () => {
                                 </label>
                                 <textarea
                                     name="description"
-                                    rows="6"
-                                    placeholder={data.description}
+                                    rows="4"
+                                    value={data.description}
                                     onBlur={handleBlur}
                                     onChange={handleInput}
                                 ></textarea>
                             </div>
+                            <div className={styles.biography}>
+                                <label htmlFor="description">Biografie:</label>
+                                <textarea
+                                    name="biografy"
+                                    rows="6"
+                                    value={data.biografy}
+                                    onBlur={handleBlur}
+                                    onChange={handleInput}
+                                ></textarea>
+                            </div>
+
 
                             <div className={styles.contacts}>
                                 <div className={styles["contacts__container"]}>
@@ -335,6 +381,32 @@ const TeacherEdit = () => {
                                     />
                                 </div>
                             </div>
+
+                            <div>
+                                <Accordion defaultActiveKey="0">
+                                    <Accordion.Item eventKey="0">
+                                        <Accordion.Header>Cursuri</Accordion.Header>
+                                        <Accordion.Body>
+                                            {courses ?
+                                                <Form>
+                                                    {courses.map((course) => (
+                                                        <div key={course.id} className="mb-3">
+                                                            <Form.Check
+                                                                type={`checkbox`}
+                                                                id={course.id}
+                                                                label={course.name}
+                                                                value={course.id}
+                                                                onChange={(e) => { onValueChecked(e) }}
+                                                                checked={data.courses.includes(course)}
+                                                            />
+                                                        </div>
+                                                    ))}
+                                                </Form> : <>Loading...</>}
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                </Accordion>
+                            </div>
+
 
                             <button
                                 type="submit"

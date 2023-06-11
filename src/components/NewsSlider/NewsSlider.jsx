@@ -17,38 +17,23 @@ export default function NewsSlider() {
         modules: { Navigation, Pagination, Autoplay, EffectFade },
         slidesPerView: 3,
         spaceBetween: 20,
-        navigation: true,
-        // breakpoints: {
-        //     992: {
-        //         slidesPerView: 3,
-        //         spaceBetween: 20
-        //     },
-        //     767: {
-        //         slidesPerView: 3,
-        //         spaceBetween: 20
-        //     },
-        // },
+        breakpoints: {
+            992: {
+                slidesPerView: 3,
+                spaceBetween: 20
+            },
+            767: {
+                slidesPerView: 3,
+                spaceBetween: 20
+            },
+        },
         autoplay: {
             delay: 3000,
             disableOnInteraction: false,
             pauseOnMouseEnter: true,
         },
         effect: "fade",
-        injectStyles: [
-            `
-            .swiper-button-next,
-            .swiper-button-prev {
-              color: white;
-    
-              @media screen and (max-width: 768px) {
-                display: none;
-              }
-            }
-            .swiper-pagination-bullet{
-              background-color: white;
-            }
-        `,
-        ],
+
     };
 
     useEffect(() => {
@@ -71,6 +56,8 @@ export default function NewsSlider() {
 
     return (
         <div className={styles.container}>
+            <small>Vă ținem mereu la curent</small>
+            <h2>Ultimele noutăți</h2>
             <swiper-container
                 ref={swiperElRef}
                 init="true"
@@ -90,7 +77,7 @@ export default function NewsSlider() {
                                 >
                                     {news.title}
                                 </h5>
-                                <p className={`card-text ${styles.card__text}`}>
+                                <p className={`card-text ${styles.card__data}`}>
                                     {new Date(
                                         news.createdAt
                                     ).toLocaleDateString("en-GB")}

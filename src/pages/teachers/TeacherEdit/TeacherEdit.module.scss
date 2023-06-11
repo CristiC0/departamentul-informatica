@@ -75,6 +75,17 @@
                     }
                 }
 
+                .biography{
+                    display: flex;
+                    flex-direction: column;
+
+                    textarea {
+                        padding: 0.7rem;
+                        border: 1px solid $font-color-grey;
+                        border-radius: 0.5rem;
+                    }
+                }
+
                 .contacts {
                     display: flex;
                     flex-direction: row;

@@ -96,7 +96,9 @@ function Navbar() {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/">{t("navbar-courses")}</Link>
+                                <Link to={`/${i18n.language}/courses`}>
+                                    {t("navbar-courses")}
+                                </Link>
                             </li>
                             <li>
                                 <Link to={`/${i18n.language}/schedule`}>
