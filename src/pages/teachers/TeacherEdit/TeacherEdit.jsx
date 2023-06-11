@@ -8,8 +8,12 @@ import HeaderImage from "@components/HeaderImage/HeaderImage";
 import { useFormik } from "formik";
 import { teacherSchema } from "@/schemas/teacherSchema";
 import { useTranslation } from "react-i18next";
+import Accordion from 'react-bootstrap/Accordion';
+import Form from 'react-bootstrap/Form';
+import { Toast } from "react-bootstrap";
 
 const TeacherEdit = () => {
+
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
@@ -18,10 +22,15 @@ const TeacherEdit = () => {
         description: "",
         biografy: "",
         email: "",
+        courses: [],
         phone: "",
     });
 
     const { i18n, t } = useTranslation();
+    const [courses, setCourses] = useState(null);
+    const [selectedCourses, setSelectedCourses] = useState([]);
+    const [showToast, setShowToast] = useState(false);
+    const [error, setError] = useState(null);
     const [image, setImage] = useState("Upload image");
 
     const { id } = useParams();
@@ -40,6 +49,7 @@ const TeacherEdit = () => {
                     biografy,
                     email,
                     phone,
+                    courses,
                 } = response.data;
 
                 setData({
@@ -51,13 +61,23 @@ const TeacherEdit = () => {
                     biografy,
                     email,
                     phone,
+                    courses,
                 });
+
+                const coursesId = courses.map((course) => course.id);
+                setSelectedCourses(coursesId);
 
                 values.firstName = firstName;
                 values.lastName = lastName;
                 values.email = email;
                 values.phone = phone;
             });
+
+        axios
+            .get(`${import.meta.env.VITE_API_BASE_URL}/courses`)
+            .then((response) =>
+                setCourses(response.data)
+            );
     }, []);
 
     const handleInput = (event) => {
@@ -104,27 +124,46 @@ const TeacherEdit = () => {
         });
     };
 
+    const onValueChecked = (event, courseId) => {
+        setSelectedCourses((oldData) => {
+            const courses = event.target.checked
+                ? [event.target.value, ...oldData]
+                : [...oldData.filter((course) => course !== courseId)];
+            return courses;
+        });
+    };
+
+
     function onSubmit(event) {
         event.preventDefault();
         axios
             .patch(
                 `${import.meta.env.VITE_API_BASE_URL}/teachers/${id}`,
-                { ...data },
+                { ...data, courses: selectedCourses },
                 { withCredentials: true }
             )
             .then(({ statusText }) => {
                 if (statusText === "OK")
                     axios
                         .get(
-                            `${
-                                import.meta.env.VITE_API_BASE_URL
+                            `${import.meta.env.VITE_API_BASE_URL
                             }/teachers/${id}`
                         )
                         .then((response) => {
                             setData(response.data);
                         });
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                setShowToast(true);
+                setError(error?.response?.data?.message);
+                setTimeout(() => {
+                    setShowToast(false);
+                    setError(null);
+                }, 3000);
+                actions.resetForm();
+                return;
+            });
+            actions.resetForm();
         navigate(`/${i18n.language}/teachers/${id}`);
     }
 
@@ -146,6 +185,8 @@ const TeacherEdit = () => {
         validationSchema: teacherSchema,
         onSubmit,
     });
+
+    console.log("selectedCours", selectedCourses);
 
     if (data === null) return <>Loading...</>;
 
@@ -195,6 +236,9 @@ const TeacherEdit = () => {
                                             handleInput(e), handleChange(e);
                                         }}
                                     />
+                                    {error && touched && (
+                                        <p className={styles["message-error"]}>{error}</p>
+                                    )}
                                 </div>
                                 <div className={styles.firstname}>
                                     <label htmlFor="firstName">
@@ -287,12 +331,23 @@ const TeacherEdit = () => {
                                 </label>
                                 <textarea
                                     name="description"
-                                    rows="6"
-                                    placeholder={data.description}
+                                    rows="4"
+                                    value={data.description}
                                     onBlur={handleBlur}
                                     onChange={handleInput}
                                 ></textarea>
                             </div>
+                            <div className={styles.biography}>
+                                <label htmlFor="description">Biografie:</label>
+                                <textarea
+                                    name="biografy"
+                                    rows="6"
+                                    value={data.biografy}
+                                    onBlur={handleBlur}
+                                    onChange={handleInput}
+                                ></textarea>
+                            </div>
+
 
                             <div className={styles.contacts}>
                                 <div className={styles["contacts__container"]}>
@@ -336,6 +391,34 @@ const TeacherEdit = () => {
                                 </div>
                             </div>
 
+                            <div>
+                                <Accordion defaultActiveKey="0">
+                                    <Accordion.Item eventKey="0">
+                                        <Accordion.Header>Cursuri</Accordion.Header>
+                                        <Accordion.Body>
+                                            {courses ?
+                                                <Form>
+                                                    {courses.map((course) => (
+                                                        <div key={course.id} className="mb-3">
+                                                            <Form.Check
+                                                                type={`checkbox`}
+                                                                id={course.id}
+                                                                label={course.name}
+                                                                value={course.id}
+                                                                onChange={(e) => {
+                                                                    onValueChecked(e, course.id);
+                                                                }}
+                                                                checked={selectedCourses.includes(course.id)}
+                                                            />
+                                                        </div>
+                                                    ))}
+                                                </Form> : <>Loading...</>}
+                                        </Accordion.Body>
+                                    </Accordion.Item>
+                                </Accordion>
+                            </div>
+
+
                             <button
                                 type="submit"
                                 className={styles.button}
@@ -348,23 +431,39 @@ const TeacherEdit = () => {
                             </button>
                         </div>
 
-                        <div className={styles.profile__photo}>
-                            <img
-                                src={
-                                    data.photo
-                                        ? data.photo
-                                        : "/src/assets/images/default-user.png"
-                                }
-                                alt="Photo"
-                            />
-                            <span>{t("teacher__detail__photo")}</span>
-                            <div className={styles.upload}>
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={imageChangeHandler}
+                        <div className={styles.profile__right}>
+                            <div className={styles.profile__photo}>
+                                <img
+                                    src={
+                                        data.photo
+                                            ? data.photo
+                                            : "/src/assets/images/default-user.png"
+                                    }
+                                    alt="Photo"
                                 />
+                                <span>{t("teacher__detail__photo")}</span>
+                                <div className={styles.upload}>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={imageChangeHandler}
+                                    />
+                                </div>
                             </div>
+                            <button
+                                type="submit"
+                                className={styles.button}
+                                onClick={onSubmit}
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? "Submitting..." : "Salvează"}
+                            </button>
+                            <Toast show={showToast} className={styles.toast}>
+                                <Toast.Header>
+                                    <strong className="me-auto"> Login Error </strong>
+                                </Toast.Header>
+                                <Toast.Body className="text-danger">{error}</Toast.Body>
+                            </Toast>
                         </div>
                     </div>
                 </div>

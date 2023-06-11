@@ -6,6 +6,8 @@ import HeaderImage from "@components/HeaderImage/HeaderImage";
 import PageHeader from "@components/PageHeader/PageHeader";
 import TeacherCard from "./components/TeacherCard/TeacherCard";
 import { useTranslation } from "react-i18next";
+import SearchBar from "../../components/SearchBar/SearchBar";
+
 
 const Teachers = () => {
     const [data, setData] = useState({ management: null, teachers: null });
@@ -46,12 +48,12 @@ const Teachers = () => {
 
     return (
         <div>
-            <HeaderImage headerImage="/src/assets/images/courses-banner.jpeg" />
             <PageHeader
                 title={`${t("teachers__title")}`}
                 introduction={`${t("teachers__intro")}`}
             />
             <div className={styles.teacher}>
+            <SearchBar text="Caută profesor..."/>
                 <div className={styles["teacher__container"]}>
                     <div className={styles["teacher__row"]}>
                         {data.management ? (

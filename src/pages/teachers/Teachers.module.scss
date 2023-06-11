@@ -1,11 +1,10 @@
 .teacher {
     display: block;
-    padding: 4rem 0;
     background-color: $tertiary-color;
 
     &__container {
         max-width: 75rem;
-        padding: 0 1rem;
+        padding: 2rem 1rem;
         margin: 0 auto;
     }
     
@@ -87,7 +86,7 @@
         }
 
         &--current {
-            background-color: $primary-color;
+            background-color: $font-color-dark;
             color: $secondary-color;
 
         }

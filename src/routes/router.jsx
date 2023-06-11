@@ -18,7 +18,10 @@ import CreateNews from "@pages/news/CreateNews";
 import NewsDetail from "@pages/NewsPage/NewsDetail/NewsDetail";
 import TeacherEdit from "@pages/teachers/TeacherEdit/TeacherEdit";
 import Schedule from "@pages/Schedule/Schedule";
+import Courses from "@pages/Courses/Courses";
+import CourseDetail from "@pages/Courses/CourseDetail";
 import AdminActionsPage from "@pages/admin/AdminActionsPage";
+
 const router = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<Setup />}>
@@ -49,7 +52,9 @@ const router = createBrowserRouter(
                             <TeacherEdit />
                         </GuardedRoute>
                     }
-                />
+                /> 
+                <Route path="courses" element={<Courses />} />
+                <Route path="courses/:id" element={<CourseDetail />} />
                 <Route path="schedule" element={<Schedule />} />
                 <Route
                     path="admin"

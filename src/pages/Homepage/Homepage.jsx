@@ -21,8 +21,10 @@ function Homepage() {
             <div className={styles["container__information"]}>
                 <Info_container />
             </div>
-            <About />
-            <NewsSlider/>
+            <div className={styles.container__partners}>
+                <About />
+            </div>
+            <NewsSlider />
             <div className={styles.container__partners}>
                 <Partners />
             </div>

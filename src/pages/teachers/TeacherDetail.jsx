@@ -3,11 +3,11 @@ import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import CompartmentName from "@components/CompartmentName/CompartmentName";
-import HeaderImage from "@components/HeaderImage/HeaderImage";
-
 import { useRef, useEffect, useState } from "react";
+import { Navigation, Pagination, Autoplay, EffectFade } from "swiper";
 import { register } from "swiper/element/bundle";
 import { useParams } from "react-router-dom";
+import Card from 'react-bootstrap/Card';
 import "swiper/scss";
 
 import "swiper/scss/navigation";
@@ -21,35 +21,8 @@ register();
 
 const TeacherDetail = (props) => {
     const swiperElRef = useRef(null);
-    const { i18n, t } = useTranslation();
-    // useEffect(() => {
-    //     const swiperParams = {
-    //         modules: { Navigation, Pagination, Autoplay },
-    //         slidesPerView: 1,
-    //         spaceBetween: 20,
-    //         breakpoints: {
-    //             992: {
-    //                 slidesPerView: 1,
-    //                 spaceBetween: 20
-    //             },
-    //             767: {
-    //                 slidesPerView: 1,
-    //                 spaceBetween: 20
-    //             },
-    //         },
-    //         autoplay: {
-    //             delay: 3000,
-    //             disableOnInteraction: false,
-    //             pauseOnMouseEnter: true,
-    //         },
-
-    //     }
-    //     Object.assign(swiperElRef.current, swiperParams);
-    //     swiperElRef.current.initialize();
-    // }, []);
-
+    const { i18n,t } = useTranslation();
     const [data, setData] = useState(null);
-
     const { id } = useParams();
 
     useEffect(() => {
@@ -61,22 +34,52 @@ const TeacherDetail = (props) => {
             });
     }, []);
 
-    // const numberOfCourses = data.courses.length;
-    // let coursesPerView = 0;
-    // if (numberOfCourses <= 1) {
-    //     coursesPerView = 1;
-    // } else if (numberOfCourses === 2) {
-    //     coursesPerView = 2;
+    // if (data.courses !== null) {
+    //     const numberOfCourses = data.courses.length;
+    //     let coursesPerView = 0;
+    //     if (numberOfCourses <= 1) {
+    //         coursesPerView = 1;
+    //     } else if (numberOfCourses === 2) {
+    //         coursesPerView = 2;
+    //     }
+    //     else {
+    //         coursesPerView = 3
+    //     }
     // }
-    // else {
-    //     coursesPerView = 3
-    // }
+
+    const swiperParams = {
+        modules: { Navigation, Pagination, Autoplay },
+        slidesPerView: 3,
+        spaceBetween: 20,
+        breakpoints: {
+            992: {
+                slidesPerView: 2,
+                spaceBetween: 20
+            },
+            767: {
+                slidesPerView: 1,
+                spaceBetween: 20
+            },
+        },
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+        },
+
+    }
+    useEffect(() => {
+        if (swiperElRef?.current) {
+            Object.assign(swiperElRef.current, swiperParams);
+            swiperElRef.current.initialize();
+        }
+    }, [swiperElRef.current, swiperParams]);
+
 
     if (data === null) return <>Loading...</>;
 
     return (
         <>
-            <HeaderImage headerImage="/src/assets/images/courses-banner.jpeg" />
             <div className={styles.teacher}>
                 <div className={styles.container}>
                     <nav aria-label="breadcrumb">
@@ -112,12 +115,15 @@ const TeacherDetail = (props) => {
                                     </Link>
                                 </div>
                                 <p className={styles.content__role}>
-                                    {data.title.map((role) => {
-                                        return <span>{role}.</span>;
+                                    {data.title.map((role,i) => {
+                                        return <span key={i}>{role}.</span>;
                                     })}
                                 </p>
                                 <p className={styles.content__description}>
                                     {data.description}
+                                </p>
+                                <p className={styles.content__biography}>
+                                    {data.biografy}
                                 </p>
                             </div>
                             <div className={styles.contacts}>
@@ -148,220 +154,37 @@ const TeacherDetail = (props) => {
                     <CompartmentName
                         name={`${t("teacher__detail__courses")}`}
                     ></CompartmentName>
-                    <swiper-container
-                        ref={swiperElRef}
-                        init="false"
-                        className={styles.swiper_container}
-                    >
-                        {data.courses.map((course) => (
-                            <swiper-slide key={course.id} class={styles.swiper}>
-                                <div className={`card ${styles.card}`}>
-                                    <img
-                                        src={course.image}
-                                        className="card-img-top"
-                                        alt="..."
-                                    />
-                                    <div
-                                        className={`card-body ${styles.card__body}`}
-                                    >
-                                        <h5
-                                            className={`card-title ${styles.card__title}`}
-                                        >
-                                            {course.name}
-                                        </h5>
-                                        <p
-                                            className={`card-text ${styles.card__text}`}
-                                        >
-                                            {course.cicle}
+
+                    <div className={styles.container__card}>
+                        {Array.from(data.courses).map((course) => (
+                            <Card className={styles.card} key={data.id}>
+                                <Card.Img className={styles.card__photo} src={course.photo} />
+                                <Card.Body className={styles.card__body}>
+                                    <Card.Title className={styles.card__title}>{course.name}</Card.Title>
+                                    <Card.Subtitle className="mb-2 text-muted">{course.acronym}</Card.Subtitle>
+                                    <Card.Text className={styles.card__text}>{course.speciality}</Card.Text>
+                                </Card.Body>
+                                <div className={styles.overlay}>
+                                    <h5 className={styles.overlay__name}>
+                                        {course.name}
+                                    </h5>
+                                    <div className={styles.overlay__text}>
+                                        <p className={styles.overlay__description}>
+                                            {course.description}
                                         </p>
                                     </div>
-                                    <div className={styles.overlay}>
-                                        <h5 className={styles.overlay__name}>
-                                            {course.name}
-                                        </h5>
-                                        <div className={styles.overlay__text}>
-                                            <p
-                                                className={
-                                                    styles.overlay__description
-                                                }
-                                            >
-                                                {course.description}
-                                            </p>
-                                        </div>
-                                        <a
-                                            href="#"
-                                            className={`btn btn-primary ${styles.overlay__button}`}
-                                        >
-                                            Acceseaza cursul
-                                        </a>
-                                    </div>
+                                    <Link
+                                        to={`/${i18n.language}/courses/${course.id}`}
+                                        className={`btn btn-primary ${styles.overlay__button}`}
+                                    >
+                                        Acceseaza
+                                    </Link>
                                 </div>
-                            </swiper-slide>
+                            </Card>
                         ))}
-                    </swiper-container>
-                    <CompartmentName
-                        name={t("teacher__detail__bio")}
-                    ></CompartmentName>
+                    </div>
                 </div>
             </div>
-
-            {/* <div className={styles.container} >
-                <header className={styles.header}>
-                    {teacherDetail.picture ? (
-                        <div>
-                            <img
-                                src={teacherDetail.picture}
-                                alt={`${teacherDetail.name} photo`}
-                            />
-                        </div>
-                    ) : (
-                        <div className={styles["header__NoImage"]}></div>
-                    )}
-
-                    <div className={styles["header__info"]}>
-                        <h1>{teacherDetail.name}</h1>
-                        <p>{teacherDetail.role}</p>
-                        <p className={styles["header__description"]}>
-                            {teacherDetail.description}
-                        </p>
-                    </div>
-                </header>
-                <div className={styles["contacts__line"]}> </div>
-                <div className={styles["contacts"]}>
-                    <div className={styles["contacts__email"]}>
-                        {teacherDetail.socials.email}
-                    </div>
-                    <div className={styles["contacts__socials"]}>
-                        <a href="">
-                            <BsFacebook className={styles["contacts__item"]} />
-                        </a>
-                        <a href="">
-                            <SlSocialVkontakte
-                                className={styles["contacts__item"]}
-                            />
-                        </a>
-                        <a href="">
-                            <BsInstagram className={styles["contacts__item"]} />
-                        </a>
-                    </div>
-                </div>
-
-                <CompartmentName name="Cursuri"></CompartmentName>
-
-                <div className={styles["courses"]}>
-                    <div className={styles["courses__card"]}>
-                        {teacherDetail.courses[0].image ? (
-                            <img src="" alt="" />
-                        ) : (
-                            <div className={styles["courses__NoPhoto"]}></div>
-                        )}
-
-                        <h3>{teacherDetail.courses[0].name}</h3>
-                        <Link className={styles["courses__link"]}>Read it</Link>
-                    </div>
-                    <div className={styles["courses__card"]}>
-                        {teacherDetail.courses[0].image ? (
-                            <img src="" alt="" />
-                        ) : (
-                            <div className={styles["courses__NoPhoto"]}></div>
-                        )}
-
-                        <h3>{teacherDetail.courses[0].name}</h3>
-                        <Link className={styles["courses__link"]}>Read it</Link>
-                    </div>
-                    <div className={styles["courses__card"]}>
-                        {teacherDetail.courses[0].image ? (
-                            <img src="" alt="" />
-                        ) : (
-                            <div className={styles["courses__NoPhoto"]}></div>
-                        )}
-
-                        <h3>{teacherDetail.courses[0].name}</h3>
-                        <Link className={styles["courses__link"]}>Read it</Link>
-                    </div>
-                </div>
-
-                <CompartmentName name="Date biografice"></CompartmentName>
-
-                <div className={styles["bio"]}>
-                    {Object.keys(teacherDetail.bios)
-                        .reverse()
-                        .map((year) => (
-                            <>
-                                <p>{year}</p>
-                                <ul>
-                                    {teacherDetail.bios[year].map((entry) => (
-                                        <li key={entry}>{colorBlue(entry)}</li>
-                                    ))}
-                                </ul>
-                            </>
-                        ))}
-                </div>
-
-                <CompartmentName name="Carți"></CompartmentName>
-                <div className={styles.book}>
-                    {teacherDetail.books[0].image ? (
-                        <img src="" alt="" />
-                    ) : (
-                        <div className={styles["book--NoPhoto"]}></div>
-                    )}
-                    <div className={styles["book__info"]}>
-                        <h2>{teacherDetail.books[0].name}</h2>
-                        <p>{teacherDetail.books[0].description}</p>
-                        <a>Read It</a>
-                    </div>
-                </div>
-
-                <div className={styles.others}>
-                    <div className={styles["others__posts"]}>
-                        <h2>Ultimile Postari</h2>
-                        <div className={styles["others__post"]}>
-                            <h3>LOREM IPSUM</h3>
-                            <p>
-                                Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry. Lorem Ipsum has been the.Lorem
-                                Ipsum is simply dummy text of the printing and
-                                typesetting industry. Lorem Ipsum has been the.
-                            </p>
-                            <p>27.05.2023</p>
-                        </div>
-                        <div className={styles["others__post"]}>
-                            <h3>LOREM IPSUM</h3>
-                            <p>
-                                Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry. Lorem Ipsum has been the.Lorem
-                                Ipsum is simply dummy text of the printing and
-                                typesetting industry. Lorem Ipsum has been the.
-                            </p>
-                            <p>27.05.2023</p>
-                        </div>
-                        <div className={styles["others__post"]}>
-                            <h3>LOREM IPSUM</h3>
-                            <p>
-                                Lorem Ipsum is simply dummy text of the printing and
-                                typesetting industry. Lorem Ipsum has been the.Lorem
-                                Ipsum is simply dummy text of the printing and
-                                typesetting industry. Lorem Ipsum has been the.
-                            </p>
-                            <p>27.05.2023</p>
-                        </div>
-                    </div>
-
-                    <div className={styles["others__facebook"]}>
-                        <h2>Postari de la {teacherDetail.name} </h2>
-                        <iframe
-                            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FeUSMinformatica&tabs=timeline&width=340&height=500&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=false&appId"
-                            width="500"
-                            height="400"
-                            style={{ border: "none", overflow: "hidden" }}
-                            scrolling="no"
-                            frameBorder="0"
-                            allowFullScreen="true"
-                            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                        ></iframe>
-                    </div>
-                </div>
-            </div> */}
         </>
     );
 };
