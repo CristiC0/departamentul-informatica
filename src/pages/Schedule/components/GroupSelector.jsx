@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
+    const { t } = useTranslation();
+
     const [weekParity, setWeekParity] = useState(null);
     useEffect(() => {
         const currentDate = new Date();
@@ -67,18 +70,19 @@ const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
                         variant="dark"
                         id="dropdown-basic"
                     >
-                        Ciclu de studii {settings.cycle === 1 ? "I" : "II"}
+                        {t("schedule__cycle")}
+                        {settings.cycle === 1 ? "I" : "II"}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item
                             onClick={() => onSettingClick({ cycle: 1 })}
                         >
-                            Licenta
+                            {t("schedule__bachelor")}
                         </Dropdown.Item>
                         <Dropdown.Item
                             onClick={() => onSettingClick({ cycle: 2 })}
                         >
-                            Master
+                            {t("schedule__master")}
                         </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
@@ -88,7 +92,8 @@ const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
                         variant="dark"
                         id="dropdown-basic"
                     >
-                        Anul de studii {settings.year}
+                        {t("schedule__year")}
+                        {settings.year}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item
@@ -117,7 +122,7 @@ const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
                         variant="dark"
                         id="dropdown-basic"
                     >
-                        Grupa {settings.group?.name}
+                        {t("schedule__group")} {settings.group?.name}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         {groups.currentGroups &&
@@ -138,26 +143,33 @@ const GroupSelector = ({ settings, groups, setGroups, setSettings }) => {
                         variant="dark"
                         id="dropdown-basic"
                     >
-                        Saptamana {settings.week === 2 ? "Para" : "Impara"}
+                        {t("schedule__week")}
+                        {settings.week === 2
+                            ? t("schedule__even")
+                            : t("schedule__odd")}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item
                             onClick={() => onSettingClick({ week: 2 })}
                         >
-                            Para
+                            {t("schedule__even")}
                         </Dropdown.Item>
                         <Dropdown.Item
                             onClick={() => onSettingClick({ week: 1 })}
                         >
-                            Impara
+                            {t("schedule__odd")}
                         </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
 
                 <span className="d-table my-2">
                     <i className=" d-table-cell align-middle">
-                        Acum este saptamana
-                        <b>{weekParity === 1 ? " impara" : " para"}</b>
+                        {t("schedule__is-week")}
+                        <b>
+                            {weekParity === 1
+                                ? t("schedule__even").toLowerCase()
+                                : t("schedule__odd").toLowerCase()}
+                        </b>
                     </i>
                 </span>
             </div>

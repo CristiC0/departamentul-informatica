@@ -21,7 +21,7 @@ const TeacherEdit = () => {
         phone: "",
     });
 
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
     const [image, setImage] = useState("Upload image");
 
     const { id } = useParams();
@@ -157,11 +157,11 @@ const TeacherEdit = () => {
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item ">
-                                <Link to="/">Home</Link>
+                                <Link to="/">{t("breadcrumb_home")}</Link>
                             </li>
                             <li className="breadcrumb-item ">
                                 <Link to={`/${i18n.language}/teachers`}>
-                                    Profesori
+                                    {t("teachers__title")}
                                 </Link>
                             </li>
                             <li
@@ -179,7 +179,9 @@ const TeacherEdit = () => {
                         <div className={styles.profile__content}>
                             <div className={styles.name}>
                                 <div className={styles.lastname}>
-                                    <label htmlFor="lastName">Nume:</label>
+                                    <label htmlFor="lastName">
+                                        {t("teacher__detail__name")}:
+                                    </label>
                                     <input
                                         type="text"
                                         name="lastName"
@@ -195,7 +197,9 @@ const TeacherEdit = () => {
                                     />
                                 </div>
                                 <div className={styles.firstname}>
-                                    <label htmlFor="firstName">Prenume:</label>
+                                    <label htmlFor="firstName">
+                                        {t("teacher__detail__lastname")}:
+                                    </label>
                                     <input
                                         type="text"
                                         name="firstName"
@@ -214,7 +218,7 @@ const TeacherEdit = () => {
 
                             <div className={styles.function}>
                                 <label className={styles.function__label}>
-                                    Funcție:
+                                    {t("teacher__detail__function")}:
                                 </label>
                                 <div className={styles["function--primary"]}>
                                     <input
@@ -278,7 +282,9 @@ const TeacherEdit = () => {
                             </div>
 
                             <div className={styles.description}>
-                                <label htmlFor="description">Descriere:</label>
+                                <label htmlFor="description">
+                                    {t("teacher__detail__description")}:
+                                </label>
                                 <textarea
                                     name="description"
                                     rows="6"
@@ -311,7 +317,9 @@ const TeacherEdit = () => {
                                 <div className={styles["contacts__container"]}>
                                     <div className={styles["contacts--col1"]}>
                                         <BsTelephone />
-                                        <label htmlFor="phone">Telefon:</label>
+                                        <label htmlFor="phone">
+                                            {t("teacher__detail__phone")}:
+                                        </label>
                                     </div>
                                     <input
                                         type="tel"
@@ -334,7 +342,9 @@ const TeacherEdit = () => {
                                 onClick={onSubmit}
                                 disabled={isSubmitting}
                             >
-                                {isSubmitting ? "Submitting..." : "Salvează"}
+                                {isSubmitting
+                                    ? "Submitting..."
+                                    : t("teacher__detail__save")}
                             </button>
                         </div>
 
@@ -347,7 +357,7 @@ const TeacherEdit = () => {
                                 }
                                 alt="Photo"
                             />
-                            <span>Încărcați fotografia</span>
+                            <span>{t("teacher__detail__photo")}</span>
                             <div className={styles.upload}>
                                 <input
                                     type="file"

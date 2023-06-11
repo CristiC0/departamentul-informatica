@@ -1,5 +1,6 @@
 import axios from "axios";
 import Modal from "react-bootstrap/Modal";
+import { useTranslation } from "react-i18next";
 
 const DeleteTimeModal = ({
     settings,
@@ -9,6 +10,7 @@ const DeleteTimeModal = ({
     deleteTime,
     setDeleteTime,
 }) => {
+    const { t } = useTranslation();
     const clickHandler = async () => {
         await axios
             .delete(
@@ -34,11 +36,13 @@ const DeleteTimeModal = ({
         <>
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Delete entries</Modal.Title>
+                    <Modal.Title>
+                        {t("schedule__delete__time__title")}
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <span>
-                        {`You sure you want to delete all entries that happen at 
+                        {`${t("schedule__delete__time__alert")} 
                        ${deleteTime} ?`}
                     </span>
                 </Modal.Body>
@@ -48,7 +52,7 @@ const DeleteTimeModal = ({
                         className="btn btn-secondary"
                         onClick={handleClose}
                     >
-                        No
+                        {t("schedule__no")}
                     </button>
                     <button
                         type="submit"
@@ -56,7 +60,7 @@ const DeleteTimeModal = ({
                         data-bs-dismiss="modal"
                         onClick={clickHandler}
                     >
-                        Yes
+                        {t("schedule__yes")}
                     </button>
                 </Modal.Footer>
             </Modal>
