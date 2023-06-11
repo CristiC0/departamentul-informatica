@@ -8,7 +8,29 @@
             color: $font-color-dark;
         }
 
-        
+        .content{
+
+            &__title{
+                font-weight: 700;
+            }
+
+            &__body{
+                display: flex;
+                flex-direction: row;
+            }
+
+            &__image{
+
+            }
+
+            &__description{
+
+            }
+
+            &__content{
+
+            }
+        }
 
     }
 }

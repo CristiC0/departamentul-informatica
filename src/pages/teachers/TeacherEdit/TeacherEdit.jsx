@@ -10,8 +10,10 @@ import { teacherSchema } from "@/schemas/teacherSchema";
 import { useTranslation } from "react-i18next";
 import Accordion from 'react-bootstrap/Accordion';
 import Form from 'react-bootstrap/Form';
+import { Toast } from "react-bootstrap";
 
 const TeacherEdit = () => {
+
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
@@ -26,7 +28,9 @@ const TeacherEdit = () => {
 
     const { i18n, t } = useTranslation();
     const [courses, setCourses] = useState(null);
-
+    const [selectedCourses, setSelectedCourses] = useState([]);
+    const [showToast, setShowToast] = useState(false);
+    const [error, setError] = useState(null);
     const [image, setImage] = useState("Upload image");
 
     const { id } = useParams();
@@ -59,6 +63,9 @@ const TeacherEdit = () => {
                     phone,
                     courses,
                 });
+
+                const coursesId = courses.map((course) => course.id);
+                setSelectedCourses(coursesId);
 
                 values.firstName = firstName;
                 values.lastName = lastName;
@@ -117,33 +124,22 @@ const TeacherEdit = () => {
         });
     };
 
-    const onValueChecked = (event) => {
-        setData((oldData) => {
+    const onValueChecked = (event, courseId) => {
+        setSelectedCourses((oldData) => {
             const courses = event.target.checked
-                ? [event.target.value, ...oldData.courses]
-                : [event.target.value];
-            console.log(" data ", oldData);
-            return { ...oldData, courses };
+                ? [event.target.value, ...oldData]
+                : [...oldData.filter((course) => course !== courseId)];
+            return courses;
         });
     };
 
-    // const onValueChecked = (event) => {
-    //     setData((oldData) => {
-    //         console.log("event", event);
-    //         // console.log("old",oldData);
-    //         return ({
-    //         ...oldData,
-    //         courses: [event.target.value]
-    //     })}
-    //     );
-    // };
 
     function onSubmit(event) {
         event.preventDefault();
         axios
             .patch(
                 `${import.meta.env.VITE_API_BASE_URL}/teachers/${id}`,
-                { ...data },
+                { ...data, courses: selectedCourses },
                 { withCredentials: true }
             )
             .then(({ statusText }) => {
@@ -157,7 +153,17 @@ const TeacherEdit = () => {
                             setData(response.data);
                         });
             })
-            .catch((error) => console.log(error));
+            .catch((error) => {
+                setShowToast(true);
+                setError(error?.response?.data?.message);
+                setTimeout(() => {
+                    setShowToast(false);
+                    setError(null);
+                }, 3000);
+                actions.resetForm();
+                return;
+            });
+            actions.resetForm();
         navigate(`/${i18n.language}/teachers/${id}`);
     }
 
@@ -180,7 +186,7 @@ const TeacherEdit = () => {
         onSubmit,
     });
 
-    console.log("courses", data.courses);
+    console.log("selectedCours", selectedCourses);
 
     if (data === null) return <>Loading...</>;
 
@@ -230,6 +236,9 @@ const TeacherEdit = () => {
                                             handleInput(e), handleChange(e);
                                         }}
                                     />
+                                    {error && touched && (
+                                        <p className={styles["message-error"]}>{error}</p>
+                                    )}
                                 </div>
                                 <div className={styles.firstname}>
                                     <label htmlFor="firstName">
@@ -396,8 +405,10 @@ const TeacherEdit = () => {
                                                                 id={course.id}
                                                                 label={course.name}
                                                                 value={course.id}
-                                                                onChange={(e) => { onValueChecked(e) }}
-                                                                checked={data.courses.includes(course)}
+                                                                onChange={(e) => {
+                                                                    onValueChecked(e, course.id);
+                                                                }}
+                                                                checked={selectedCourses.includes(course.id)}
                                                             />
                                                         </div>
                                                     ))}
@@ -420,23 +431,39 @@ const TeacherEdit = () => {
                             </button>
                         </div>
 
-                        <div className={styles.profile__photo}>
-                            <img
-                                src={
-                                    data.photo
-                                        ? data.photo
-                                        : "/src/assets/images/default-user.png"
-                                }
-                                alt="Photo"
-                            />
-                            <span>{t("teacher__detail__photo")}</span>
-                            <div className={styles.upload}>
-                                <input
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={imageChangeHandler}
+                        <div className={styles.profile__right}>
+                            <div className={styles.profile__photo}>
+                                <img
+                                    src={
+                                        data.photo
+                                            ? data.photo
+                                            : "/src/assets/images/default-user.png"
+                                    }
+                                    alt="Photo"
                                 />
+                                <span>{t("teacher__detail__photo")}</span>
+                                <div className={styles.upload}>
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={imageChangeHandler}
+                                    />
+                                </div>
                             </div>
+                            <button
+                                type="submit"
+                                className={styles.button}
+                                onClick={onSubmit}
+                                disabled={isSubmitting}
+                            >
+                                {isSubmitting ? "Submitting..." : "Salvează"}
+                            </button>
+                            <Toast show={showToast} className={styles.toast}>
+                                <Toast.Header>
+                                    <strong className="me-auto"> Login Error </strong>
+                                </Toast.Header>
+                                <Toast.Body className="text-danger">{error}</Toast.Body>
+                            </Toast>
                         </div>
                     </div>
                 </div>

@@ -50,13 +50,15 @@ export default function CourseDetail() {
                     </nav>
                     <div className={styles.content}>
                         <div className={styles.content__title}>
-                            <h1>{`${data.name} (${data.acronym})`}</h1>
+                            <h2>{`${data.name} (${data.acronym})`}</h2>
                         </div>
-                        <div className={styles.content__image}>
-                            <img src={data.photo}/>
-                        </div>
-                        <div className={styles.content__description}>
-                            <p>{data.desciption}</p>
+                        <div className={styles.content__body}>
+                            <div className={styles.content__image}>
+                                <img src={data.photo} />
+                            </div>
+                            <div className={styles.content__description}>
+                                <p>{data.desciption}</p>
+                            </div>
                         </div>
                         <div className={styles.content__content}>
                             <p>{data.content}</p>

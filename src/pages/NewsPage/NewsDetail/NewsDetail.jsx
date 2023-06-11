@@ -11,15 +11,17 @@ const NewsDetail = () => {
             <h1>{data.title}</h1>
             <h6>
                 {`${data.author} -
-                ${
-                    new Date(data.createdAt)
+                ${new Date(data.createdAt)
                         .toLocaleString("en-GB")
                         .split(",")[0]
-                }`}
+                    }`}
             </h6>
-            <img src={data.thumbnail} alt="" />
-
-            {data.content}
+            <div className={styles.content}>
+                <div className={styles.content__detail}>
+                    {data.content}
+                </div>
+                <img src={data.thumbnail} alt="" />
+            </div>
         </div>
     );
 };

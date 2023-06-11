@@ -115,8 +115,8 @@ const TeacherDetail = (props) => {
                                     </Link>
                                 </div>
                                 <p className={styles.content__role}>
-                                    {data.title.map((role) => {
-                                        return <span>{role}.</span>;
+                                    {data.title.map((role,i) => {
+                                        return <span key={i}>{role}.</span>;
                                     })}
                                 </p>
                                 <p className={styles.content__description}>

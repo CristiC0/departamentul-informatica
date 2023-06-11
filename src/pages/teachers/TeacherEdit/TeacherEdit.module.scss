@@ -41,6 +41,7 @@
                         display: flex;
                         flex-direction: column;
                         flex-grow: 1;
+                        max-width: 50%;
 
                         input {
                             height: 3rem;
@@ -117,14 +118,17 @@
             }
 
             .button {
-                //width: 30%;
                 height: 3rem;
                 padding: 0.7rem;
-                //margin:0 70%;
                 border: none;
                 border-radius: 0.5rem;
                 background-color: $primary-color;
                 color: white;
+            }
+
+            &__right{
+                display: flex;
+                flex-direction: column;
             }
 
 
@@ -143,7 +147,7 @@
                     color: $font-color-dark;
                 }
 
-                @include responsive("medium") {
+                @include responsive("small") {
                     width: 100%;
                     height: auto;
                 }
@@ -182,3 +186,9 @@
         }
     }
 }
+
+.message-error{
+    color: red;
+}
+
+

@@ -15,7 +15,7 @@
             display: flex;
             flex-wrap: nowrap;
             justify-content: space-between;
-            gap: 2rem;
+            gap: 4rem;
 
             @include responsive("medium") {
                 flex-wrap: wrap;
@@ -80,8 +80,7 @@
                 &__description {
                     font-size: 1.25rem;
                     font-weight: 200;
-                    letter-spacing: 1px;
-                    margin-bottom: 2rem;
+                    margin-bottom: 3rem;
                 }
 
                 &__biography {}
@@ -116,10 +115,6 @@
                     }
                 }
             }
-        }
-
-        .swiper {
-            min-height: 20rem;
         }
 
         &__card {
