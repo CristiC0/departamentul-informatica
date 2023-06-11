@@ -5,18 +5,21 @@ import usePagination from "@hooks/usePagination";
 import HeaderImage from "@components/HeaderImage/HeaderImage";
 import PageHeader from "@components/PageHeader/PageHeader";
 import TeacherCard from "./components/TeacherCard/TeacherCard";
-
+import { useTranslation } from "react-i18next";
 
 const Teachers = () => {
     const [data, setData] = useState({ management: null, teachers: null });
 
+    const { t } = useTranslation();
     useEffect(() => {
         const managementRequest = fetch(
-            `${import.meta.env.VITE_API_BASE_URL
+            `${
+                import.meta.env.VITE_API_BASE_URL
             }/teachers/filter?management=true`
         );
         const teachersRequest = fetch(
-            `${import.meta.env.VITE_API_BASE_URL
+            `${
+                import.meta.env.VITE_API_BASE_URL
             }/teachers/filter?management=false`
         );
         Promise.allSettled([managementRequest, teachersRequest])
@@ -41,60 +44,67 @@ const Teachers = () => {
         previousPage,
     } = usePagination(data.teachers, 4);
 
-
     return (
         <div>
             <HeaderImage headerImage="/src/assets/images/courses-banner.jpeg" />
             <PageHeader
-                title="Profesori"
-                introduction="Voluptate ut do aliquip incididunt nisi aute qui eu aliqua nulla. Fugiat qui sint fugiat irure nulla pariatur ex ad nulla. Proident pariatur veniam elit ut excepteur duis cillum labore enim labore incididunt dolore. Laboris elit duis et pariatur. Velit tempor et voluptate incididunt duis ipsum reprehenderit incididunt sit labore proident aliquip. Adipisicing labore cillum duis ea non id ex pariatur."
+                title={`${t("teachers__title")}`}
+                introduction={`${t("teachers__intro")}`}
             />
             <div className={styles.teacher}>
                 <div className={styles["teacher__container"]}>
                     <div className={styles["teacher__row"]}>
-                        {data.management ? data.management.map((teacher) => {
-                            return (
-                                <div
-                                    key={teacher.id}
-                                    className={styles["teacher__cols--1"]}
-                                >
-                                    <TeacherCard
-                                        id={teacher.id}
-                                        photo={
-                                            teacher.photo
-                                                ? teacher.photo
-                                                : "/src/assets/images/default-user.png"
-                                        }
-                                        name={`${teacher.lastName} ${teacher.firstName}`}
-                                        function={teacher.title}
-                                    ></TeacherCard>
-                                </div>
-                            );
-                        }) : <Spinner/>}
+                        {data.management ? (
+                            data.management.map((teacher) => {
+                                return (
+                                    <div
+                                        key={teacher.id}
+                                        className={styles["teacher__cols--1"]}
+                                    >
+                                        <TeacherCard
+                                            id={teacher.id}
+                                            photo={
+                                                teacher.photo
+                                                    ? teacher.photo
+                                                    : "/src/assets/images/default-user.png"
+                                            }
+                                            name={`${teacher.lastName} ${teacher.firstName}`}
+                                            function={teacher.title}
+                                        ></TeacherCard>
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            <Spinner />
+                        )}
                     </div>
                 </div>
 
                 <div className={styles["teacher__container"]}>
                     <div className={styles["teacher__row"]}>
-                        {itemsOnPage ? itemsOnPage.map((teacher) => {
-                            return (
-                                <div
-                                    key={teacher.id}
-                                    className={styles["teacher__cols--2"]}
-                                >
-                                    <TeacherCard
-                                        id={teacher.id}
-                                        photo={
-                                            teacher.photo
-                                                ? teacher.photo
-                                                : "/src/assets/images/default-user.png"
-                                        }
-                                        name={`${teacher.lastName} ${teacher.firstName}`}
-                                        function={teacher.title}
-                                    ></TeacherCard>
-                                </div>
-                            );
-                        }) :  <Spinner/>}
+                        {itemsOnPage ? (
+                            itemsOnPage.map((teacher) => {
+                                return (
+                                    <div
+                                        key={teacher.id}
+                                        className={styles["teacher__cols--2"]}
+                                    >
+                                        <TeacherCard
+                                            id={teacher.id}
+                                            photo={
+                                                teacher.photo
+                                                    ? teacher.photo
+                                                    : "/src/assets/images/default-user.png"
+                                            }
+                                            name={`${teacher.lastName} ${teacher.firstName}`}
+                                            function={teacher.title}
+                                        ></TeacherCard>
+                                    </div>
+                                );
+                            })
+                        ) : (
+                            <Spinner />
+                        )}
                     </div>
                 </div>
 
@@ -105,10 +115,11 @@ const Teachers = () => {
                     />
                     {displayedPages.map((page) => (
                         <div
-                            className={`${styles["navigation__page"]} ${currentPage === page
-                                ? styles["navigation__page--current"]
-                                : ""
-                                }`}
+                            className={`${styles["navigation__page"]} ${
+                                currentPage === page
+                                    ? styles["navigation__page--current"]
+                                    : ""
+                            }`}
                             key={page}
                             onClick={() => changePageNumber(page)}
                         >
@@ -134,5 +145,5 @@ const Spinner = () => {
                 <span className="sr-only">Loading...</span>
             </div>
         </div>
-    )
-}
+    );
+};

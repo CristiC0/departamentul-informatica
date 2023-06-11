@@ -5,20 +5,22 @@ import styles from "./TableSchedule.module.scss";
 import AddTimeModal from "./AddTimeModal";
 import DeleteTimeModal from "./DeleteTimeModal";
 import EditEntryModal from "./EditEntryModal";
-const days = [
-    "Luni",
-    "Marti",
-    "Miercuri",
-    "Joi",
-    "Vineri",
-    "Sambata",
-    "Duminica",
-];
+import { useTranslation } from "react-i18next";
 
 const modalId = "addTime";
 
 const TableSchedule = ({ schedule, edit, settings, setSchedule }) => {
-    if ((!schedule || schedule.length === 0) && !edit) return null;
+    const { t } = useTranslation();
+    const days = [
+        t("schedule__day-1"),
+        t("schedule__day-2"),
+        t("schedule__day-3"),
+        t("schedule__day-4"),
+        t("schedule__day-5"),
+        t("schedule__day-6"),
+        t("schedule__day-7"),
+    ];
+
     const [times, setTimes] = useState(null);
     const [deleteTime, setDeleteTime] = useState(null);
     const [showDeleteTime, setShowDeleteTime] = useState(false);
@@ -83,6 +85,8 @@ const TableSchedule = ({ schedule, edit, settings, setSchedule }) => {
             setSelectedEntry(entry);
     };
 
+    if ((!schedule || schedule.length === 0) && !edit) return null;
+
     return (
         <>
             <table
@@ -108,7 +112,12 @@ const TableSchedule = ({ schedule, edit, settings, setSchedule }) => {
                         if (schedule)
                             loop: for (let day of schedule) {
                                 for (let entry of day) {
-                                    if (entry.time === time) {
+                                    console.log(entry.week, settings.week - 1);
+                                    if (
+                                        entry.time === time &&
+                                        (entry.week === 0 ||
+                                            entry.week !== settings.week - 1)
+                                    ) {
                                         existsEntry = true;
                                         break loop;
                                     }

@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import styles from "./EditEntryModal.module.scss";
 import Dropdown from "react-bootstrap/Dropdown";
-const week = ["Oricare", "Impara", "Para"];
+import { useTranslation } from "react-i18next";
+
 const EditEntryModal = ({
     settings,
     show,
@@ -13,6 +14,13 @@ const EditEntryModal = ({
     selectedDay,
     setSchedule,
 }) => {
+    const { t } = useTranslation();
+    const week = [
+        t("schedule__edit__anything"),
+        t("schedule__odd"),
+        t("schedule__even"),
+    ];
+
     const [data, setData] = useState(selectedEntry);
     const [options, setOptions] = useState(null);
 
@@ -110,7 +118,7 @@ const EditEntryModal = ({
                 className={styles.modal}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit entry</Modal.Title>
+                    <Modal.Title>{t("schedule__edit__title")}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className={`w-75 m-auto ${styles.body}`}>
                     <div className="row my-2">
@@ -132,7 +140,7 @@ const EditEntryModal = ({
                     </div>
                     <div className="row my-2">
                         <label htmlFor="room" className="col-6">
-                            Cursul:
+                            {t("schedule__edit__course")}:
                         </label>
                         <div className="col-6 dropdown p-0">
                             <Dropdown>
@@ -170,7 +178,7 @@ const EditEntryModal = ({
                     </div>
                     <div className="row my-2">
                         <label htmlFor="room" className="col-6">
-                            Profesorul:
+                            {t("schedule__edit__teacher")}:
                         </label>
                         {options.teachers && (
                             <Dropdown className="col-6 dropdown p-0">
@@ -217,7 +225,7 @@ const EditEntryModal = ({
                     </div>
                     <div className="row my-2">
                         <label htmlFor="room" className="col-6">
-                            Saptamana:
+                            {t("schedule__edit__week")}:
                         </label>
                         {options.teachers && (
                             <div className="col-6 dropdown p-0">
@@ -252,7 +260,7 @@ const EditEntryModal = ({
                     </div>
                     <div className="row my-2">
                         <label htmlFor="room" className="col-6">
-                            Tipul:
+                            {t("schedule__edit__type")}:
                         </label>
                         {options.teachers && (
                             <div className="col-6 dropdown p-0">
@@ -275,7 +283,7 @@ const EditEntryModal = ({
                                                 }));
                                             }}
                                         >
-                                            Curs
+                                            {t("schedule__edit__type_course")}
                                         </Dropdown.Item>
                                         <Dropdown.Item
                                             onClick={() => {
@@ -285,7 +293,7 @@ const EditEntryModal = ({
                                                 }));
                                             }}
                                         >
-                                            Seminar
+                                            {t("schedule__edit__type__seminar")}
                                         </Dropdown.Item>
                                         <Dropdown.Item
                                             onClick={() => {
@@ -295,7 +303,7 @@ const EditEntryModal = ({
                                                 }));
                                             }}
                                         >
-                                            Laborator
+                                            {t("schedule__edit__type_lab")}
                                         </Dropdown.Item>
                                         <Dropdown.Item
                                             onClick={() => {
@@ -305,7 +313,7 @@ const EditEntryModal = ({
                                                 }));
                                             }}
                                         >
-                                            Nici un tip
+                                            {t("schedule__edit__type_none")}
                                         </Dropdown.Item>
                                     </Dropdown.Menu>
                                 </Dropdown>
@@ -319,14 +327,14 @@ const EditEntryModal = ({
                         className="btn btn-secondary"
                         onClick={handleClose}
                     >
-                        Cancel
+                        {t("schedule__edit__type_cancel")}
                     </button>
                     <button
                         type="button"
                         className="btn btn-danger"
                         onClick={deleteEntry}
                     >
-                        Delete
+                        {t("schedule__edit__type_delete")}
                     </button>
                     <button
                         type="submit"
@@ -334,7 +342,7 @@ const EditEntryModal = ({
                         data-bs-dismiss="modal"
                         onClick={clickHandler}
                     >
-                        Save
+                        {t("schedule__edit__type_save")}
                     </button>
                 </Modal.Footer>
             </Modal>

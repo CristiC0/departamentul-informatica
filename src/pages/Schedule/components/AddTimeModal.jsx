@@ -1,7 +1,9 @@
 import { useRef } from "react";
 import { TiMinus } from "react-icons/ti";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 const AddTimeModal = ({ id, settings, setTimes, setSchedule }) => {
+    const { t } = useTranslation();
     const from = useRef(null);
     const to = useRef(null);
 
@@ -45,7 +47,7 @@ const AddTimeModal = ({ id, settings, setTimes, setSchedule }) => {
                                 className="modal-title fs-5"
                                 id="exampleaddTime"
                             >
-                                Add Time
+                                {t("schedule__add-time")}
                             </h1>
                             <button
                                 type="button"
@@ -57,14 +59,14 @@ const AddTimeModal = ({ id, settings, setTimes, setSchedule }) => {
                         <div className="modal-body">
                             <div className="d-flex justify-content-evenly  align-content-center">
                                 <div className="d-flex flex-column  justify-content-center">
-                                    <b>From</b>
+                                    <b>{t("schedule__from")}</b>
                                     <input type="text" ref={from} />
                                 </div>
                                 <span className=" align-self-end">
                                     <TiMinus />
                                 </span>
                                 <div className="d-flex flex-column align-content-center">
-                                    <b>To</b>
+                                    <b>{t("schedule__to")}</b>
                                     <input type="text" ref={to} />
                                 </div>
                             </div>
@@ -75,7 +77,7 @@ const AddTimeModal = ({ id, settings, setTimes, setSchedule }) => {
                                 className="btn btn-secondary"
                                 data-bs-dismiss="modal"
                             >
-                                Close
+                                {t("schedule__close")}
                             </button>
                             <button
                                 type="submit"
@@ -83,7 +85,7 @@ const AddTimeModal = ({ id, settings, setTimes, setSchedule }) => {
                                 data-bs-dismiss="modal"
                                 onClick={clickHandler}
                             >
-                                Save changes
+                                {t("schedule__save")}
                             </button>
                         </div>
                     </div>

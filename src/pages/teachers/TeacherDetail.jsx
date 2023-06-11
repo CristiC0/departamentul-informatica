@@ -21,7 +21,7 @@ register();
 
 const TeacherDetail = (props) => {
     const swiperElRef = useRef(null);
-    const { i18n } = useTranslation();
+    const { i18n, t } = useTranslation();
     // useEffect(() => {
     //     const swiperParams = {
     //         modules: { Navigation, Pagination, Autoplay },
@@ -82,11 +82,11 @@ const TeacherDetail = (props) => {
                     <nav aria-label="breadcrumb">
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item ">
-                                <Link to="/">Home</Link>
+                                <Link to="/">{t("breadcrumb_home")}</Link>
                             </li>
                             <li className="breadcrumb-item ">
                                 <Link to={`/${i18n.language}/teachers`}>
-                                    Profesori
+                                    {t("teachers__title")}
                                 </Link>
                             </li>
                             <li
@@ -145,7 +145,9 @@ const TeacherDetail = (props) => {
                         </div>
                     </div>
 
-                    <CompartmentName name="Cursuri"></CompartmentName>
+                    <CompartmentName
+                        name={`${t("teacher__detail__courses")}`}
+                    ></CompartmentName>
                     <swiper-container
                         ref={swiperElRef}
                         init="false"
@@ -197,7 +199,9 @@ const TeacherDetail = (props) => {
                             </swiper-slide>
                         ))}
                     </swiper-container>
-                    <CompartmentName name="Biografie"></CompartmentName>
+                    <CompartmentName
+                        name={t("teacher__detail__bio")}
+                    ></CompartmentName>
                 </div>
             </div>
 
